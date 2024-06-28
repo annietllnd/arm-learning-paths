@@ -1,4 +1,7 @@
 on:
+  push:
+    branches:
+        - githubaction-sync-fork
   schedule:
     - cron:  '0 7 * * 1-5'
     # scheduled at 07:00 every weekday
@@ -24,7 +27,7 @@ jobs:
         target_branch: main
         git_pull_args: --rebase
 
-        # Set test_mode true to run tests instead of the true action!!
+        # Set test_mode true to run tests instead of the true action!
         test_mode: true
 
     - name: Timestamp
