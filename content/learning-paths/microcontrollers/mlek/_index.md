@@ -1,11 +1,15 @@
 ---
 title: Build and run the Arm Machine Learning Evaluation Kit examples
 
-minutes_to_complete: 30   
+minutes_to_complete: 30
+
+test_images:
+- ubuntu:latest
+test_maintenance: true
 
 who_is_this_for: This is an introductory topic for embedded software developers interested in learning about machine learning.
 
-learning_objectives: 
+learning_objectives:
     - Build examples from Machine Learning Evaluation Kit (MLEK)
     - Run the examples on Corstone-300 FVP or Virtual Hardware
 
