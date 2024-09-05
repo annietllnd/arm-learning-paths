@@ -40,9 +40,8 @@ Confirm you are using a Windows on Arm device such as Windows Dev Kit 2023 or a 
 
 Confirm you are using an Arm computer with 64-bit Linux by running the command and observing the output:
 
-```bash { target="ubuntu:latest | 2" }
+```bash { target="ubuntu:latest" }
 uname -m
-aarch64
 ```
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
