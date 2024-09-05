@@ -21,7 +21,8 @@ jobs:
         id: run-suite
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         run: |
-            ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} \
+            (./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }}) \
+            | (tee /dev/fd/2 &) \
             |& grep -q 'maintenance is turned off' && echo "{MAINTENANCE}=off" >> "$GITHUB_ENV" \
             || echo "{MAINTENANCE}=on" >> "$GITHUB_ENV"
       - name: Test condition
