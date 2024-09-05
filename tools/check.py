@@ -185,6 +185,8 @@ def check(json_file, start, stop, md_article):
                 docker_cmd = [f"docker cp {test_cmd_filename} test_{n_image}:/home/{username}/"]
                 subprocess.run(docker_cmd, shell=True, capture_output=True)
                 logging.debug(docker_cmd)
+                # Remove the file storing the command since we now copied it to container
+                os.remove(test_cmd_filename)
 
                 test_type = test["type"]
                 # Check type
