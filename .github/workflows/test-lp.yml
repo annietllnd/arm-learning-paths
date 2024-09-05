@@ -13,17 +13,23 @@ jobs:
           # Avoid using single or double quotes for multiline patterns
           files: |
              **.md
-
       - name: Install dependencies
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         run: pip install -r tools/requirements.txt
 
       - name: Run test suite for all changed files
+        id: run-suite
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
-        run: ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+        run: |
+            ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} \
+            |& grep -q 'maintenance is turned off' && echo "{MAINTENANCE}=off" >> "$GITHUB_ENV" \
+            || echo "{MAINTENANCE}=on" >> "$GITHUB_ENV"
+      - name: Test condition
+        if: success() && steps.run-suite.outputs.MAINTENANCE == 'off'
+        run: echo "Maintenance is turned off for one or more files, skipping tests"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
-        if: success()
+        if: success() && ${{ steps.run-suite.outputs.MAINTENANCE == 'on' }}
         with:
           commit-message: update stats_current_test_info.yml
           title: Update stats_current_test_info.yml
