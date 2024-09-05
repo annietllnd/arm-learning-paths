@@ -15,7 +15,7 @@ official_docs: https://cmake.org/documentation/
 
 test_images:
 - ubuntu:latest
-test_maintenance: false
+test_maintenance: true
 
 layout: installtoolsall
 tool_install: true
