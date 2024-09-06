@@ -22,17 +22,21 @@ jobs:
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         # Run the test suite, and then determine if maintenance is turned off
         run: |
-            ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }}
-            ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 1>/dev/null \
-            | grep -q 'maintenance is turned off' && echo "{MAINTENANCE}=off" >> "$GITHUB_ENV" \
+            ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee output.txt
+      - name: Parse maintenance state
+        id: maintenance-state
+        if: success()
+        # Check if maintenance is turned off
+        run: |
+            cat output.txt | grep -q 'maintenance is turned off' && echo "{MAINTENANCE}=off" >> "$GITHUB_ENV" \
             || echo "{MAINTENANCE}=on" >> "$GITHUB_ENV"
       - name: Test condition
-        if: success() && steps.run-suite.outputs.MAINTENANCE == 'off'
-        # Skip opening a PR if nothing has changed
+        if: success() && steps.maintenance-state.outputs.MAINTENANCE == 'off'
+        # Skip opening a PR if tests have not been run
         run: echo "Maintenance is turned off for one or more files, skipping tests"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
-        if: success() && steps.run-suite.outputs.MAINTENANCE == 'on'
+        if: success() && steps.maintenance-state.outputs.MAINTENANCE == 'on'
         with:
           commit-message: update stats_current_test_info.yml
           title: Update stats_current_test_info.yml
