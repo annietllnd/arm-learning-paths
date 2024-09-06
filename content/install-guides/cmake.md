@@ -28,6 +28,7 @@ weight: 1
 
 It is available for a variety of operating systems and there are multiple ways to install it.
 
+
 ## What should I do before installing CMake for Arm Linux distributions or CMake for Windows on Arm?
 
 This article provides quick instructions to install CMake for Arm Linux distributions and for Windows on Arm.
