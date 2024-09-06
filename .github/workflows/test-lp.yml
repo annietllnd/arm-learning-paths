@@ -23,7 +23,7 @@ jobs:
         # Run the test suite, and then determine if maintenance is turned off
         run: |
             ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }}
-            (./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }}) \
+            ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 1>/dev/null \
             | grep -q 'maintenance is turned off' && echo "{MAINTENANCE}=off" >> "$GITHUB_ENV" \
             || echo "{MAINTENANCE}=on" >> "$GITHUB_ENV"
       - name: Test condition
