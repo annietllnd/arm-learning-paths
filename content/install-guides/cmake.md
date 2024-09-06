@@ -43,7 +43,7 @@ Confirm you are using an Arm computer with 64-bit Linux by running the command a
 
 ```bash { target="ubuntu:latest | 2" }
 uname -m
-aarch64
+x86_64
 ```
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
