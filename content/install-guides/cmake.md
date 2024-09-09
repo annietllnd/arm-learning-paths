@@ -46,6 +46,7 @@ uname -m
 aarch64
 ```
 
+
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
 ## How do I download and install on Windows on Arm?
