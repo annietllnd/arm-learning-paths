@@ -13,12 +13,8 @@ multitool_install_part: false
 official_docs: https://developer.arm.com/documentation/100748
 test_images:
 - ubuntu:latest
-- fedora:latest
 test_link: null
-test_maintenance: false
-test_status:
-- passed
-- passed
+test_maintenance: true
 title: Arm Compiler for Embedded
 tool_install: true
 weight: 1
@@ -67,22 +63,17 @@ win-x86_64\setup.exe
 ```
 To install on Linux hosts, `untar` the downloaded package and run the install script (note the exact filenames are version and host dependent). For example:
 
-#### x86_64
+#### Linux
+The `uname -m` call is used to determine whether your machine is running `aarch64` or `x86_64`, and target the downloaded package accordingly.
+
 ```console
 mkdir tmp
-mv ARMCompiler6.22_standalone_linux-x86_64.tar.gz tmp
+mv ARMCompiler6.22_standalone_linux-`uname -m`.tar.gz tmp
 cd tmp
-tar xvfz ARMCompiler6.22_standalone_linux-x86_64.tar.gz
-./install_x86_64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.22
+tar xvfz ARMCompiler6.22_standalone_linux-`uname -m`.tar.gz
+./install_`uname -m`.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.22
 ```
-#### aarch64
-```console
-mkdir tmp
-mv ARMCompiler6.22_standalone_linux-aarch64.tar.gz tmp
-cd tmp
-tar xvfz ARMCompiler6.22_standalone_linux-aarch64.tar.gz
-./install_aarch64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.22
-```
+
 Remove the install data when complete.
 ```console
 cd ..
@@ -106,12 +97,13 @@ The Arm Compiler for Embedded, as well as other tools and utilities are availabl
 
 Available packages can also be fetched directly from the artifactory. This is particularly useful for automated CI/CD flows.
 
-```command
+```bash
 wget https://artifacts.tools.arm.com/arm-compiler/6.22/45/standalone-linux-armv8l_64-rel.tar.gz
 ```
 
 Note that the artifactory packages do not have their own installers. You should manually extract files and configure, for example:
-```command
+
+```bash
 mkdir ArmCompilerforEmbedded6.22
 tar xvzf ./standalone-linux-armv8l_64-rel.tar.gz -C ./ArmCompilerforEmbedded6.22 --strip-components=1
 rm ./standalone-linux-armv8l_64-rel.tar.gz
