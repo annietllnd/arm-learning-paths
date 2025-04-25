@@ -28,20 +28,19 @@ jobs:
           targets=()
           for file in ${{ steps.changed-md.outputs.all_changed_files }}; do
             if [[ "$file" == *"_index.md" ]]; then
-              values=$(grep -A 10 "test_images:" "$file" | grep '-' | sed 's/- //g' | xargs)
+              values=$(awk '/test_images:/, /^[^ -]/ { if ($1 == "-") print $2 }' "$file")
               for v in $values; do
                 targets+=("\"$v\"")
               done
             fi
           done
 
-          # Ensure at least one runner
           if [ "${#targets[@]}" -eq 0 ]; then
             targets=("\"ubuntu-latest\"")
           fi
 
-          echo "matrix={\"target\":[${targets[*]// /,}]}" >> "$GITHUB_OUTPUT"
-          echo "Targets: ${targets[*]}"
+          json_targets=$(IFS=, ; echo "${targets[*]}")
+          echo "matrix={\"target\":[${json_targets}]}" >> "$GITHUB_OUTPUT"
 
   test-lp:
     needs: determine-test-targets
