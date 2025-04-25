@@ -12,8 +12,8 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://developer.arm.com/documentation/101458/latest
 test_images:
-- ubuntu-24.04-arm
-- fedora:latest
+    - ubuntu-24.04-arm
+    - fedora:latest
 test_link: null
 test_maintenance: true
 title: Arm Compiler for Linux

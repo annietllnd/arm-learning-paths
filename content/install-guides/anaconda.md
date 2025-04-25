@@ -12,7 +12,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://docs.anaconda.com/
 test_images:
-- ubuntu-24.04-arm
+    - ubuntu-24.04-arm
 test_link: null
 test_maintenance: true
 title: Anaconda

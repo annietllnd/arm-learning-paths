@@ -18,7 +18,7 @@ prerequisites:
 author: David Spickett
 
 test_images:
-- ubuntu-24.04-arm
+    - ubuntu-24.04-arm
 test_link: null
 test_maintenance: true
 
