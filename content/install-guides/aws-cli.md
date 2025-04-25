@@ -11,7 +11,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html
 test_images:
-- ubuntu-24.04-arm
+    - ubuntu-24.04-arm
 test_maintenance: true
 title: AWS CLI
 tool_install: true
