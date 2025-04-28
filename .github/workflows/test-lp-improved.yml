@@ -31,7 +31,7 @@ jobs:
             /test_images:/ { in_list=1; next }
             /^[^ -]/ { in_list=0 }
             in_list && /^ *-/ { print $2 }
-            ' "$file")
+            ' "$file" | sort -u)
 
             for v in $values; do
               targets+=("\"$v\"")
@@ -39,14 +39,24 @@ jobs:
 
           done
 
+          if [ "${#all_targets[@]}" -gt 0 ]; then
+            # Deduplicate (preserve order or sort alphabetically)
+            unique_targets=($(printf "%s\n" "${all_targets[@]}" | sort -u))
+
+            # Apply quotes for matrix
+            targets=()
+            for t in "${unique_targets[@]}"; do
+              targets+=("\"$t\"")
+            done
+          else
+            echo "No targets found, falling back to default: ubuntu-24.04-arm"
+            targets=("\"ubuntu-24.04-arm\"")
+          fi
+
           echo "Parsed test targets:"
           for t in "${targets[@]}"; do
             echo "  - $t"
           done
-
-          if [ "${#targets[@]}" -eq 0 ]; then
-            targets=("\"ubuntu-24.04-arm\"")
-          fi
 
           json_targets=$(IFS=, ; echo "${targets[*]}")
           echo "matrix={\"target\":[${json_targets}]}" >> "$GITHUB_OUTPUT"
