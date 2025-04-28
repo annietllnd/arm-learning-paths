@@ -110,10 +110,10 @@ jobs:
               if [[ "$file" == */_index.md ]]; then
                 dir=$(dirname "$file")
                 echo "📂 Running improved_maintenance.py on directory: $dir"
-                python3 tools/improved_maintenance.py --path "$dir" --target ${{ matrix.target }} --debug || failed=1
+                python3 tools/improved_maintenance.py --path "$dir" --target ${{ matrix.target }} || failed=1
               else
                 echo "📄 Running improved_maintenance.py on file: $file"
-                python3 tools/improved_maintenance.py --path "$file" --target ${{ matrix.target }} --debug || failed=1
+                python3 tools/improved_maintenance.py --path "$file" --target ${{ matrix.target }} || failed=1
               fi
             fi
           done

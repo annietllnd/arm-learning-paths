@@ -168,6 +168,7 @@ def main():
             pre_cmds = meta.get("pre_cmd")
             env_source = meta.get("env_source")
             file_name = meta.get("file_name")
+            cwd = meta.get("cwd")
 
             if file_name:
                 temp_file_name = pathlib.Path(file_name)
@@ -189,6 +190,8 @@ def main():
                 full_cmd += f"source {env_source} && "
             if pre_cmds:
                 full_cmd += f"{pre_cmds} && "
+            if cwd:
+                full_cmd += f"cd {cwd} && "
             full_cmd += block
 
             ok, output = run_code_block(full_cmd)
@@ -213,7 +216,7 @@ def main():
             os.remove(file)
             print(f"🧹 Removed file: {file}")
         except Exception as e:
-            print(f"⚠️ Could not remove {file}: {e}")
+            print(f"Could not remove {file}: {e}")
 
     if maintenance_status == "off":
         print("::set-output name=maintenance::off")

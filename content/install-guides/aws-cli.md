@@ -28,7 +28,7 @@ This article provides quick solutions to install the latest version of AWS CLI, 
 
 Confirm you are using an Arm computer with 64-bit Linux by running:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 uname -m
 ```
 
@@ -46,14 +46,14 @@ The easiest way to install the latest version of the AWS CLI for Ubuntu on Arm i
 
 Before starting, install `unzip`:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt update
 sudo apt install unzip -y
 ```
 
 Download the zip file with `curl`, extract the installer, and run it.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install --update
@@ -61,7 +61,7 @@ sudo ./aws/install --update
 
 Confirm the CLI version 2 is available by invoking the `aws` command to print the version.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 aws --version
 ```
 
