@@ -9,7 +9,7 @@ on:
 
 jobs:
   determine-test-targets:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.extract.outputs.matrix }}
     steps:
