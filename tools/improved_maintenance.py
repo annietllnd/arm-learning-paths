@@ -99,6 +99,21 @@ def extract_front_matter_flags(md_path):
     maintenance = "off" if not front_matter.get("test_maintenance", True) else "on"
     return test_images, maintenance
 
+def cleanup_new_paths(existing_paths):
+    current_paths = set(p.resolve() for p in pathlib.Path('.').rglob('*'))
+    new_paths = current_paths - existing_paths
+
+    for path in sorted(new_paths, reverse=True):
+        try:
+            if path.is_file() or path.is_symlink():
+                path.unlink()
+                print(f"🧹 Removed file: {path}")
+            elif path.is_dir():
+                path.rmdir()
+                print(f"🧹 Removed directory: {path}")
+        except Exception as e:
+            print(f"Failed to remove {path}: {e}")
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--path", help="A single .md file or a directory containing .md files with weights")
@@ -141,6 +156,8 @@ def main():
         print(f"🔍 Testing: {md_file}")
         blocks = extract_code_blocks_with_metadata(md_file)
         print(f"Extracted {len(blocks)} blocks from {md_file}")
+
+        existing_paths = set(p.resolve() for p in pathlib.Path('.').rglob('*'))
 
         for i, (block, meta) in enumerate(blocks):
             total_blocks += 1
@@ -211,12 +228,7 @@ def main():
     print(f"❌ Failed: {failed_blocks}")
     print(f"🧪 Total:  {total_blocks}")
 
-    for file in created_files:
-        try:
-            os.remove(file)
-            print(f"🧹 Removed file: {file}")
-        except Exception as e:
-            print(f"Could not remove {file}: {e}")
+    cleanup_new_paths(existing_paths)
 
     if maintenance_status == "off":
         print("::set-output name=maintenance::off")
