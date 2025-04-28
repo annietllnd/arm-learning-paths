@@ -98,7 +98,7 @@ Fetch the ACfL installers:
 
 #### Ubuntu Linux:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 wget  https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-for-Linux/Version_24.10.1/arm-compiler-for-linux_24.10.1_Ubuntu-22.04_aarch64.tar
 ```
 #### Red Hat Linux:
@@ -114,7 +114,7 @@ Each command sequence includes accepting the license agreement to automate the i
 
 #### Ubuntu Linux:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo -E apt-get -y install environment-modules python3 libc6-dev
 tar -xvf arm-compiler-for-linux_24.10.1_Ubuntu-22.04_aarch64.tar
 cd ./arm-compiler-for-linux_24.10.1_Ubuntu-22.04
@@ -226,7 +226,7 @@ Set up the environment, for example, in your `.bashrc` and add module files. The
 
 #### Ubuntu Linux:
 
-```bash { target="ubuntu:latest" pre_cmd=". /usr/share/modules/init/bash" pre_cmd="module use /opt/arm/modulefiles" }
+```bash { target="ubuntu-24.04-arm" pre_cmd=". /usr/share/modules/init/bash" pre_cmd="module use /opt/arm/modulefiles" }
 echo ". /usr/share/modules/init/bash" >> $HOME/.bashrc
 echo "module use /opt/arm/modulefiles" >> $HOME/.bashrc
 source $HOME/.bashrc
