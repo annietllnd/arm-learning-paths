@@ -34,7 +34,7 @@ jobs:
             ' "$file" | sort -u)
 
             for v in $values; do
-              all_targets+=("\"$v\"")
+              all_targets+=("$v")
             done
 
           done
