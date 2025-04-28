@@ -25,7 +25,7 @@ jobs:
         id: extract
         run: |
           echo "Reading test targets from _index.md files..."
-          targets=()
+          all_targets=()
           for file in ${{ steps.changed-md.outputs.all_changed_files }}; do
             values=$(awk '
             /test_images:/ { in_list=1; next }
@@ -34,7 +34,7 @@ jobs:
             ' "$file" | sort -u)
 
             for v in $values; do
-              targets+=("\"$v\"")
+              all_targets+=("\"$v\"")
             done
 
           done
