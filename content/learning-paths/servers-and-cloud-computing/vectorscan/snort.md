@@ -93,7 +93,7 @@ cd hyperscan-build
 Configure and build Vectorscan:
 
 ```bash { cwd="~/snort_src/hyperscan-build" }
-cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DBOOST_ROOT=~/snort_src/boost_1_85_0/ ~/snort_src/vectorscan/
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DBOOST_ROOT=~/snort_src/boost_1_87_0/ ~/snort_src/vectorscan/
 make -j$(nproc) && sudo make install
 ```
 
