@@ -183,3 +183,4 @@ jobs:
                 core.setFailed(`Error updating project board:${error.message}`);
               }
             }
+            main();
