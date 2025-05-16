@@ -22,7 +22,7 @@ You should run the executable in the way that it is usually used. If it is run i
 
 ### What should I do if my executable is input dependent?
 
-You can either find an input that covers all possible input cases. If this is not possible there are 2 other solutions. 
+You can either find an input that covers all possible input cases. If this is not possible there are 2 other solutions.
 
 If you know which inputs go down which path you can record profiles for multiple cases and then create an optimized executable for each case. Then when you get input you need to pick which executable to run.
 
@@ -30,7 +30,7 @@ Another solution is to collect profiles for a range of inputs, generate a `.fdat
 
 For example, collect profiles with different inputs:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf record -e cycles:u -o perf1.data -- ./executable abc
 perf record -e cycles:u -o perf2.data -- ./executable def
 perf record -e cycles:u -o perf3.data -- ./executable ghi
@@ -38,21 +38,21 @@ perf record -e cycles:u -o perf3.data -- ./executable ghi
 
 Convert each case to the `.fdata` format:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf2bolt -p perf1.data -o perf1.fdata -nl ./executable
 perf2bolt -p perf2.data -o perf2.fdata -nl ./executable
 perf2bolt -p perf3.data -o perf3.fdata -nl ./executable
 ```
 
-Combine the `.fdata` files into a single file: 
+Combine the `.fdata` files into a single file:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 merge-fdata *.fdata > combined.fdata
 ```
 
 Run BOLT to optimize and create the new executable based on `combined.fdata`:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 llvm-bolt ./executable -o ./new_executable -data combined.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
 
@@ -60,7 +60,7 @@ llvm-bolt ./executable -o ./new_executable -data combined.fdata -reorder-blocks=
 
 The easiest way to check is look at the names of the sections in the new executable because BOLT adds a few new sections with bolt in the name.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 objdump -h ./new_executable | grep bolt
 ```
 
@@ -75,7 +75,7 @@ If you see the `.bolt` sections you know this is the new executable:
 
 Check the original executable to see that these sections didn't exist there before.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 objdump -h ./executable | grep bolt
 ```
 
@@ -91,7 +91,7 @@ Use the `time` command to see how long each executable took and see if it has re
 
 For example, run both executables:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 time ./executable
 time ./new_executable
 ```
@@ -114,7 +114,7 @@ Perf stat can be used to measure time and record event counters.
 
 For example, run both executables:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf stat -e task-clock,instructions,cycles,l1i_cache_refill,branch-misses -- ./executable
 perf stat -e task-clock,instructions,cycles,l1i_cache_refill,branch-misses -- ./new_executable
 ```

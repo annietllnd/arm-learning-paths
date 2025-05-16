@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## BOLT with multiple systems
 
-If you want to use an Arm Linux target system and a different build system, the process is outlined below. 
+If you want to use an Arm Linux target system and a different build system, the process is outlined below.
 
 ### Collect Perf samples
 
@@ -16,13 +16,13 @@ The Perf data is collected on the Arm target system.
 
 Record samples while running your application. Substitute the actual name of your application for `executable`:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf record -e cycles:u -o perf.data -- ./executable
 ```
 
 Copy `perf.data` and `executable` to the build system using `scp`. You will need to replace `BUILD-SYSTEM` and `/path/to/bolt/work-area` with the build system hostname and work area path respectively for your setup.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 scp perf.data BUILD-SYSTEM:/path/to/bolt/work-area
 scp executable BUILD-SYSTEM:/path/to/bolt/work-area
 ```
@@ -33,11 +33,11 @@ On the build system, verify that `perf.data` and `executable` have been copied.
 
 List the directory contents:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 ls
 ```
 
-You should see `executable` and `perf.data` in your directory. 
+You should see `executable` and `perf.data` in your directory.
 
 ```output
 drwxrwxr-x  2 username username    4096 Nov 28 12:43 ./
@@ -48,7 +48,7 @@ drwxrwxr-x 14 username username    4096 Nov 28 11:09 ../
 
 Run the command below to convert the profile data:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf2bolt -p perf.data -o perf.fdata -nl ./executable
 llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
@@ -61,7 +61,7 @@ This is run from the target system
 
 Copy `new_executable` to the target system. You will need to replace `BUILD-SYSTEM` and `/path/to/bolt/work-area/new_executable` with the build system hostname and path to new_executable respectively.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 scp BUILD-SYSTEM:/path/to/bolt/work-area/new_executable .
 ```
 
@@ -69,7 +69,7 @@ Verify that `new_executable` has been copied.
 
 List the directory contents:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 ls
 ```
 
@@ -85,7 +85,7 @@ drwxrwxr-x 14 username username    4096 Nov 28 11:09 ../
 
 Run the new executable
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 ./new_executable
 ```
 

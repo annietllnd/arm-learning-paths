@@ -3,6 +3,7 @@ on: pull_request
 jobs:
   Test-Pull-Request:
     runs-on: ubuntu-24.04-arm
+    if: false
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4

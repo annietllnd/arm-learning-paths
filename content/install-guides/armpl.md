@@ -16,7 +16,7 @@ minutes_to_complete: 10
 
 test_maintenance: true
 test_images:
-  - ubuntu:latest
+  - ubuntu-24.04-arm
 
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/101004

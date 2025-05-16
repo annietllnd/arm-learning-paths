@@ -32,8 +32,8 @@ operatingsystems:
 
 ### Test
 test_images:
-- ubuntu:latest
-test_maintenance: false
+- ubuntu-24.04-arm
+test_maintenance: true
 
 ### Cross-platform metadata only
 shared_path: true

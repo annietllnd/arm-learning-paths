@@ -15,13 +15,13 @@ For more information and the latest updates see: [[AArch64] BOLT does not suppor
 
 The steps to use BOLT with Perf SPE are listed below.
 
-### Collect Perf data with SPE 
+### Collect Perf data with SPE
 
 Run your executable in the normal use case and collect a SPE performance profile. This will output a `perf.data` file containing the profile and will be used to optimize the executable.
 
 Record samples while running your application. Substitute the actual name of your application for `executable`:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf record -e arm_spe/branch_filter=1/u -o perf.data-- ./executable
 ```
 
@@ -38,7 +38,7 @@ Perf prints the size of the `perf.data` file:
 
 If you application is named `executable`, run the commend below to convert the profile data:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf2bolt -p perf.data -o perf.fdata -nl ./executable
 ```
 
@@ -83,7 +83,7 @@ The final step is to generate a new executable using `perf.fdata`.
 
 To run BOLT use the command below and substitute the name of your application:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
 
@@ -155,4 +155,4 @@ BOLT-INFO: setting __hot_end to 0x4002b0
 BOLT-INFO: patched build-id (flipped last bit)
 ```
 
-The optimized executable is now available as `new_executable`. 
+The optimized executable is now available as `new_executable`.

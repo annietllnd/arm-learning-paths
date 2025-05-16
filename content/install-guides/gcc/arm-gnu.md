@@ -8,7 +8,7 @@ multi_install: false
 multitool_install_part: true
 official_docs: https://gcc.gnu.org/onlinedocs/
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 - fedora:latest
 test_link: null
 test_maintenance: true
@@ -68,7 +68,7 @@ export PATH=/path/to/install/dir/bin:$PATH
 
 Here is a specific example for an Arm Linux host and the AArch32 bare-metal target.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 wget https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel1/binrel/arm-gnu-toolchain-14.2.rel1-aarch64-arm-none-eabi.tar.xz
 tar xJf arm-gnu-toolchain-14.2.rel1-aarch64-arm-none-eabi.tar.xz -C $HOME
 echo 'export PATH="$PATH:$HOME/arm-gnu-toolchain-14.2.rel1-aarch64-arm-none-eabi/bin"' >> ~/.bashrc
