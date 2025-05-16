@@ -13,9 +13,10 @@ The steps to use BOLT with Perf SPE are listed below.
 
 First, make sure you are using Linux Perf version v6.14 or later, which supports the 'brstack' field and captures all branch information.
 
-```bash { output_lines = "2" }
-perf --version
-perf version 6.14
+Record samples while running your application. Substitute the actual name of your application for `executable`:
+
+```bash { target="ubuntu-24.04-arm" }
+perf record -e arm_spe/branch_filter=1/u -o perf.data-- ./executable
 ```
 
 Next, run your executable in the normal use case to collect an SPE performance profile. This generates a `perf.data` file containing the profile, which will be used to optimize the executable.
@@ -40,8 +41,8 @@ The `-jitter=1` flag can help avoid resonance, while `-c`/`--count` controls the
 
 If you application is named `executable`, run the command below to convert the profile data:
 
-```bash { target="ubuntu:latest" }
-perf2bolt -p perf.data -o perf.fdata --spe ./executable
+```bash { target="ubuntu-24.04-arm" }
+perf2bolt -p perf.data -o perf.fdata -nl ./executable
 ```
 
 Below is example output from `perf2bolt`, it has read all samples from `perf.data` and created the converted profile `perf.fdata`.
@@ -89,7 +90,7 @@ The final step is to generate a new executable using `perf.fdata`.
 
 To run BOLT use the command below and substitute the name of your application:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
 

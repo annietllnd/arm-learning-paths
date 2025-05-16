@@ -16,7 +16,7 @@ Run your executable in the normal use case and collect a samples performance pro
 
 Record samples while running your application. Substitute the actual name of your application for `executable`:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf record -e cycles:u -o perf.data -- ./executable
 ```
 
@@ -33,7 +33,7 @@ Perf prints the total number of samples and the size of the `perf.data` file:
 
 If you application is named `executable`, run the command below to convert the profile data:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf2bolt -p perf.data -o perf.fdata -nl ./executable
 ```
 
@@ -77,7 +77,7 @@ The final step is to generate a new executable using `perf.fdata`.
 
 To run BOLT use the command below and substitute the name of your application:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
 
@@ -150,4 +150,4 @@ BOLT-INFO: setting __hot_end to 0x400d88
 BOLT-INFO: patched build-id (flipped last bit)
 ```
 
-The optimized executable is now available as `new_executable`. 
+The optimized executable is now available as `new_executable`.

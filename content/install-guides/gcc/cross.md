@@ -8,7 +8,7 @@ multi_install: false
 multitool_install_part: true
 official_docs: https://gcc.gnu.org/onlinedocs/
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 - fedora:latest
 test_link: null
 test_maintenance: true
@@ -44,7 +44,7 @@ You can install a GCC cross compiler with Arm as a target architecture using Lin
 
 Use the `apt` command to install software packages on any Debian based Linux distribution.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt update
 sudo apt install gcc-arm-none-eabi -y
 sudo apt install gcc-arm-linux-gnueabihf -y
@@ -111,18 +111,18 @@ int main()
 
 To compile hello-world as a bare-metal application:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 arm-none-eabi-gcc --specs=rdimon.specs hello-world-embedded.c -o hello-world.elf
 ```
 
 To cross-compile hello-world as a 32-bit Linux application. On Fedora, only building kernels is currently supported. Support for cross-building user space programs is not currently provided as that would massively multiply the number of packages.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 arm-linux-gnueabihf-gcc  hello-world-embedded.c -o hello-world.elf
 ```
 
 To cross-compile hello-world as a 64-bit Linux application. On Fedora, only building kernels is currently supported. Support for cross-building user space programs is not currently provided as that would massively multiply the number of packages.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 aarch64-linux-gnu-gcc hello-world-embedded.c -o hello-world.elf
 ```

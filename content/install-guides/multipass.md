@@ -22,7 +22,7 @@ author: Jason Andrews
 official_docs: https://documentation.ubuntu.com/multipass/en/latest/
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 
 ### PAGE SETUP

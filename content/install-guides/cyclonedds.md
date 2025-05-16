@@ -9,7 +9,7 @@ additional_search_terms:
 - automotive
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 
 layout: installtoolsall
@@ -45,7 +45,7 @@ You need to install the following before building Cyclone DDS:
 
 - C and C++ compilers (such as GCC).
 - Git.
-- CMake see [How do I install CMake?](/install-guides/cmake/)). 
+- CMake see [How do I install CMake?](/install-guides/cmake/)).
 - OpenSSL.
 
 For Ubuntu Linux, run the commands below. For other Linux distributions, use the package manager to install the software listed above.
@@ -68,7 +68,7 @@ git clone https://github.com/eclipse-cyclonedds/cyclonedds.git
 
 Once downloaded, you can build and install Cyclone DDS.
 
-Enable the flags `BUILD_EXAMPLES` (to compile the example applications included) and `BUILD_TESTING` (to compile the test suite). 
+Enable the flags `BUILD_EXAMPLES` (to compile the example applications included) and `BUILD_TESTING` (to compile the test suite).
 
 Here are the build and install commands:
 
@@ -83,7 +83,7 @@ sudo cmake --build . --target install
 Cyclone DDS is now installed in `/usr/local`.
 
 {{% notice Note %}}
-If you don't want to install Cyclone DDS in the default location of `/usr/local`, you can specify another location 
+If you don't want to install Cyclone DDS in the default location of `/usr/local`, you can specify another location
 by adding `-DCMAKE_INSTALL_PREFIX=<install-prefix>` to the first `cmake` command with your alternative location.
 {{% /notice %}}
 
@@ -91,7 +91,7 @@ by adding `-DCMAKE_INSTALL_PREFIX=<install-prefix>` to the first `cmake` command
 
 To verify the installation, you can run the `Hello World` example from the build directory.
 
-Open two terminals and navigate to the `bin/` directory in each. 
+Open two terminals and navigate to the `bin/` directory in each.
 
 Run the commands shown below in each tab in each of your two terminals:
 
@@ -119,4 +119,4 @@ If you observe the following output from each of the terminals, Cyclone DDS is r
   {{< /tab >}}
 {{< /tabpane >}}
 
-You are now ready to use Cyclone DDS. 
+You are now ready to use Cyclone DDS.

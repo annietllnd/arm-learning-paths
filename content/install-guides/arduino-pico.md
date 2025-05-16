@@ -12,7 +12,7 @@ official_docs: https://docs.aws.amazon.com/greengrass/v2/developerguide/quick-in
 prerequisites: Arduino IDE
 test_maintenance: true
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 tool_install: true
 multi_install: false
 multitool_install_part: false
