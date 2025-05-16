@@ -4,21 +4,20 @@ differentiating_info:
 - Gaming
 - Graphics
 key_ip:
-- Cortex-X
 - Cortex-A
 - Immortalis
 - Mali
 maintopic: true
 operatingsystems_filter:
 - Android: 28
-- Linux: 23
+- Linux: 24
 - macOS: 10
 - Windows: 11
 subjects_filter:
 - Gaming: 6
 - Graphics: 6
 - ML: 10
-- Performance and Architecture: 26
+- Performance and Architecture: 27
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech
 title: Mobile, Graphics, and Gaming
 tools_software_languages_filter:
@@ -43,7 +42,7 @@ tools_software_languages_filter:
 - Coding: 16
 - ExecuTorch: 1
 - Frame Advisor: 1
-- GCC: 9
+- GCC: 10
 - GenAI: 2
 - GoogleTest: 1
 - Java: 5
@@ -65,7 +64,7 @@ tools_software_languages_filter:
 - PyTorch: 1
 - QEMU: 1
 - RME: 1
-- Runbook: 14
+- Runbook: 15
 - Rust: 2
 - SDDiskTool: 1
 - SVE2: 1
