@@ -22,7 +22,7 @@ author: Jason Andrews
 official_docs: https://github.com/nestybox/sysbox/blob/master/docs/user-guide/README.md
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 
 ### PAGE SETUP

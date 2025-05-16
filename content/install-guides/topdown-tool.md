@@ -20,7 +20,7 @@ author: Jason Andrews
 official_docs: https://gitlab.arm.com/telemetry-solution/telemetry-solution
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 
 ### PAGE SETUP
@@ -69,7 +69,7 @@ Install these on your Linux distribution.
 
 For Debian based distributions (including Ubuntu) run:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt update
 sudo apt install python-is-python3 python3-pip python3-venv python3-packaging linux-tools-generic linux-tools-$(uname -r) -y
 ```
@@ -78,7 +78,7 @@ sudo apt install python-is-python3 python3-pip python3-venv python3-packaging li
 
 1. Clone the repository:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 git clone https://git.gitlab.arm.com/telemetry-solution/telemetry-solution.git
 ```
 

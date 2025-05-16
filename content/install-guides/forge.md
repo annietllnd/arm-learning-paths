@@ -12,7 +12,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://www.linaroforge.com/documentation/
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_link: null
 test_maintenance: true
 title: Linaro Forge
@@ -37,7 +37,7 @@ This install guide assumes an Arm AArch64 platform running Ubuntu Linux.
 
 Download and extract the appropriate installation package from [Linaro Forge Downloads](https://www.linaroforge.com/downloadForge/).
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt install wget
 wget https://downloads.linaroforge.com/24.0.3/linaro-forge-24.0.3-linux-aarch64.tar
 tar -xf linaro-forge-24.0.3-linux-aarch64.tar
@@ -57,7 +57,7 @@ If no install directory is specified, you will be prompted to specify this while
 
 To install to the default directory, non-interactively:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 linaro-forge-24.0.3-linux-aarch64/textinstall.sh --accept-license /home/ubuntu/linaro/forge/24.0.3
 ```
 

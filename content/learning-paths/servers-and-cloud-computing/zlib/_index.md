@@ -17,7 +17,7 @@ prerequisites:
 author: Jason Andrews
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_link:
 test_maintenance: true
 

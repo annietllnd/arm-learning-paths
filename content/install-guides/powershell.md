@@ -8,7 +8,7 @@ additional_search_terms:
 - linux
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -50,7 +50,7 @@ You can download a release file for the Arm architecture from GitHub and install
 
 1. Copy and paste the commands below to your Linux shell prompt:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 # Download the powershell '.tar.gz' archive
 curl -L -o /tmp/powershell.tar.gz https://github.com/PowerShell/PowerShell/releases/download/v7.4.1/powershell-7.4.1-linux-arm64.tar.gz
 
@@ -69,7 +69,7 @@ sudo ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 
 2. Confirm the `pwsh` executable is in the search path:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 which pwsh
 ```
 
@@ -79,9 +79,9 @@ The path is printed:
 /usr/bin/pwsh
 ```
 
-3. To verify the installed version run: 
+3. To verify the installed version run:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 pwsh --version
 ```
 
@@ -97,8 +97,8 @@ You are now ready to use PowerShell on your Arm Linux computer.
 
 To print a hello world message using `pwsh` run the following commands:
 
-```bash { target="ubuntu:latest" }
-pwsh -c Write-Host Hello Arm Linux world! 
+```bash { target="ubuntu-24.04-arm" }
+pwsh -c Write-Host Hello Arm Linux world!
 ```
 
 The hello message is printed:

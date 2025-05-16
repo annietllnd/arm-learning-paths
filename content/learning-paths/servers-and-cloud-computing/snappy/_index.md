@@ -18,7 +18,7 @@ prerequisites:
 author: Pareena Verma
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
 test_maintenance: true
 

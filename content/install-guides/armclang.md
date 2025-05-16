@@ -12,7 +12,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://developer.arm.com/documentation/100748
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_link: null
 test_maintenance: true
 title: Arm Compiler for Embedded

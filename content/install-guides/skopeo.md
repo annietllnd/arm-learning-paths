@@ -13,13 +13,13 @@ layout: installtoolsall
 multi_install: false
 multitool_install_part: false
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: false
 tool_install: true
 weight: 1
 ---
 
-Skopeo is a command-line utility that performs various operations on container images and image repositories. It does not require a daemon to be running on your computer. 
+Skopeo is a command-line utility that performs various operations on container images and image repositories. It does not require a daemon to be running on your computer.
 
 This article explains how to install Skopeo for Ubuntu on Arm.
 

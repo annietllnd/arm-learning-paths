@@ -12,7 +12,7 @@ multi_install: false
 multitool_install_part: false
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: false
 
 tool_install: true
@@ -26,7 +26,7 @@ Its aim is to have as few implementation dependencies as possible, making it a v
 
 ## Is Java available for Arm Linux?
 
-Yes, there are numerous ways to install Java on Arm Linux distributions. 
+Yes, there are numerous ways to install Java on Arm Linux distributions.
 
 Below are some of the common methods that you can use to install Java. This includes both the Java runtime environment (JRE), which is used to run Java applications, and the Java Development Kit (JDK), which is used to create Java applications.
 
@@ -57,8 +57,8 @@ sudo dnf install java-latest-openjdk
 For distributions using `pacman`, including Arch and Manjaro, you can install Java using this code:
 
 ```console
-sudo pacman -S jdk-openjdk  
-sudo pacman -S jre-openjdk  
+sudo pacman -S jdk-openjdk
+sudo pacman -S jre-openjdk
 ```
 
 ## Can I install Java using Snap?
@@ -88,7 +88,7 @@ You can find out more about the installation options for Corretto in the [Amazon
 The Microsoft Build of OpenJDK is a no-cost, open source distribution of OpenJDK. It includes Long-Term Support (LTS) binaries for Java 11 and Java 17 and runs on Arm Linux.
 
 {{% notice Note %}}
-The Arm architecture is not available in the repositories for the `apt` package manager. 
+The Arm architecture is not available in the repositories for the `apt` package manager.
 {{% /notice %}}
 
 You can download a tar.gz file from [Download the Microsoft Build of OpenJDK](https://learn.microsoft.com/en-gb/java/openjdk/download)
@@ -105,7 +105,7 @@ Extract the contents of the file:
 tar xvf microsoft-jdk-21.0.4-linux-aarch64.tar.gz
 ```
 
-Move the contents to a directory of your choice: 
+Move the contents to a directory of your choice:
 
 ```console
 sudo mv  jdk-21.0.4+7/ /usr/local
@@ -124,7 +124,7 @@ For more information about the available versions and supported platforms refer 
 
 ## How do I install Eclipse Temurin from the Adoptium Working Group?
 
-The Adoptium Working Group promotes and supports high-quality, TCK-certified runtimes and associated technology for use across the Java ecosystem. 
+The Adoptium Working Group promotes and supports high-quality, TCK-certified runtimes and associated technology for use across the Java ecosystem.
 
 Eclipse Temurin is the name of the OpenJDK distribution from Adoptium.
 
@@ -134,7 +134,7 @@ To install Temurin on Ubuntu run:
 sudo apt install -y wget apt-transport-https gpg
 wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/adoptium.gpg > /dev/null
 echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
-sudo apt update 
+sudo apt update
 sudo apt install temurin-17-jdk -y
 ```
 
@@ -144,7 +144,7 @@ For more information about the available versions and supported platforms refer 
 
 You can download Java from the [Oracle website](https://www.oracle.com/java/technologies/javase-downloads.html) and install it manually. Look for the files with ARM64 in the description.
 
-Download a [tar.gz](https://download.oracle.com/java/22/latest/jdk-22_linux-aarch64_bin.tar.gz) file from the website. 
+Download a [tar.gz](https://download.oracle.com/java/22/latest/jdk-22_linux-aarch64_bin.tar.gz) file from the website.
 
 Extract the contents of the file:
 
@@ -152,7 +152,7 @@ Extract the contents of the file:
 tar xvf jdk-22_linux-aarch64_bin.tar.gz
 ```
 
-Move the contents to a directory of your choice: 
+Move the contents to a directory of your choice:
 
 ```console
 sudo mv jdk-22.0.2 /usr/local/
@@ -175,7 +175,7 @@ Yes, you can change the default version. For systems with `apt` use:
 sudo update-alternatives --config java
 ```
 
-You will be given the option to select a new version. The options are dependent on the software currently installed on your computer. 
+You will be given the option to select a new version. The options are dependent on the software currently installed on your computer.
 
 ```output
 There are 3 choices for the alternative java (providing /usr/bin/java).
@@ -190,7 +190,7 @@ There are 3 choices for the alternative java (providing /usr/bin/java).
 Press <enter> to keep the current choice[*], or type selection number:
 ```
 
-In this example, if you select option 1, Java 17 becomes the default. 
+In this example, if you select option 1, Java 17 becomes the default.
 
 ## How do I print the Java version?
 
@@ -226,7 +226,7 @@ For performance and security, it’s important to ensure that your version of Ja
 
 ## Which flags are available for tuning the JVM?
 
-The Java Virtual Machine (JVM) includes a number of flags which are available to tune performance and aid in debugging. Some of the flags are general-purpose and some are Arm architecture-specific. 
+The Java Virtual Machine (JVM) includes a number of flags which are available to tune performance and aid in debugging. Some of the flags are general-purpose and some are Arm architecture-specific.
 
 To print the final values of the flags after the JVM has been initialized, run:
 
@@ -254,7 +254,7 @@ There are a number of Java-related tools you might like to install.
 
 ### Apache Maven
 
-Apache Maven is a powerful build automation tool primarily used for Java projects. 
+Apache Maven is a powerful build automation tool primarily used for Java projects.
 
 It simplifies the build process by providing a uniform build system, with dependency and project management capabilities.
 
@@ -282,9 +282,9 @@ OS name: "linux", version: "6.8.0-41-generic", arch: "aarch64", family: "unix"
 
 ### Gradle
 
-Gradle is another build automation tool that is widely used for Java projects. 
+Gradle is another build automation tool that is widely used for Java projects.
 
-It is designed to be highly customizable and flexible, making it suitable for a wide range of projects. 
+It is designed to be highly customizable and flexible, making it suitable for a wide range of projects.
 
 You can install it from the `apt` package manager:
 
@@ -337,7 +337,7 @@ OS:            Linux 6.8.0-41-generic aarch64
 
 ### Apache Ant
 
-Apache Ant is a Java-based build tool used to automate the build process for Java projects. It is similar to Make but is designed specifically for Java projects. 
+Apache Ant is a Java-based build tool used to automate the build process for Java projects. It is similar to Make but is designed specifically for Java projects.
 
 Ant uses XML to describe the build process and dependencies.
 
@@ -370,7 +370,7 @@ Apache Ant(TM) version 1.10.13 compiled on January 4 2023
 
 ### Apache JMeter
 
-JMeter is an open-source tool designed for performance and load testing Java applications. 
+JMeter is an open-source tool designed for performance and load testing Java applications.
 
 You can install it using:
 
@@ -401,4 +401,4 @@ INFO: Created user preferences directory.
 Copyright (c) 1999-2024 The Apache Software Foundation
 ```
 
-You are ready to use Java on your Arm Linux system. 
+You are ready to use Java on your Arm Linux system.

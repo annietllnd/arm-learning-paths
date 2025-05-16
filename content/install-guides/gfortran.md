@@ -14,7 +14,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://gcc.gnu.org/onlinedocs/gfortran/
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 - fedora:latest
 test_link: null
 test_maintenance: true
@@ -55,7 +55,7 @@ The Linux package manager downloads the required files so there are no special i
 
 Use the `apt` command to install software packages on any Debian based Linux distribution, including Ubuntu.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt update
 sudo apt install gfortran -y
 ```
