@@ -173,7 +173,8 @@ sw_categories:
       tests_and_status: []
     ml-perf:
       readable_title: Measure Machine Learning Inference Performance on Arm servers
-      tests_and_status: []
+      tests_and_status:
+      - ubuntu:latest: passed
     mysql_tune:
       readable_title: Learn how to Tune MySQL
       tests_and_status: []
