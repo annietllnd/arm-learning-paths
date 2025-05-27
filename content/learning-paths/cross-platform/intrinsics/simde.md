@@ -8,7 +8,7 @@ weight: 5
 
 [SIMD Everywhere (SIMDe)](https://github.com/simd-everywhere/simde) is another way to get C/C++ applications with intrinsics running on Arm.
 
-Like `sse2neon` it is a header-only library which makes porting code to other architectures easy. 
+Like `sse2neon` it is a header-only library which makes porting code to other architectures easy.
 
 If the code being migrated has `MMX` or `SSE` code then either `sse2neon` or `SIMDe` can be used, but if it contains `AVX` then `SIMDe` is needed.
 
@@ -26,7 +26,7 @@ The use of `SIMDE_ENABLE_NATIVE_ALIASES` is not recommended for large projects.
 It is recommended to rename the intrinics with `simde` prepended. For example, change `_mm_set_ps` to `simde_mm_set_ps` in the below.
 
 Using the `simde` prefix is recommended for new code.
-{{% /notice %}}  
+{{% /notice %}}
 
 The appropriate header file for `emmintrin.h` is `simde/x86/sse2.h`
 

@@ -1,0 +1,145 @@
+name: Test Learning Path Improved
+
+on:
+  pull_request:
+    paths:
+      - 'content/**/*.md'
+      - 'tools/improved_maintenance.py'
+      - '.github/workflows/test-lp-improved.yml'
+
+jobs:
+  determine-test-targets:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.extract.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get changed markdown files
+        id: changed-md
+        uses: tj-actions/changed-files@v46
+        with:
+          files: '**/*.md'
+
+      - name: Extract test targets from _index.md files
+        id: extract
+        run: |
+          echo "Reading test targets from _index.md files..."
+          all_targets=()
+          for file in ${{ steps.changed-md.outputs.all_changed_files }}; do
+            values=$(awk '
+            /test_images:/ { in_list=1; next }
+            /^[^ -]/ { in_list=0 }
+            in_list && /^ *-/ { print $2 }
+            ' "$file" | sort -u)
+
+            for v in $values; do
+              all_targets+=("$v")
+            done
+
+          done
+
+          if [ "${#all_targets[@]}" -gt 0 ]; then
+            # Deduplicate (preserve order or sort alphabetically)
+            unique_targets=($(printf "%s\n" "${all_targets[@]}" | sort -u))
+
+            # Apply quotes for matrix
+            targets=()
+            for t in "${unique_targets[@]}"; do
+              targets+=("\"$t\"")
+            done
+          else
+            echo "No targets found, falling back to default: ubuntu-24.04-arm"
+            targets=("\"ubuntu-24.04-arm\"")
+          fi
+
+          echo "Parsed test targets:"
+          for t in "${targets[@]}"; do
+            echo "  - $t"
+          done
+
+          json_targets=$(IFS=, ; echo "${targets[*]}")
+          echo "matrix={\"target\":[${json_targets}]}" >> "$GITHUB_OUTPUT"
+
+  test-lp:
+    needs: determine-test-targets
+    runs-on: ${{ matrix.target }}
+    strategy:
+      matrix: ${{ fromJson(needs.determine-test-targets.outputs.matrix) }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.vars.outputs.branch-name }}
+      - name: Get changed markdown files
+        id: changed-md
+        uses: tj-actions/changed-files@v46
+        with:
+          files: '**/*.md'
+      - name: Install dependencies
+        run: pip install -r tools/requirements.txt
+
+      - name: Run hugo site build
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y hugo
+          hugo
+
+      - name: Check for capital letters or spaces in content directory
+        run: |
+          echo "Checking for capital letters or spaces in content directory paths (excluding file extensions)..."
+
+          tmpfile=$(mktemp)
+
+          git diff --name-only origin/${{ github.base_ref }}...HEAD |
+            grep '^content/' |
+            while read -r path; do
+              name=$(basename "$path")
+
+              # Strip file extension if it exists
+              base="${name%.*}"
+
+              if [[ "$base" =~ [A-Z] || "$base" =~ [[:space:]] ]]; then
+                echo "Invalid name: $path"
+                echo "$path" >> "$tmpfile"
+              fi
+            done
+
+          if [[ -s "$tmpfile" ]]; then
+            echo "❌ One or more files or directories in 'content/' contain capital letters or spaces (excluding extensions):"
+            cat "$tmpfile"
+            rm "$tmpfile"
+            exit 1
+          else
+            rm "$tmpfile"
+            echo "✅ No capital letters or spaces found in 'content/' paths."
+          fi
+
+      - name: Run test suite on changed content
+        id: run-tests
+        run: |
+          set -o pipefail
+          echo "🔍 Detecting changed content to test..."
+
+          failed=0
+
+          for file in ${{ steps.changed-md.outputs.all_changed_files }}; do
+            if [[ "$file" == content/* && "$file" == *.md ]]; then
+              # If it's an _index.md or a subdir file, test the whole directory
+              if [[ "$file" == */_index.md ]]; then
+                dir=$(dirname "$file")
+                echo "📂 Running improved_maintenance.py on directory: $dir"
+                python3 tools/improved_maintenance.py --path "$dir" --target ${{ matrix.target }} || failed=1
+              else
+                echo "📄 Running improved_maintenance.py on file: $file"
+                python3 tools/improved_maintenance.py --path "$file" --target ${{ matrix.target }} || failed=1
+              fi
+            fi
+          done
+
+          if [[ "$failed" -eq 1 ]]; then
+            echo "::error::❌Tests failed in test suite"
+            exit 1
+          else
+            echo "✅ All tests passed"
+          fi

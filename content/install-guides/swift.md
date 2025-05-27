@@ -10,9 +10,9 @@ additional_search_terms:
 layout: installtoolsall
 multi_install: false
 multitool_install_part: false
-official_docs: https://www.swift.org/documentation/ 
+official_docs: https://www.swift.org/documentation/
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 tool_install: true
 weight: 1
@@ -22,7 +22,7 @@ weight: 1
 
 ## What do I need to install Swift?
 
-Swift is available for macOS, Windows, and Linux, including Arm Linux distributions. 
+Swift is available for macOS, Windows, and Linux, including Arm Linux distributions.
 
 This guide provides a quick solution to install Swift on Ubuntu for Arm.
 
@@ -42,7 +42,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ### What software packages are needed?
 
-Before you install Swift on Ubuntu 24.04, install the following packages: 
+Before you install Swift on Ubuntu 24.04, install the following packages:
 
 ```bash
 sudo apt update
@@ -68,7 +68,7 @@ sudo apt-get -y install \
 
 ## How do I download and install Swift?
 
-This guide uses Swift version 6.0.1 on Ubuntu 24.04. 
+This guide uses Swift version 6.0.1 on Ubuntu 24.04.
 
 You can get more information about other versions and platforms from [Download Swift](https://www.swift.org/download/).
 
@@ -91,7 +91,7 @@ echo 'export PATH="$PATH:/usr/local/swift-6.0.1-RELEASE-ubuntu24.04-aarch64/usr/
 source ~/.bashrc
 ```
 
-## How can I confirm Swift is working? 
+## How can I confirm Swift is working?
 
 You can print the version with:
 
@@ -106,7 +106,7 @@ Swift version 6.0.1 (swift-6.0.1-RELEASE)
 Target: aarch64-unknown-linux-gnu
 ```
 
-You can also create and run a simple example program. 
+You can also create and run a simple example program.
 
 Use a text editor to create a new file named `hello.swift` and add the following code:
 

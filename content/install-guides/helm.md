@@ -14,7 +14,7 @@ layout: installtoolsall
 multi_install: false
 multitool_install_part: false
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_link: false
 test_maintenance: false
 tool_install: true
@@ -27,7 +27,7 @@ Helm supports the Arm architecture, and is available for Windows, macOS, and Lin
 
 ## Before you begin
 
-There is documentation available on [Installing Helm](https://helm.sh/docs/intro/install/) which covers all supported operating systems. 
+There is documentation available on [Installing Helm](https://helm.sh/docs/intro/install/) which covers all supported operating systems.
 
 This Install Guide gives you a quick solution for installing Helm for Ubuntu on Arm.
 
@@ -56,7 +56,7 @@ There are multiple ways to install Helm for Ubuntu on Arm. Here are three option
 
 ### Option 1: Install using the release tar file
 
-Download and install the latest version. 
+Download and install the latest version.
 
 There is just one executable to copy to the desired location:
 

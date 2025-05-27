@@ -9,7 +9,7 @@ additional_search_terms:
 - rust
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 
 ### FIXED, DO NOT MODIFY
@@ -52,7 +52,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 Use the `apt` command to install the required software packages on any Debian-based Linux distribution, including Ubuntu.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt update
 sudo apt install -y curl gcc
 ```

@@ -1,5 +1,5 @@
 ---
-title: Train a model for text classification 
+title: Train a model for text classification
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -10,11 +10,11 @@ layout: learningpathall
 
 You will need to install Python and pip to use ThirdAI. The instructions below are for Ubuntu, but you can use other Linux distributions.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt install python3-pip python3-venv -y
 ```
 
-Create a virtual environment to avoid dependency conflicts: 
+Create a virtual environment to avoid dependency conflicts:
 
 ```bash
 python3 -m venv thirdai
@@ -23,13 +23,13 @@ source thirdai/bin/activate
 
 The prompt of your terminal now has (thirdai) as a prefix to indicate the virtual environment is active.
 
-To start, you need to install the ThirdAI package: 
+To start, you need to install the ThirdAI package:
 
 ```bash
 pip3 install thirdai
 ```
 
-The full classification example below uses the Hugging Face datasets package to download data. 
+The full classification example below uses the Hugging Face datasets package to download data.
 
 To install datasets, run the following command:
 
@@ -37,17 +37,17 @@ To install datasets, run the following command:
 pip3 install datasets
 ```
 
-The data used is from the Amazon Polarity Sentiment dataset, a large-scale sentiment analysis dataset for product reviews. 
+The data used is from the Amazon Polarity Sentiment dataset, a large-scale sentiment analysis dataset for product reviews.
 
-In the Amazon Polarity Sentiment dataset, each review is turned into a simple binary sentiment classification task, where a positive review has a label of 1 and a negative review has a label of 0. 
+In the Amazon Polarity Sentiment dataset, each review is turned into a simple binary sentiment classification task, where a positive review has a label of 1 and a negative review has a label of 0.
 
-The dataset is called "polarity" because it focuses on binary sentiment classification, which is often referred to as "sentiment polarity". 
+The dataset is called "polarity" because it focuses on binary sentiment classification, which is often referred to as "sentiment polarity".
 
 This dataset is often used in natural language processing tasks related to sentiment analysis, where the goal is to determine the sentiment expressed in a piece of text.
 
-## Download dataset and train the model 
+## Download dataset and train the model
 
-You are now ready to download the text classification dataset and train a classification model with ThirdAI. 
+You are now ready to download the text classification dataset and train a classification model with ThirdAI.
 
 Using a file editor of your choice, create a file called `train.py` with the contents:
 
@@ -62,11 +62,11 @@ thirdai.licensing.activate("KVN9-JVRJ-FAAN-4UPE-KVXT-KV4F-LMWK-CM9E")
 
 def load_data(output_filename, split, return_inference_batch=False):
     data = load_dataset('amazon_polarity')
-    
+
     df = pd.DataFrame(data[split])
-    df = df[['title', 'label']]    
+    df = df[['title', 'label']]
     df.to_csv(output_filename, index=False, sep='\t')
-    
+
     if return_inference_batch:
         inference_batch = to_udt_input_batch(df[["title"]].sample(frac=1).iloc[:5])
         return inference_batch
@@ -102,7 +102,7 @@ To train the model run the script:
 python3 train.py
 ```
 
-You see a progress bar which shows 5 epochs. 
+You see a progress bar which shows 5 epochs.
 
 The output is:
 

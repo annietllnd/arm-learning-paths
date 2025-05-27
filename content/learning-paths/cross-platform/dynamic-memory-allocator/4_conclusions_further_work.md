@@ -10,14 +10,14 @@ layout: learningpathall
 
 You have glimpsed into the world of dynamic memory allocation, and
 probably have more questions than answers. You may have noticed some oversights
-in the implementation presented, and you are almost certainly right. 
+in the implementation presented, and you are almost certainly right.
 
 Overall your take away from this material is that "dynamic" memory allocation
 can mean many things. Sometimes it is all dynamic, sometimes it is a dynamic
 face with a static allocation behind it. This will change depending on the
 performance and complexity needs of the application.
 
-Fundamentally, dynamic memory allocation provides a way to get memory you 
+Fundamentally, dynamic memory allocation provides a way to get memory you
 did not know if you would
 need when the program was written. You likely know that you need some amount
 of memory and dynamic allocation lets you ask for it while the program is running.
@@ -45,7 +45,7 @@ Look again at the last logging example on the previous page.
 
 What's wrong with these ranges? Nothing, until you allocate something >= 249
 bytes. The allocator should be able to put that at address `0x55e68c41f0ac`, but because
-the 2 free ranges are separated, the requested memory doesn't fit. 
+the 2 free ranges are separated, the requested memory doesn't fit.
 
 ```text
   [0x55e68c41f0ac -> 0x55e68c41f1a4) : 0x00000000000000f8 (free, size = 248 bytes)
@@ -59,7 +59,7 @@ Then again, this does add some overhead. Perhaps it shouldn't be called on every
 free. Think about the trade-off (and don't be afraid to change the data
 structures you've used, they are not perfect either).
 
-### Memory safety 
+### Memory safety
 
 A big problem with memory in general is code accessing or changing memory that
 it should not. The allocator presented here is certainly vulnerable to all the
@@ -160,7 +160,7 @@ On Linux this is done using the environment variable `LD_PRELOAD`.
 
 Set the environment variable to point to your allocator instead of the one provided by Linux:
 
-```
+```console
 LD_PRELOAD=<path to your shared object> <program>
 ```
 
@@ -181,4 +181,4 @@ the size of the static allocation, or consider using `mmap` to ask the kernel
 for memory (as C libraries tend to do).
 
 There are many things to learn about dynamic memory allocation, but it helps
-to have a good understanding of the basics. 
+to have a good understanding of the basics.

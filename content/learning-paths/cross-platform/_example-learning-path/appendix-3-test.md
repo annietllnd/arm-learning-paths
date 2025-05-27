@@ -208,7 +208,7 @@ To allow the framework to parse and test the Learning Path instructions, edit th
 ```yaml
 test_maintenance: true
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 - fedora:latest
 ```
 
@@ -252,12 +252,12 @@ install-guides:
     mytool:
       readable_title: My Tool
       tests_and_status:
-      - ubuntu:latest: passed
+      - ubuntu-24.04-arm: passed
 microcontrollers:
     my-new-learning-path:
       readable_title: My new Learning Path
       tests_and_status:
-      - ubuntu:latest: passed
+      - ubuntu-24.04-arm: passed
 ```
 
 ```bash
@@ -266,13 +266,13 @@ microcontrollers:
 
 ```yaml
 tests_and_status:
-  - ubuntu:latest: passed
+  - ubuntu-24.04-arm: passed
   - fedora:latest: failed
 ```
 
 The field `tests_and_status` is a list that indicated whether all tests passed for a corresponding Docker container image or if at least one test failed.
 
-In the example above, the summary indicates that for this Learning Path all tests passed for the image `ubuntu:latest` but at least one test failed for the image `fedora:latest`. More information about the failures can be found in the console.
+In the example above, the summary indicates that for this Learning Path all tests passed for the image `ubuntu-24.04-arm` but at least one test failed for the image `fedora:latest`. More information about the failures can be found in the console.
 
 ## Advanced usage for embedded development
 ### Using the Corstone-300 FVP

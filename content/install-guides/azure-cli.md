@@ -9,7 +9,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://learn.microsoft.com/en-us/cli/azure
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 title: Azure CLI
 tool_install: true
@@ -32,7 +32,7 @@ Ubuntu 20.04, Ubuntu 22.04, Ubuntu 24.04
 
 Confirm you are using an Arm machine by running:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 uname -m
 ```
 
@@ -46,13 +46,13 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 You can install Azure CLI using the following script. This script pulls required Arm64 packages and installs those on the system
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```
 
 Execute the following command to verify the Azure CLI is installed correctly
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 az version
 ```
 
@@ -90,7 +90,7 @@ pip install azure-cli
 
 The pip install updates $HOME/.profile with the path the `az` executable. Check the executable is available by printing the version.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 source $HOME/.profile
 az version
 ```

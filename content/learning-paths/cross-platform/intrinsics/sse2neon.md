@@ -4,9 +4,9 @@ title: Use sse2neon to port code to Arm
 weight: 4
 ---
 
-## sse2neon 
+## sse2neon
 
-The [sse2neon project](https://github.com/DLTcollab/sse2neon) is a quick way to get C/C++ applications compiling and running on Arm. The `sse2neon.h` header file provides NEON implementations for x64 intrinsics so no further source code changes are needed. 
+The [sse2neon project](https://github.com/DLTcollab/sse2neon) is a quick way to get C/C++ applications compiling and running on Arm. The `sse2neon.h` header file provides NEON implementations for x64 intrinsics so no further source code changes are needed.
 
 Each intrinsic is replaced with NEON code and so will run on an appropriate Arm platform.
 

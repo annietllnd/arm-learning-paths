@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-Any computer running Docker can be used for this section. 
+Any computer running Docker can be used for this section.
 
 Before you begin, confirm Docker `buildx` is installed by running the `docker buildx` command.
 
@@ -28,7 +28,7 @@ If any other output is shown return to [Installing Docker](/install-guides/docke
 
 ### Note for Docker Engine
 
-Docker Desktop provides the ability to build and run multi-architecture images using instruction emulation. If you are running Docker Engine on Linux, there is an extra step to enable emulation for multi-architecture images. 
+Docker Desktop provides the ability to build and run multi-architecture images using instruction emulation. If you are running Docker Engine on Linux, there is an extra step to enable emulation for multi-architecture images.
 
 For Ubuntu, install emulation support using the command below.
 
@@ -41,29 +41,29 @@ If emulation support is not installed on a Linux machine running Docker Engine, 
 standard_init_linux.go:228: exec user process caused: exec format error
 ```
 
-The next section explains how to use `docker buildx` to create multi-architecture images. Multi-architecture images provide variants for different instruction set architectures so users can run the image on any of the supported architectures. 
+The next section explains how to use `docker buildx` to create multi-architecture images. Multi-architecture images provide variants for different instruction set architectures so users can run the image on any of the supported architectures.
 
 ## Build a multi-architecture Docker image from a Dockerfile
 
 Create a new directory and use a text editor to copy the two lines below into a file named `Dockerfile`, or reuse the same file from the previous section.
 
 ```dockerfile
-FROM ubuntu:latest
+FROM ubuntu-24.04-arm
 CMD echo -n "Architecture is " && uname -m
 ```
 
-Build the docker image using `docker buildx`. Replace `username` with your Docker Hub username. 
+Build the docker image using `docker buildx`. Replace `username` with your Docker Hub username.
 
-```console 
+```console
 docker buildx create --use --name mybuilder
 docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t username/uname-x --push .
 ```
 
-Docker `buildx` must push the multi-architecture image to a registry. The docker daemon cannot save the image locally. This will change with the future transition from dockerd to containerd, so stay tuned. 
+Docker `buildx` must push the multi-architecture image to a registry. The docker daemon cannot save the image locally. This will change with the future transition from dockerd to containerd, so stay tuned.
 
 After the build, the `docker images` command does not show a local image, but the multi-architecture image is present in Docker Hub. The missing local image is a common misunderstanding for developers.
 
-## Run the Docker image 
+## Run the Docker image
 
 From any computer pull and run the multi-architecture image. Because support for three architectures is included, Docker will automatically get the correct image and run it.
 
@@ -95,7 +95,7 @@ Architecture is x86_64
 
 It is possible to run `docker buildx build` again with a change to the Dockerfile, push to Docker Hub, and re-run expecting to run the new image.
 
-The `docker run` command will use the local image. It will NOT pull the new version which went directly to Docker Hub. 
+The `docker run` command will use the local image. It will NOT pull the new version which went directly to Docker Hub.
 
 To remove the local copy use the `docker rmi` command.
 
@@ -103,7 +103,7 @@ To remove the local copy use the `docker rmi` command.
 docker rmi username/uname-x
 ```
 
-Now the new image will be downloaded from Docker Hub. 
+Now the new image will be downloaded from Docker Hub.
 
 ## Other useful commands
 

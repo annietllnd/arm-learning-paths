@@ -17,8 +17,8 @@ armips:
 - Cortex-A
 
 prerequisites:
-- An Arm Linux system or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a 
-  cloud service provider. 
+- An Arm Linux system or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a
+  cloud service provider.
 
 operatingsystems:
     - Linux
@@ -27,9 +27,9 @@ skilllevels: Introductory
 subjects: Libraries
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_link: null
-test_maintenance: false
+test_maintenance: true
 
 tools_software_languages:
 

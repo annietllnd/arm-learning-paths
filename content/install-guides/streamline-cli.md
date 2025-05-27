@@ -20,7 +20,7 @@ author: Julie Gaskin
 official_docs: https://developer.arm.com/documentation/109847/latest/
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 
 ### PAGE SETUP

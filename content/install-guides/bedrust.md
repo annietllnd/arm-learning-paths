@@ -13,7 +13,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://github.com/darko-mesaros/bedrust
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 tool_install: true
 weight: 1
@@ -21,7 +21,7 @@ weight: 1
 
 Bedrust is a command-line program you can use to easily invoke models on Amazon Bedrock, a managed service that makes it easy for developers to build and scale generative AI applications using foundation models (FMs) from leading AI model providers.
 
-Bedrust is available as Rust source code, and you can build and run it on an Arm Linux computer. 
+Bedrust is available as Rust source code, and you can build and run it on an Arm Linux computer.
 
 ## What should I consider before installing Bedrust?
 
@@ -34,25 +34,25 @@ To use Bedrust you need to:
 
 ### Configure credentials
 
-To connect to Bedrock, you need to install the [AWS CLI](/install-guides/aws-cli/), generate an access key ID and secret access key, and use the `aws configure` command to enter your credentials. 
+To connect to Bedrock, you need to install the [AWS CLI](/install-guides/aws-cli/), generate an access key ID and secret access key, and use the `aws configure` command to enter your credentials.
 
-Refer to [AWS Credentials](/install-guides/aws_access_keys/) for more details. 
+Refer to [AWS Credentials](/install-guides/aws_access_keys/) for more details.
 
 ### Enable model access in Bedrock
 
-To use Bedrock models you need to request access to specific foundation models through the AWS Bedrock console. 
+To use Bedrock models you need to request access to specific foundation models through the AWS Bedrock console.
 
-In your AWS account, navigate to "Model access" in the Bedrock console and select the models you want to use. 
+In your AWS account, navigate to "Model access" in the Bedrock console and select the models you want to use.
 
 Refer to [Getting started with Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html) for additional documentation.
 
 ## How do I download and install Bedrust?
 
-The easiest way to install Bedrust is by using Cargo, the Rust package manager. 
+The easiest way to install Bedrust is by using Cargo, the Rust package manager.
 
 ### Install Rust
 
-Ensure you have Rust and Cargo installed on your computer. If not, install them using the commands: 
+Ensure you have Rust and Cargo installed on your computer. If not, install them using the commands:
 
 ```bash
 sudo apt install curl gcc -y
@@ -135,7 +135,7 @@ Use the menu to select the default model:
 Just run `bedrust` to invoke the CLI with the default model.
 
 ```console
-bedrust 
+bedrust
 ```
 
 You will see the prompt and can start asking questions like `how do I install the AWS CLI?` to see how it works.
@@ -176,7 +176,7 @@ Your queries are now sent to the Amazon Nova Micro model.
 
 ## How do I know which models I can use?
 
-Use `--help` to see your models. 
+Use `--help` to see your models.
 
 ```console
 bedrust --help
@@ -199,7 +199,7 @@ Options:
   -V, --version              Print version
 ```
 
-The output shows the model strings you can use. Make sure to enable the models you want to use in the Bedrock console. 
+The output shows the model strings you can use. Make sure to enable the models you want to use in the Bedrock console.
 
 Bedrust is a quick way to explore many Bedrock models and easily compare them.
 
