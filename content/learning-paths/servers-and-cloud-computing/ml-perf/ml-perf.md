@@ -22,7 +22,28 @@ Launch an Arm-based instance running `Ubuntu 20.04` or `Ubuntu 22.04`.
 
 Install build-essential and Python3 package dependencies:
 
+```text { file_name="example.txt" }
+Hello, world!
+This is a sample file.
+It has five lines.
+Each line is unique.
+Learning Paths rock!
+```
+
+```python { file_name="sample.py" }
+def print_file_lines(filename):
+    with open(filename, 'r') as file:
+        for idx, line in enumerate(file, 1):
+            print(f"{idx}: {line.strip()}")
+
+print_file_lines("example.txt")
+```
+
 ```bash
+python3 sample.py
+```
+
+```console
 sudo apt-get update
 sudo apt-get install -y build-essential
 sudo apt-get install -y python3-pip
@@ -38,7 +59,7 @@ You will use the MLPerf Inference benchmark suite from MLCommons to benchmark mo
 
 Start by cloning the repository below:
 
-```bash
+```console
 cd $HOME
 git clone --recurse-submodules https://github.com/mlcommons/inference.git mlperf_inference
 ```
@@ -47,7 +68,7 @@ git clone --recurse-submodules https://github.com/mlcommons/inference.git mlperf
 
 Next, build and install the MLPerf Inference Benchmark for the Image Classification and Object Detection use case using the steps below:
 
-```bash
+```console
 cd $HOME/mlperf_inference/loadgen/
 CFLAGS="-std=c++14" sudo python3 setup.py develop --user
 cd ../vision/classification_and_detection/
@@ -58,7 +79,7 @@ sudo python3 setup.py develop
 
 MLPerf Inference Benchmark suite can use different backends such as ONNX or TensorFlow. You will install TensorFlow as the backend. Install TensorFlow using the commands below:
 
-```bash
+```console
 pip install tensorflow
 pip install tensorflow-io
 ```
@@ -77,7 +98,7 @@ AWS Graviton3 instances are the first instances with BF16 support.
 
 Next, download the ML model you want to run the benchmark with. In this example, download the `resnet50-v1.5` model.
 
-```bash { cwd="$HOME/mlperf_inference/vision/classification_and_detection/" }
+```console { cwd="$HOME/mlperf_inference/vision/classification_and_detection/" }
 wget -q https://zenodo.org/record/2535873/files/resnet50_v1.pb
 ```
 
@@ -87,7 +108,7 @@ You need to download a dataset for the ML model you want to benchmark. The image
 
 For this example, you generate a fake image dataset using the tooling included in the repo. Use the command below:
 
-```bash { cwd="$HOME/mlperf_inference/vision/classification_and_detection/" }
+```console { cwd="$HOME/mlperf_inference/vision/classification_and_detection/" }
 tools/make_fake_imagenet.sh
 ```
 
@@ -95,7 +116,7 @@ tools/make_fake_imagenet.sh
 
 Finally, before you run the benchmark you will need to set up the environment variables below to point to the location of the ML model and dataset.
 
-```bash
+```console
 export MODEL_DIR=`pwd`
 export DATA_DIR=`pwd`/fake_imagenet
 ```
@@ -104,7 +125,7 @@ export DATA_DIR=`pwd`/fake_imagenet
 
 You can now launch the benchmark on your Arm machine, using the command below:
 
-```bash { env="TF_ENABLE_ONEDNN_OPTS=1 ONEDNN_DEFAULT_FPMATH_MODE=BF16 MODEL_DIR=$HOME/mlperf_inference/vision/classification_and_detection/ DATA_DIR=$HOME/mlperf_inference/vision/classification_and_detection/fake_imagenet", cwd="$HOME/mlperf_inference/vision/classification_and_detection/" }
+```console { env="TF_ENABLE_ONEDNN_OPTS=1 ONEDNN_DEFAULT_FPMATH_MODE=BF16 MODEL_DIR=$HOME/mlperf_inference/vision/classification_and_detection/ DATA_DIR=$HOME/mlperf_inference/vision/classification_and_detection/fake_imagenet", cwd="$HOME/mlperf_inference/vision/classification_and_detection/" }
 ./run_local.sh tf resnet50 cpu
 ```
 
@@ -112,6 +133,7 @@ This command runs the benchmark with the "tf" TensorFlow backend on the "resnet5
 
 The minimal arguments that you need to pass to the benchmark are shown below:
 
+(was console before)
 ```console
 ./run_local.sh backend model device
 
@@ -122,7 +144,7 @@ device is one of [cpu|gpu]
 
 For all other options, run help as shown below:
 
-```bash { env="TF_ENABLE_ONEDNN_OPTS=1 ONEDNN_DEFAULT_FPMATH_MODE=BF16 MODEL_DIR=$HOME/mlperf_inference/vision/classification_and_detection DATA_DIR=$HOME/mlperf_inference/vision/classification_and_detection/fake_imagenet", cwd="$HOME/mlperf_inference/vision/classification_and_detection" }
+```console { env="TF_ENABLE_ONEDNN_OPTS=1 ONEDNN_DEFAULT_FPMATH_MODE=BF16 MODEL_DIR=$HOME/mlperf_inference/vision/classification_and_detection DATA_DIR=$HOME/mlperf_inference/vision/classification_and_detection/fake_imagenet", cwd="$HOME/mlperf_inference/vision/classification_and_detection" }
 ./run_local.sh --help
 ```
 
