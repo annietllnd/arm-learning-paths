@@ -18,11 +18,9 @@ jobs:
       - name: Get changed image files from last week
         id: changed-files
         run: |
-          # Get the date 7 days ago (last Monday)
-          LAST_MONDAY=$(date -d "7 days ago" +%Y-%m-%d)
-          
           # Find all image files that changed since last Monday
-          CHANGED_IMAGES=$(git diff --name-only --since="$LAST_MONDAY" -- "*.jpg" "*.jpeg" "*.png" "*.gif" "*.webp" "*.bmp" "*.tiff" | tr '\n' ' ')
+          CHANGED_IMAGES=$(git log --since="7 days ago" --name-only --pretty="" \
+          -- '*.jpg' '*.jpeg' '*.png' | sort -u | tr '\n' ' ')
           
           echo "changed_images=$CHANGED_IMAGES" >> $GITHUB_OUTPUT
           echo "Changed images: $CHANGED_IMAGES"
