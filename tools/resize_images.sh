@@ -9,7 +9,7 @@ if [ $# -eq 0 ]; then
 fi
 
 echo "🔍 Processing $# image(s)..."
-dry_run=true
+dry_run=false
 
 # Process each image argument
 for img in "$@"; do
