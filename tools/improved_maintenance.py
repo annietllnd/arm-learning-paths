@@ -60,14 +60,6 @@ def run_code_block(code):
     except subprocess.CalledProcessError as e:
         return False, e.output
 
-
-def check_maintenance_flag(md_path):
-    with open(md_path) as f:
-        for line in f:
-            if "maintenance: false" in line or "test_maintenance" not in line:
-                return "off"
-    return "on"
-
 def extract_weight(md_path):
     with open(md_path) as f:
         for line in f:
@@ -93,7 +85,6 @@ def extract_front_matter_flags(md_path):
                     continue
             if in_front_matter:
                 lines.append(line)
-
     front_matter = yaml.safe_load("".join(lines))
     test_images = front_matter.get("test_images", ["ubuntu-latest"])
     maintenance = "off" if not front_matter.get("test_maintenance", True) else "on"
@@ -135,12 +126,11 @@ def main():
 
     if input_path.is_file():
         md_files = [input_path]
-        test_images, _ = extract_front_matter_flags(input_path)
+        test_images, maintenance_status = extract_front_matter_flags(input_path)
 
     elif input_path.is_dir():
         index_path = input_path / "_index.md"
-        test_images, _ = extract_front_matter_flags(index_path)
-
+        test_images, maintenance_status = extract_front_matter_flags(index_path)
         md_files = list(input_path.glob("*.md"))
         md_files.sort(key=extract_weight)
     else:
@@ -148,7 +138,6 @@ def main():
         sys.exit(1)
 
     for md_file in md_files:
-        maintenance_status = check_maintenance_flag(md_file)
         if maintenance_status == "off":
             print(f"🚫 Skipping {md_file}: maintenance is off")
             continue

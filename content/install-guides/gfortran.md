@@ -15,7 +15,6 @@ multitool_install_part: false
 official_docs: https://gcc.gnu.org/onlinedocs/gfortran/
 test_images:
 - ubuntu-24.04-arm
-- fedora:latest
 test_link: null
 test_maintenance: true
 title: GFortran
@@ -60,7 +59,7 @@ These Linux distributions use `yum` as the package manager.
 
 To install the most common development tools use the commands below. If the machine has `sudo` you can use it.
 
-```bash { target="fedora:latest" }
+```bash
 sudo yum update -y
 sudo yum install gcc-gfortran -y
 ```

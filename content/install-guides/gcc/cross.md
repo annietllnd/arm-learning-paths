@@ -9,7 +9,6 @@ multitool_install_part: true
 official_docs: https://gcc.gnu.org/onlinedocs/
 test_images:
 - ubuntu-24.04-arm
-- fedora:latest
 test_link: null
 test_maintenance: true
 title: Cross-compiler
@@ -59,7 +58,7 @@ To install the most common development tools use the commands below.
 
 - If the machine has `sudo` you can use it:
 
-  ```bash { target="fedora:latest" }
+  ```bash
   sudo dnf update -y
   sudo dnf install arm-none-eabi-gcc-cs -y
   sudo dnf install arm-none-eabi-newlib -y

@@ -9,7 +9,6 @@ multitool_install_part: true
 official_docs: https://gcc.gnu.org/onlinedocs/
 test_images:
 - ubuntu-24.04-arm
-- fedora:latest
 test_link: null
 test_maintenance: true
 title: Arm GNU Toolchain

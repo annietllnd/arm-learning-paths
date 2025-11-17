@@ -13,7 +13,6 @@ multitool_install_part: false
 official_docs: https://developer.arm.com/documentation/101458/latest
 test_images:
     - ubuntu-24.04-arm
-    - fedora:latest
 test_link: null
 test_maintenance: true
 title: Arm Compiler for Linux
@@ -102,7 +101,7 @@ Fetch the ACfL installers:
 wget  https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-for-Linux/Version_24.10.1/arm-compiler-for-linux_24.10.1_Ubuntu-22.04_aarch64.tar
 ```
 #### Red Hat Linux:
-```bash { target="fedora:latest" }
+```bash
 wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-for-Linux/Version_24.10.1/arm-compiler-for-linux_24.10.1_RHEL-9_aarch64.tar
 ```
 
