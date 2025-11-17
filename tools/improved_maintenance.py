@@ -135,11 +135,11 @@ def main():
 
     if input_path.is_file():
         md_files = [input_path]
-        test_images, maintenance_status = extract_front_matter_flags(input_path)
+        test_images, _ = extract_front_matter_flags(input_path)
 
     elif input_path.is_dir():
         index_path = input_path / "_index.md"
-        test_images, maintenance_status = extract_front_matter_flags(index_path)
+        test_images, _ = extract_front_matter_flags(index_path)
 
         md_files = list(input_path.glob("*.md"))
         md_files.sort(key=extract_weight)
@@ -148,9 +148,8 @@ def main():
         sys.exit(1)
 
     for md_file in md_files:
-        file_status = check_maintenance_flag(md_file)
-        if file_status == "off":
-            maintenance_status = "off"
+        maintenance_status = check_maintenance_flag(md_file)
+        if maintenance_status == "off":
             print(f"🚫 Skipping {md_file}: maintenance is off")
             continue
 
