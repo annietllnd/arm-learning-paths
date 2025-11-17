@@ -229,11 +229,11 @@ def main():
     print(f"❌ Failed: {failed_blocks}")
     print(f"🧪 Total:  {total_blocks}")
 
-    cleanup_new_paths(existing_paths, args.debug)
 
     if maintenance_status == "off":
         print("::set-output name=maintenance::off")
     else:
+        cleanup_new_paths(existing_paths, args.debug)
         print("::set-output name=maintenance::on")
 
     if failures:
