@@ -64,7 +64,7 @@ def run_code_block(code):
 def check_maintenance_flag(md_path):
     with open(md_path) as f:
         for line in f:
-            if "maintenance: false" in line:
+            if "maintenance: false" in line or "test_maintenance" not in line:
                 return "off"
     return "on"
 
@@ -99,7 +99,7 @@ def extract_front_matter_flags(md_path):
     maintenance = "off" if not front_matter.get("test_maintenance", True) else "on"
     return test_images, maintenance
 
-def cleanup_new_paths(existing_paths):
+def cleanup_new_paths(existing_paths, debug):
     current_paths = set(p.resolve() for p in pathlib.Path('.').rglob('*'))
     new_paths = current_paths - existing_paths
 
@@ -107,10 +107,11 @@ def cleanup_new_paths(existing_paths):
         try:
             if path.is_file() or path.is_symlink():
                 path.unlink()
-                print(f"🧹 Removed file: {path}")
+                
             elif path.is_dir():
                 path.rmdir()
-                print(f"🧹 Removed directory: {path}")
+            if debug:
+                print(f"🧹 Removed path: {path}")
         except Exception as e:
             print(f"Failed to remove {path}: {e}")
 
@@ -228,7 +229,7 @@ def main():
     print(f"❌ Failed: {failed_blocks}")
     print(f"🧪 Total:  {total_blocks}")
 
-    cleanup_new_paths(existing_paths)
+    cleanup_new_paths(existing_paths, args.debug)
 
     if maintenance_status == "off":
         print("::set-output name=maintenance::off")
