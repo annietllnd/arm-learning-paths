@@ -30,7 +30,12 @@ operatingsystems:
     - Windows
     - macOS
 
-### Test
+further_reading:
+    - resource:
+        title: Remote.It official documentation
+        link: https://docs.remote.it/
+        type: documentation
+
 test_images:
 - ubuntu-24.04-arm
 test_maintenance: true
