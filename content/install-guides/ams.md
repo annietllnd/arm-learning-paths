@@ -33,9 +33,6 @@ tool_install: true              # Set to true to be listed in main selection pag
 multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
-test_maintenance: true
-test_images:
-  - ubuntu-24.04-arm
 ---
 [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) is a performance analysis tool suite for Android and Linux application developers
 
