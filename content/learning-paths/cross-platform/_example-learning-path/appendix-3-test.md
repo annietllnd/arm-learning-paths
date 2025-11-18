@@ -267,12 +267,11 @@ microcontrollers:
 ```yaml
 tests_and_status:
   - ubuntu-24.04-arm: passed
-  - fedora:latest: failed
 ```
 
 The field `tests_and_status` is a list that indicated whether all tests passed for a corresponding Docker container image or if at least one test failed.
 
-In the example above, the summary indicates that for this Learning Path all tests passed for the image `ubuntu-24.04-arm` but at least one test failed for the image `fedora:latest`. More information about the failures can be found in the console.
+In the example above, the summary indicates that for this Learning Path all tests passed for the image `ubuntu-24.04-arm`.
 
 ## Advanced usage for embedded development
 ### Using the Corstone-300 FVP

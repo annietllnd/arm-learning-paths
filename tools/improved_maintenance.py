@@ -173,6 +173,7 @@ def main():
 
             pre_cmds = meta.get("pre_cmd")
             env_source = meta.get("env_source")
+            env = meta.get("env")
             file_name = meta.get("file_name")
             cwd = meta.get("cwd")
 
@@ -198,6 +199,8 @@ def main():
                 full_cmd += f"{pre_cmds} && "
             if cwd:
                 full_cmd += f"cd {cwd} && "
+            if env:
+                full_cmd += f"export {env} && "
             full_cmd += block
 
             ok, output = run_code_block(full_cmd)

@@ -27,17 +27,14 @@ jobs:
           echo "Reading test targets from changed _index.md files..."
           all_targets=()
           for file in ${{ steps.changed-md.outputs.all_changed_files }}; do
-            if [[ "$file" == */_index.md ]]; then
-              values=$(awk '
-              /test_images:/ { in_list=1; next }
-              /^[^ -]/ { in_list=0 }
-              in_list && /^ *-/ { print $2 }
-              ' "$file" | sort -u)
-
-              for v in $values; do
-                all_targets+=("$v")
-              done
-            fi
+            values=$(awk '
+            /test_images:/ { in_list=1; next }
+            /^[^ -]/ { in_list=0 }
+            in_list && /^ *-/ { print $2 }
+            ' "$file" | sort -u)
+            for v in $values; do
+              all_targets+=("$v")
+            done
           done
 
           if [ "${#all_targets[@]}" -gt 0 ]; then

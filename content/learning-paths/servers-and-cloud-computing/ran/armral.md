@@ -117,7 +117,7 @@ sudo make install
 
 Build and run the supplied benchmark example by running:
 
-```bash { ret_code="0" cwd="$HOME/ral/build" }
+```bash { cwd="$HOME/ral/build" }
 make check
 ```
 

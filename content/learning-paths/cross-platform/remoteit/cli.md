@@ -12,8 +12,8 @@ The CLI downloads are single binary applications and ready to run.
 
 You can change the name of them and make sure they have execute permission on Linux. Full instructions for other operating systems, and the most current URLs can be found on the [download page](https://link.remote.it/download/cli):
 
-```console
-wget https://downloads.remote.it/cli/v3.0.14/remoteit.aarch64-linux
+```bash
+wget https://downloads.remote.it/cli/v4.14.1/remoteit.aarch64-linux 
 mv remoteit.aarch64-linux remoteit
 chmod +x remoteit
 sudo cp remoteit /usr/local/bin
