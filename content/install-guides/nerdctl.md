@@ -4,7 +4,7 @@ author: Jason Andrews
 
 minutes_to_complete: 10
 
-official_docs: https://github.com/containerd/nerdctl/blob/main/docs/command-reference.md 
+official_docs: https://github.com/containerd/nerdctl/blob/main/docs/command-reference.md
 
 additional_search_terms:
 - container
@@ -13,7 +13,7 @@ additional_search_terms:
 - Linux
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: false
 
 tool_install: true
@@ -25,11 +25,11 @@ weight: 1
 
 [Nerdctl](https://github.com/containerd/nerdctl) is an open-source command-line interface (CLI) designed to be compatible with the Docker CLI, but specifically for interacting with [containerd](https://containerd.io/). It provides a familiar user experience for developers who are familiar with Docker, while leveraging the capabilities of containerd as the underlying container runtime.
 
-Using `containerd` and `nerdctl` provides similar functionality to Docker but with a smaller memory footprint, making it ideal for IoT and edge solutions, especially on Arm devices that balance energy efficiency and performance. 
+Using `containerd` and `nerdctl` provides similar functionality to Docker but with a smaller memory footprint, making it ideal for IoT and edge solutions, especially on Arm devices that balance energy efficiency and performance.
 
-Nerdctl also supports running containers in rootless mode, which helps enhance security by not requiring elevated privileges. Rootless mode is not covered below but you can refer to the [documentation](https://rootlesscontaine.rs/getting-started/containerd/) for information about how to run `containerd-rootless-setuptool.sh install`. 
+Nerdctl also supports running containers in rootless mode, which helps enhance security by not requiring elevated privileges. Rootless mode is not covered below but you can refer to the [documentation](https://rootlesscontaine.rs/getting-started/containerd/) for information about how to run `containerd-rootless-setuptool.sh install`.
 
-This guide explains how to install and use `containerd` and `nerdctl` on Arm Linux, and how to run commands with `sudo`. 
+This guide explains how to install and use `containerd` and `nerdctl` on Arm Linux, and how to run commands with `sudo`.
 
 ## What should I do before installing nerdctl?
 
@@ -58,13 +58,13 @@ sudo apt-get install -y wget tar
 
 Install the `containerd` runtime:
 
-```bash 
+```bash
 sudo apt-get install containerd -y
 ```
 
 Start and enable the `containerd` service:
 
-```bash 
+```bash
 sudo systemctl start containerd
 sudo systemctl enable containerd
 ```
@@ -92,7 +92,7 @@ When `containerd` is running, the output is similar to:
 
 ## How do I install nerdctl and CNI plugins?
 
-Install `nerdctl` and the necessary CNI (Container Network Interface) plugins: 
+Install `nerdctl` and the necessary CNI (Container Network Interface) plugins:
 
 ```bash
 NERDCTL_VERSION=$(curl -s https://api.github.com/repos/containerd/nerdctl/releases/latest | grep tag_name | cut -d '"' -f 4 | sed 's/v//')
@@ -121,9 +121,9 @@ The commands above attempt to fetch the latest versions automatically. If requir
 
 ## How do I install BuildKit for container image building?
 
-If you want to build container images with `nerdctl`, you need to install [BuildKit](https://github.com/moby/buildkit). 
+If you want to build container images with `nerdctl`, you need to install [BuildKit](https://github.com/moby/buildkit).
 
-If you only plan to run container images (not build them), you can skip this step. 
+If you only plan to run container images (not build them), you can skip this step.
 
 ```bash
 BUILDKIT_VERSION=$(curl -s https://api.github.com/repos/moby/buildkit/releases/latest | grep tag_name | cut -d '"' -f 4 | sed 's/v//')
@@ -201,7 +201,7 @@ sudo nerdctl version
 
 Test your installation by running a simple container that prints the processor architecture:
 
-```console 
+```console
 sudo nerdctl run --name uname armswdev/uname
 ```
 
@@ -220,7 +220,7 @@ sudo nerdctl rm uname
 To build a container image, save the following lines to a file named `Dockerfile`.
 
 ```console
-FROM ubuntu:latest
+FROM ubuntu-24.04-arm
 CMD echo -n "Architecture is " && uname -m
 ```
 

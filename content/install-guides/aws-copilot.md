@@ -11,7 +11,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://aws.github.io/copilot-cli/
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 title: AWS Copilot CLI
 tool_install: true
@@ -28,7 +28,7 @@ This article provides quick solutions to install the latest version of AWS Copil
 
 Confirm you are using an Arm computer by running:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 uname -m
 ```
 

@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ---
 
-You can use containers to create portable workloads which run on your local computer, on physical and virtual servers, on public cloud infrastructure, and on embedded devices. A computer's instruction set impacts container creation. This Learning Path provides a short introduction to Docker followed by information about how to build, run and share Docker images for the Arm architecture. 
+You can use containers to create portable workloads which run on your local computer, on physical and virtual servers, on public cloud infrastructure, and on embedded devices. A computer's instruction set impacts container creation. This Learning Path provides a short introduction to Docker followed by information about how to build, run and share Docker images for the Arm architecture.
 
 ## Before you begin
 
@@ -26,7 +26,7 @@ If Docker is installed and working correctly you see the following message:
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 ```
-         
+
 Note: If you do not see the message above, go to [Installing Docker](/install-guides/docker/) and follow the instructions to complete the installation.
 
 The sections describe how to:
@@ -42,13 +42,13 @@ To build a Docker image:
 1. Navigate to an empty directory and use a text editor to copy the two lines below into a file named `Dockerfile`:
 
 ```dockerfile
-FROM ubuntu:latest
+FROM ubuntu-24.04-arm
 CMD echo -n "Architecture is " && uname -m
 ```
 
-2. Build the Docker image with the `docker build` command. For example: 
+2. Build the Docker image with the `docker build` command. For example:
 
-```console 
+```console
 docker build -t uname  .
 ```
 
@@ -59,11 +59,11 @@ Note: The `-t` argument is the tag, a human-readable name for the final image. T
 To create a container from the image enter the command:
 
 ```console
-docker run --rm uname 
+docker run --rm uname
 ```
-      
+
 This command displays the architecture.
-   
+
 The output depends on the operating system and architecture of your computer. The following table shows the most common values.
 
 | Operating System and Architecture | Console Output |
@@ -118,11 +118,11 @@ docker login
 docker push username/uname
 ```
 
-5. In a browser, log in to Docker Hub. The new image is visible in your account. 
+5. In a browser, log in to Docker Hub. The new image is visible in your account.
 
 6. (optional) Create a container from the Docker image on another computer with the same architecture.
 
-If you have another computer with the same architecture you can run the image from Docker Hub. 
+If you have another computer with the same architecture you can run the image from Docker Hub.
 
 Make sure Docker is installed on the second computer.
 
@@ -132,16 +132,16 @@ On the second computer, enter the `docker run` command to create a container fro
 docker run --rm username/uname
 ```
 
-Because the image is not on the local computer, Docker downloads it from Docker Hub and creates a container. 
+Because the image is not on the local computer, Docker downloads it from Docker Hub and creates a container.
 
 You do not need to rebuild the Docker image on the second computer.
 
 ## Next steps
 
-In this section you learned how to build, run, and share a Docker image. 
+In this section you learned how to build, run, and share a Docker image.
 
 You used computers with the same instruction set architecture to build and share the Docker image.
 
-To support multiple computer architectures, you can use a single Docker image that supports multi-architectures. 
+To support multiple computer architectures, you can use a single Docker image that supports multi-architectures.
 
 Continue the Learning Path to learn about multi-architecture images.

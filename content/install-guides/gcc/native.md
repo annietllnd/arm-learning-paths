@@ -8,8 +8,7 @@ multi_install: false
 multitool_install_part: true
 official_docs: https://gcc.gnu.org/onlinedocs/
 test_images:
-- ubuntu:latest
-- fedora:latest
+- ubuntu-24.04-arm
 test_link: null
 test_maintenance: true
 title: Native compiler
@@ -46,14 +45,14 @@ The Linux package manager downloads the required files so there are no special i
 
 Use the `apt` command to install software packages on any Debian based Linux distribution, including Ubuntu.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt update
 sudo apt install gcc g++ -y
 ```
 
 Another meta-package on Ubuntu is ``build-essential``. This will install the most common tools and libraries with a single command.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt install build-essential -y
 ```
 
@@ -63,7 +62,7 @@ These Linux distributions use `dnf` as the package manager.
 
 To install the most common development tools use the commands below. If the machine has `sudo` you can use it.
 
-```bash { target="fedora:latest" }
+```bash
 sudo dnf update -y
 sudo dnf group install "development-tools" -y
 ```

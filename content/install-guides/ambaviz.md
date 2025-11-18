@@ -29,7 +29,7 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 test_maintenance: true
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 
 ---
 

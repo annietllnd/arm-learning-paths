@@ -16,11 +16,6 @@ prerequisites:
 
 author: Pareena Verma
 
-test_images:
-- amd64/ubuntu:latest
-test_link: null
-test_maintenance: false
-
 ### Tags
 skilllevels: Introductory
 subjects: RTOS Fundamentals

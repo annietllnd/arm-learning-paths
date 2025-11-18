@@ -12,7 +12,7 @@ official_docs: https://docs.aws.amazon.com/greengrass/v2/developerguide/quick-in
 prerequisites: AWS Account with IAM use role
 test_maintenance: false
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 tool_install: true
 multi_install: false
 multitool_install_part: false
@@ -141,20 +141,20 @@ You will use the credentials in the next section.
 
 Before starting, install `unzip` and `default-jdk`:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt update
 sudo apt install unzip default-jdk -y
 ```
 
 Set the environment variables to allow AWS IoT Greengrass to connect with your AWS account. Replace the access key and secret access key with the values you saved in the [previous section](#prepare-your-aws-role).
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
 ```
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 ```
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 export AWS_REGION="us-east-1"
 ```
 {{% notice Note %}}
@@ -165,7 +165,7 @@ Download the zip file with `curl`, extract the installer, and run it.
 
 This will install the AWS IoT Greengrass v2 software on your device, and and register the device with the Greengrass service.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 curl "https://d2s8p88vqu9w66.cloudfront.net/releases/greengrass-nucleus-latest.zip" -o "greengrass-nucleus-latest.zip"
 unzip greengrass-nucleus-latest.zip -d GreengrassInstaller && rm greengrass-nucleus-latest.zip
 
@@ -189,7 +189,7 @@ The `ggc_user` and `ggc_group` names will be used to create a local system user 
 
 Confirm the AWS IoT Greengrass system service was installed and is running:
 
-```bash { target="ubuntu:latest" command_line="user@localhost | 2-11"}
+```bash { target="ubuntu-24.04-arm" command_line="user@localhost | 2-11"}
 systemctl status greengrass
 ● greengrass.service - Greengrass Core
      Loaded: loaded (/etc/systemd/system/greengrass.service; enabled; vendor pr>
