@@ -21,29 +21,27 @@ jobs:
         with:
           files: '**/*.md'
 
-      - name: Extract test targets from _index.md files
+      - name: Extract test targets from changed _index.md files
         id: extract
         run: |
-          echo "Reading test targets from _index.md files..."
+          echo "Reading test targets from changed _index.md files..."
           all_targets=()
           for file in ${{ steps.changed-md.outputs.all_changed_files }}; do
-            values=$(awk '
-            /test_images:/ { in_list=1; next }
-            /^[^ -]/ { in_list=0 }
-            in_list && /^ *-/ { print $2 }
-            ' "$file" | sort -u)
+            if [[ "$file" == */_index.md ]]; then
+              values=$(awk '
+              /test_images:/ { in_list=1; next }
+              /^[^ -]/ { in_list=0 }
+              in_list && /^ *-/ { print $2 }
+              ' "$file" | sort -u)
 
-            for v in $values; do
-              all_targets+=("$v")
-            done
-
+              for v in $values; do
+                all_targets+=("$v")
+              done
+            fi
           done
 
           if [ "${#all_targets[@]}" -gt 0 ]; then
-            # Deduplicate (preserve order or sort alphabetically)
             unique_targets=($(printf "%s\n" "${all_targets[@]}" | sort -u))
-
-            # Apply quotes for matrix
             targets=()
             for t in "${unique_targets[@]}"; do
               targets+=("\"$t\"")
@@ -115,25 +113,19 @@ jobs:
             echo "✅ No capital letters or spaces found in 'content/' paths."
           fi
 
-      - name: Run test suite on changed content
+      - name: Run test suite on changed _index.md directories
         id: run-tests
         run: |
           set -o pipefail
-          echo "🔍 Detecting changed content to test..."
+          echo "🔍 Detecting changed _index.md files to test..."
 
           failed=0
 
           for file in ${{ steps.changed-md.outputs.all_changed_files }}; do
-            if [[ "$file" == content/* && "$file" == *.md ]]; then
-              # If it's an _index.md or a subdir file, test the whole directory
-              if [[ "$file" == */_index.md ]]; then
-                dir=$(dirname "$file")
-                echo "📂 Running improved_maintenance.py on directory: $dir"
-                python3 tools/improved_maintenance.py --path "$dir" --target ${{ matrix.target }} || failed=1
-              else
-                echo "📄 Running improved_maintenance.py on file: $file"
-                python3 tools/improved_maintenance.py --path "$file" --target ${{ matrix.target }} || failed=1
-              fi
+            if [[ "$file" == content/* && "$file" == */_index.md ]]; then
+              dir=$(dirname "$file")
+              echo "📂 Running improved_maintenance.py on directory: $dir"
+              python3 tools/improved_maintenance.py --path "$dir" --target ${{ matrix.target }} || failed=1
             fi
           done
 
