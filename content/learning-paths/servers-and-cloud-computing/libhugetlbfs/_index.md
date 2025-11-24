@@ -1,5 +1,5 @@
 ---
-title: Increase application performance with libhugetlbfs 
+title: Increase application performance with libhugetlbfs
 
 minutes_to_complete: 60
 
@@ -28,9 +28,9 @@ tools_software_languages:
 
 
 test_images:
-    - ubuntu:latest
+    - ubuntu-24.04-arm
 test_link: null
-test_maintenance: false
+test_maintenance: true
 
 further_reading:
     - resource:

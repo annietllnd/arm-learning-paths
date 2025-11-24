@@ -17,8 +17,8 @@ armips:
 - Cortex-A
 
 prerequisites:
-- An Arm Linux system or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a 
-  cloud service provider. 
+- An Arm Linux system or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a
+  cloud service provider.
 
 operatingsystems:
     - Linux
@@ -27,9 +27,9 @@ skilllevels: Introductory
 subjects: Libraries
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_link: null
-test_maintenance: false
+test_maintenance: true
 
 tools_software_languages:
 
@@ -48,6 +48,9 @@ further_reading:
         type: blog
 
 
-weight: 1
-layout: learningpathall
+### FIXED, DO NOT MODIFY
+# ================================================================================
+weight: 1                       # _index.md always has weight of 1 to order correctly
+layout: "learningpathall"       # All files under learning paths have this same wrapper
+learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---

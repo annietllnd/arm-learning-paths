@@ -19,7 +19,7 @@ prerequisites:
 author: Pareena Verma
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
 test_maintenance: true
 
@@ -36,7 +36,7 @@ tools_software_languages:
 
 further_reading:
     - resource:
-        title: MLPerf Inference Suite Source repo 
+        title: MLPerf Inference Suite Source repo
         link: https://github.com/mlcommons/inference/tree/master/vision/classification_and_detection
         type: documentation
     - resource:

@@ -27,8 +27,7 @@ operatingsystems:
     - Linux
 
 test_images:
-- ubuntu:latest
-test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
+    - ubuntu-24.04-arm
 test_maintenance: true
 
 further_reading:

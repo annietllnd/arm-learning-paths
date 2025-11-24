@@ -12,23 +12,23 @@ You can use GitHub Actions to build multi-architecture images by creating a work
 
 ## Create a new GitHub repository
 
-To get started, create a new GitHub repository in your GitHub account. 
+To get started, create a new GitHub repository in your GitHub account.
 
-Log in to your GitHub account using your browser. Select the [New Button](https://github.com/new) to create a new repository. Give the repository a name. Click `Create Repository`. 
+Log in to your GitHub account using your browser. Select the [New Button](https://github.com/new) to create a new repository. Give the repository a name. Click `Create Repository`.
 
 If you need more detailed instructions, there are numerous tutorials on how to create a repository or refer to the [GitHub documentation](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository).
 
 ## Set up secrets
 
-The container images created by GitHub Actions are stored on Docker Hub. 
+The container images created by GitHub Actions are stored on Docker Hub.
 
-To run GitHub Actions, you need your Docker Hub username and a Personal Access Token (PAT). This enables you to automate the login to your Docker Hub account. 
+To run GitHub Actions, you need your Docker Hub username and a Personal Access Token (PAT). This enables you to automate the login to your Docker Hub account.
 
 To save your secrets, click on the `Settings` tab in your new GitHub repository. Expand the `Secrets and variables` on the left side and click `Actions`.
 
 Add two secrets using the `New repository secret` button:
 - `DOCKER_USER` with your Docker ID.
-- `DOCKER_PAT` with your Personal Access Token. 
+- `DOCKER_PAT` with your Personal Access Token.
 
 ![GitHub Actions Secrets #center](_images/secrets.png)
 
@@ -41,13 +41,13 @@ To use GitHub Actions to build a container image and store it on Docker Hub, you
 First, create a file named `Dockerfile` with the contents below at the top of the repository.
 
 ```dockerfile
-FROM ubuntu:latest
+FROM ubuntu-24.04-arm
 CMD echo -n "Architecture is " && uname -m
 ```
 
 You can do this in the browser using the `Add file` button to create a new file, or upload the file from your computer. You can also use `git` from the command line.
 
-Next, add the `image-build.yml` file with the contents below to the `.github/workflows` directory in your repository: 
+Next, add the `image-build.yml` file with the contents below to the `.github/workflows` directory in your repository:
 
 ```yml
 name: image-build
@@ -63,7 +63,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        include: 
+        include:
           - os: ubuntu-latest
             arch: amd64
           - os: ubuntu-22.04-arm
@@ -96,17 +96,17 @@ jobs:
             docker manifest push ${{env.USER}}/docker-uname
 ```
 
-The workflow file uses a job matrix to run two jobs in parallel. One job runs `docker build` on the new Arm-hosted runner. The second job runs `docker build` on a standard runner with the `amd64` architecture. When both jobs are done, the final job uses `docker manifest` to create the multi-architecture image. 
+The workflow file uses a job matrix to run two jobs in parallel. One job runs `docker build` on the new Arm-hosted runner. The second job runs `docker build` on a standard runner with the `amd64` architecture. When both jobs are done, the final job uses `docker manifest` to create the multi-architecture image.
 
 With the two files and the two secrets in your repository, you are ready to run the action.
 
 ## Run the GitHub Action
 
-To run the action, navigate to the `Actions` tab in your repository. 
+To run the action, navigate to the `Actions` tab in your repository.
 
-Select the `image-build` on the left. 
+Select the `image-build` on the left.
 
-Use the `Run workflow` drop-down on the right-hand side to click `Run workflow`. 
+Use the `Run workflow` drop-down on the right-hand side to click `Run workflow`.
 
 ![Run workflow #center](_images/run-action.png)
 
@@ -117,7 +117,7 @@ This triggers the `image-build` workflow to start, performing the following step
 
 This flow is executed twice, once on the Arm-hosted runner to produce the `arm64` image, and once on the standard runner to produce the `amd64` image.
 
-When the workflow completes, the new image is available in your Docker Hub account. 
+When the workflow completes, the new image is available in your Docker Hub account.
 
 You can use the `Actions` tab in your repository to see if the workflow runs, click on each one to review the commands, and check errors.
 
@@ -137,4 +137,4 @@ on:
 
 If you make a change to your `Dockerfile` and push it to the repository, the workflow automatically runs.
 
-You can now use GitHub Actions to build multi-architecture images without using QEMU instruction emulation or using a self-hosted runner on a Arm server. 
+You can now use GitHub Actions to build multi-architecture images without using QEMU instruction emulation or using a self-hosted runner on a Arm server.

@@ -13,7 +13,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://cloud.google.com/sdk/docs/install-sdk#deb
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 title: Google Cloud Platform (GCP) CLI
 tool_install: true
@@ -52,13 +52,13 @@ The easiest way to install `gcloud` for Ubuntu on Arm is to use the package mana
 
 Download and install the required software packages.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt-get install -y curl apt-transport-https ca-certificates gnupg
 ```
 
 Install `gcloud` from the Google repository.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 sudo apt-get update && sudo apt-get install google-cloud-cli -y
@@ -75,20 +75,20 @@ The following packages have unmet dependencies:
 
 Download the archive file and extract the contents:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-arm.tar.gz
 sudo tar -xzf google-cloud-cli-linux-arm.tar.gz -C /opt
 ```
 
 Run the installer:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 cd /opt/google-cloud-sdk
 sudo ./install.sh -q
 ```
 
 {{% notice Note %}}
-You can change the installation directory from `/opt` to a location of your choice. 
+You can change the installation directory from `/opt` to a location of your choice.
 {{% /notice %}}
 
 Add the installation directory to your search path. The installer will print the path to a script you can source to add `gcloud` to your search path.
@@ -103,7 +103,7 @@ For more information on how to get started, please visit:
 
 Source the file to include `gcloud` in your search path:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 source /opt/google-cloud-sdk/path.bash.inc
 ```
 
@@ -117,7 +117,7 @@ export PATH="/opt/google-cloud-sdk/bin:$PATH"
 
 Confirm the executable is available and print the version:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 gcloud -v
 ```
 

@@ -26,15 +26,15 @@ For the `Target name` select the `MyGreengrassCoreGroup` that was created when y
 
 ![create deployment screen](gg_create_deployment.webp)
 
-The next step is to select which components should be in your deployment. 
+The next step is to select which components should be in your deployment.
 
-As an example, you can deploy the AWS Greengrass CLI (which is different from the AWS CLI) on your virtual device. 
+As an example, you can deploy the AWS Greengrass CLI (which is different from the AWS CLI) on your virtual device.
 
 In the Public Components section, search for `CLI` and then select `aws.greengrass.Cli` from the list.
 
 ![select components screen](gg_select_components.webp)
 
-There is no configuration needed for the AWS Greengrass CLI component, so you can skip the next screens until you get to the `Review` step. 
+There is no configuration needed for the AWS Greengrass CLI component, so you can skip the next screens until you get to the `Review` step.
 
 Verify your component selection and deployment target and click the `Deploy` button.
 
@@ -52,11 +52,11 @@ Clicking the device will show you a list of installed and running components.
 
 ## Run the CLI
 
-Return to your AVH console and run the AWS Greengrass CLI. 
+Return to your AVH console and run the AWS Greengrass CLI.
 
-Copy the command below and run it at the Raspberry Pi console. 
+Copy the command below and run it at the Raspberry Pi console.
 
-```bash { target="ubuntu:latest" command_line="pi@ubuntu:~$ | 2-16"}
+```bash { target="ubuntu-24.04-arm" command_line="pi@ubuntu:~$ | 2-16"}
 /greengrass/v2/bin/greengrass-cli --help
 Usage: greengrass-cli [-hV] [--ggcRootPath=<ggcRootPath>] [COMMAND]
 Greengrass command line interface

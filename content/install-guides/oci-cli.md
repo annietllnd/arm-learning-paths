@@ -12,7 +12,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 title: Oracle Cloud Infrastructure (OCI) CLI
 tool_install: true
@@ -51,7 +51,7 @@ You can run an automated install with default values or an interactive install t
 
 To run an an automated install with default values run:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 curl -o install.sh https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
 bash ./install.sh --accept-all-defaults --update-path-and-enable-tab-completion --rc-file-path $HOME/.bashrc
 ```

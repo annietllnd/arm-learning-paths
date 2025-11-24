@@ -13,7 +13,7 @@ author: Jonathan Davies
 official_docs: https://github.com/llvm/llvm-project/tree/main/bolt
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 
 layout: installtoolsall
@@ -42,13 +42,13 @@ Many Linux distributions include Git so you may not need to install it.
 
 2. Install CMake
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt install cmake -y
 ```
 
 Check it is installed:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 cmake --version
 ```
 
@@ -64,13 +64,13 @@ For more information refer to the [CMake install guide.](/install-guides/cmake)
 
 3. Install Ninja
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt install ninja-build -y
 ```
 
 Check it is installed:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 ninja --version
 ```
 
@@ -82,13 +82,13 @@ The version is printed:
 
 4. Install Clang
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt install clang -y
 ```
 
 Check it is installed:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 clang --version
 ```
 

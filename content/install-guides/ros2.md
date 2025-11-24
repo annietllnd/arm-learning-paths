@@ -5,7 +5,7 @@ minutes_to_complete: 30
 official_docs: https://www.ros.org/blog/getting-started/
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 
 additional_search_terms:
@@ -25,7 +25,7 @@ ROS 2 is the latest version, designed to enhance security, improve distributed s
 
 ROS 2 is available for Ubuntu Linux 22.04, 24.04, and Windows.
 
-This article provides a quick solution to install ROS 2 for Ubuntu on Arm. You can use Ubuntu 22.04 LTS or Ubuntu 24.04 LTS. 
+This article provides a quick solution to install ROS 2 for Ubuntu on Arm. You can use Ubuntu 22.04 LTS or Ubuntu 24.04 LTS.
 
 Confirm you are using an Arm machine by running:
 
@@ -54,7 +54,7 @@ sudo apt install curl software-properties-common build-essential -y
 
 You can install ROS 2 using the APT package manager.
 
-The Ubuntu package lists do not include ROS 2, so you need to add the repository. 
+The Ubuntu package lists do not include ROS 2, so you need to add the repository.
 
 ```bash
 sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
@@ -119,7 +119,7 @@ printenv ROS_DISTRO
 ```
 The output should print either `jazzy` or `humble`, depending on your Ubuntu version.
 
-## How can I test the ROS 2 installation? 
+## How can I test the ROS 2 installation?
 
 In one terminal run a `talker`:
 

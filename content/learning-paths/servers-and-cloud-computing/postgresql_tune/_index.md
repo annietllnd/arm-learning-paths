@@ -14,7 +14,7 @@ prerequisites:
 author: Julio Suarez
 
 test_images:
-    - ubuntu:latest
+    - ubuntu-24.04-arm
 test_maintenance: true
 
 ### Tags

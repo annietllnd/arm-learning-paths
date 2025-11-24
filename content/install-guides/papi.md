@@ -7,7 +7,7 @@ additional_search_terms:
 - perf
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 
 ### FIXED, DO NOT MODIFY
@@ -48,7 +48,7 @@ Use the Linux package manager to install the required software packages on your 
 
 For Debian based distributions (including Ubuntu) run:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt update -y
 sudo apt install -y make gcc
 ```
@@ -57,13 +57,13 @@ sudo apt install -y make gcc
 
 1. Clone the PAPI repository:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 git clone https://github.com/icl-utk-edu/papi/
 ```
 
 2. Configure and compile the source code:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 cd papi/src
 chmod +x configure
 ./configure
@@ -72,7 +72,7 @@ make
 
 3. Configure and compile the source code:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 cd papi/src
 sudo make install
 ```
@@ -96,7 +96,7 @@ int main()
 
 5. Compile and run the application:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 gcc -o papi-test papi-test.c -Wl,-rpath /usr/local/lib  -lpapi
 ./papi-test
 ```

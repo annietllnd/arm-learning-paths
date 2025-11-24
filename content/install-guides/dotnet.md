@@ -8,7 +8,7 @@ official_docs: https://learn.microsoft.com/en-us/dotnet/
 additional_search_terms:
 - .NET SDK
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_link: null
 test_maintenance: true
 title: .NET SDK

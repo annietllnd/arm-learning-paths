@@ -14,7 +14,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://kubernetes.io/docs/reference/kubectl
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_link: null
 test_maintenance: true
 title: Kubectl
@@ -50,19 +50,19 @@ The easiest way to install `kubectl` for Ubuntu on Arm is to use curl and copy t
 
 To install curl, for example on ubuntu:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt install -y curl
 ```
 
 Download and install the latest version of `kubctl`. There is just 1 executable to copy to the desired location.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
 ```
 
 If you have sudo or root access, install the executable in a common location for all users.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
 If you do not have sudo or root permission, add executable permission and add the location to the `$PATH` environment variable.
@@ -74,7 +74,7 @@ export PATH=$PATH:$HOME
 
 Confirm the executable is available and get the version of the client:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 kubectl version -o json --client
 ```
 

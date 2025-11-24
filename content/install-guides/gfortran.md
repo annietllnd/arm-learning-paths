@@ -14,8 +14,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://gcc.gnu.org/onlinedocs/gfortran/
 test_images:
-- ubuntu:latest
-- fedora:latest
+- ubuntu-24.04-arm
 test_link: null
 test_maintenance: true
 title: GFortran
@@ -49,7 +48,7 @@ The Linux package manager downloads the required files so there are no special i
 
 Use the `apt` command to install software packages on any Debian based Linux distribution, including Ubuntu.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 sudo apt update
 sudo apt install gfortran -y
 ```
@@ -60,7 +59,7 @@ These Linux distributions use `yum` as the package manager.
 
 To install the most common development tools use the commands below. If the machine has `sudo` you can use it.
 
-```bash { target="fedora:latest" }
+```bash
 sudo yum update -y
 sudo yum install gcc-gfortran -y
 ```

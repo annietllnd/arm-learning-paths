@@ -18,7 +18,7 @@ author: Jason Andrews
 official_docs: https://www.openssh.com/manual.html
 
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 
 ### PAGE SETUP

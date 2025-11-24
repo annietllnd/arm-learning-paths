@@ -11,7 +11,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_link: null
 test_maintenance: true
 title: AWS EKS CLI (eksctl)
@@ -31,7 +31,7 @@ This install guide provides a quick solution to install `eksctl` on Arm Linux an
 
 For Linux, confirm you are using an Arm machine by running:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 uname -m
 ```
 
@@ -57,20 +57,20 @@ Install the Kubernetes command-line tool, `kubectl`, using the [Kubectl install 
 
 1. Download the `eksctl` package using `curl`:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_Linux_arm64.tar.gz"
 ```
 
 2. Install `eksctl` with:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 tar -xzf eksctl_Linux_arm64.tar.gz -C /tmp && rm eksctl_Linux_arm64.tar.gz
 sudo mv /tmp/eksctl /usr/local/bin
 ```
 
 3. Confirm `eksctl` is installed:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 eksctl version
 ```
 

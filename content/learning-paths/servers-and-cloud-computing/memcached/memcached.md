@@ -79,7 +79,7 @@ memtier_benchmark -s localhost -p 11211 --protocol=memcache_text --clients=100 -
 This will take a few minutes to complete.
 
 To understand what each of the command line options do, see the help output:
-```bash { ret_code="2" }
+```bash
 memtier_benchmark --help
 ```
 

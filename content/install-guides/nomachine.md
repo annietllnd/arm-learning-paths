@@ -11,7 +11,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://www.nomachine.com/all-documents
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_link: null
 test_maintenance: false
 title: NoMachine
@@ -25,13 +25,13 @@ During development it may be useful to quickly create a remote desktop on an Arm
 
 This section provides info about how to setup NoMachine on a remote Arm Linux machine running Ubuntu.
 
-## What is NoMachine? 
+## What is NoMachine?
 
 NoMachine is a client server application. The NoMachine server runs on the remote machine. The client runs on the local machine and connects to the remote server.
 
 ### How do I install the xfce4 desktop?
 
-To connect to a remote desktop, desktop software must be installed. There are many options for this, but using [xfce4](https://www.xfce.org/) makes for a minimal install with good performance. 
+To connect to a remote desktop, desktop software must be installed. There are many options for this, but using [xfce4](https://www.xfce.org/) makes for a minimal install with good performance.
 
 Install the desktop software.
 
@@ -93,9 +93,9 @@ On the remote machine, run the install script.
 
 ### How do I set a user password for a NoMachine connection?
 
-For NoMachine to work, it's best to have a user account on the remote machine with a password. Many cloud instances have accounts without passwords and use only ssh keys to connect. 
+For NoMachine to work, it's best to have a user account on the remote machine with a password. Many cloud instances have accounts without passwords and use only ssh keys to connect.
 
-If the user account already has a password, this step can be skipped. 
+If the user account already has a password, this step can be skipped.
 
 To enable passwords edit the file `/etc/sshd_config` and set `PasswordAuthentication to yes`.
 
@@ -111,24 +111,24 @@ Restart the SSH daemon:
 sudo systemctl restart ssh
 ```
 
-Set a password for the user account. The example shows ubuntu, but change the username as needed. 
+Set a password for the user account. The example shows ubuntu, but change the username as needed.
 
 ```console
 sudo passwd ubuntu
 ```
 
-Enter a new password. 
+Enter a new password.
 
-Remember the password for later when the client is connected. 
+Remember the password for later when the client is connected.
 
 
-### How do I open the NoMachine port? 
+### How do I open the NoMachine port?
 
-The default port for NoMachine is `4000`. If needed, open this port in the security group. Make sure to open ports only from your IP address, not from anywhere. 
+The default port for NoMachine is `4000`. If needed, open this port in the security group. Make sure to open ports only from your IP address, not from anywhere.
 
 ### How do I install the NoMachine client?
 
-[Download](https://downloads.nomachine.com/) and install NoMachine on the client you want to connect from. There are options for most operating systems including Android and iOS. 
+[Download](https://downloads.nomachine.com/) and install NoMachine on the client you want to connect from. There are options for most operating systems including Android and iOS.
 
 Start NoMachine on the client computer. The first step is to connect. Enter a name for the connection and the (public) IP of the remote machine. The default port is `4000`.
 
@@ -142,10 +142,10 @@ A question about creating a new display may be presented, answer Yes.
 
 ![Confirm #center](/install-guides/_images/nx-confirm.png)
 
-NoMachine will resize the remote desktop to fit in the client window. The best option is to change the remote display resolution to match the client window size. 
+NoMachine will resize the remote desktop to fit in the client window. The best option is to change the remote display resolution to match the client window size.
 
 ![Resize #center](/install-guides/_images/nx-resize.png)
 
-Finally, the desktop will appear and is ready to use. 
+Finally, the desktop will appear and is ready to use.
 
 ![Linux desktop #center](/install-guides/_images/nx-desktop.png)

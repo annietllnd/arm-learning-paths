@@ -12,7 +12,7 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://developer.arm.com/documentation/102190
 test_images:
-- ubuntu:latest
+- ubuntu-24.04-arm
 test_maintenance: true
 title: Arm Instruction Emulator (armie)
 tool_install: true

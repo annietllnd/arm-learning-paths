@@ -10,13 +10,13 @@ layout: learningpathall
 
 The steps to optimize an executable with BOLT using Perf ETM are below.
 
-### Collect Perf data with ETM 
+### Collect Perf data with ETM
 
 Run your executable in the normal use case and collect an ETM performance profile. This will output a `perf.data` file containing the profile and will be used to optimize the executable.
 
 Record ETM while running your application. Substitute the actual name of your application for `executable`:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf record -e cs_etm//u -o perf.data -- ./executable
 ```
 
@@ -33,7 +33,7 @@ Perf prints the size of the `perf.data` file:
 
 If you application is named `executable`, run the command below to convert the profile data:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf2bolt -p perf.data -o perf.fdata --itrace=l64i1us ./executable
 ```
 
@@ -80,7 +80,7 @@ The final step is to generate a new executable using the `perf.fdata`.
 
 To run BOLT use the command below and substitute the name of your application:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
 
@@ -153,15 +153,15 @@ BOLT-INFO: setting __hot_end to 0x4014b0
 BOLT-INFO: patched build-id (flipped last bit)
 ```
 
-The optimized executable is now available as `new_executable`. 
+The optimized executable is now available as `new_executable`.
 
 ### Using ETM AutoFDO
 
-ETM AutoFDO is a Linux perf record method similar to ETM that performs trace strobing to collect small slices of trace. This reduces the amount of data recorded per second and that allows it to be run for longer periods compared to ETM and creates much smaller files. 
+ETM AutoFDO is a Linux perf record method similar to ETM that performs trace strobing to collect small slices of trace. This reduces the amount of data recorded per second and that allows it to be run for longer periods compared to ETM and creates much smaller files.
 
 Record with AutoFDO while running your application. Substitute the actual name of your application for `executable`:
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf record -e cs_etm/autofdo/u -o perf.data -- ./executable
 ```
 
@@ -176,9 +176,9 @@ The output shows that much less data was written to `perf.data` for the same exe
 
 The BOLT steps are the same as ETM case shown above.
 
-```bash { target="ubuntu:latest" }
+```bash { target="ubuntu-24.04-arm" }
 perf2bolt -p perf.data -o perf.fdata --itrace=l64i1us ./executable
 llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
 
-The optimized executable is now available as `new_executable`. 
+The optimized executable is now available as `new_executable`.
