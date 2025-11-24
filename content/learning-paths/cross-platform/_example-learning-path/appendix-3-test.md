@@ -209,7 +209,6 @@ To allow the framework to parse and test the Learning Path instructions, edit th
 test_maintenance: true
 test_images:
 - ubuntu-24.04-arm
-- fedora:latest
 ```
 
 The `test_maintenance` field is a boolean that enables the framework.

@@ -21,10 +21,10 @@ jobs:
         with:
           files: '**/*.md'
 
-      - name: Extract test targets from changed _index.md files
+      - name: Extract test targets from changed files
         id: extract
         run: |
-          echo "Reading test targets from changed _index.md files..."
+          echo "Reading test targets from changed files..."
           all_targets=()
           for file in ${{ steps.changed-md.outputs.all_changed_files }}; do
             values=$(awk '
@@ -110,16 +110,16 @@ jobs:
             echo "✅ No capital letters or spaces found in 'content/' paths."
           fi
 
-      - name: Run test suite on changed _index.md directories
+      - name: Run test suite on changed directories
         id: run-tests
         run: |
           set -o pipefail
-          echo "🔍 Detecting changed _index.md files to test..."
+          echo "🔍 Detecting changed content to test..."
 
           failed=0
 
           for file in ${{ steps.changed-md.outputs.all_changed_files }}; do
-            if [[ "$file" == content/* && "$file" == */_index.md ]]; then
+            if [[ "$file" == content/* ]]; then
               dir=$(dirname "$file")
               echo "📂 Running improved_maintenance.py on directory: $dir"
               python3 tools/improved_maintenance.py --path "$dir" --target ${{ matrix.target }} || failed=1
