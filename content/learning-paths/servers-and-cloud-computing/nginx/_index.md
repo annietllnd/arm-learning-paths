@@ -29,14 +29,12 @@ operatingsystems:
 
 test_images:
 - ubuntu:latest
-test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
+test_link: null
 test_maintenance: true
+test_status:
+- passed
 
 further_reading:
-    - resource:
-        title: Guidelines for Deploying Nginx Plus on Amazon Web Services
-        link: https://armkeil.blob.core.windows.net/developer/Files/pdf/white-paper/guidelines-for-deploying-nginx-plus-on-aws.pdf
-        type: documentation
     - resource:
         title: Optimize Your Nginx Plus Deployment with Arm-Based Amazon EC2 M6g Instances
         link: https://www.nginx.com/blog/optimize-nginx-plus-deployment-arm-based-amazon-ec2-m6g-instances/
@@ -45,6 +43,14 @@ further_reading:
         title: Deploying NGINX as an API Gateway
         link: https://www.nginx.com/blog/deploying-nginx-plus-as-an-api-gateway-part-1/
         type: blog
+    - resource:
+        title: NGINX Documentation
+        link: https://nginx.org/en/docs/
+        type: documentation
+    - resource:
+        title: NGINX Admin Guide
+        link: https://docs.nginx.com/nginx/admin-guide/
+        type: documentation
 
 
 ### FIXED, DO NOT MODIFY

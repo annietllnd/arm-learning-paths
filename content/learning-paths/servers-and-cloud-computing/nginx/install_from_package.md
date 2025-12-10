@@ -32,15 +32,19 @@ nginx -V
 The output from this command will look similar to:
 
 ```output
-nginx version: nginx/1.18.0
-built with OpenSSL 3.0.2 15 Mar 2022
+nginx version: nginx/1.26.2
+built with OpenSSL 3.0.13 30 Jan 2024
 TLS SNI support enabled
-configure arguments: --with-cc-opt='-g -O2 -ffile-prefix-map=/build/nginx-glNPkO/nginx-1.18.0=. -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -fPIC -Wdate-time -D_FORTIFY_SOURCE=2' --with-ld-opt='-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -Wl,-z,now -fPIC' --prefix=/usr/share/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --modules-path=/usr/lib/nginx/modules --http-client-body-temp-path=/var/lib/nginx/body --http-fastcgi-temp-path=/var/lib/nginx/fastcgi --http-proxy-temp-path=/var/lib/nginx/proxy --http-scgi-temp-path=/var/lib/nginx/scgi --http-uwsgi-temp-path=/var/lib/nginx/uwsgi --with-compat --with-debug --with-pcre-jit --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_auth_request_module --with-http_v2_module --with-http_dav_module --with-http_slice_module --with-threads --add-dynamic-module=/build/nginx-glNPkO/nginx-1.18.0/debian/modules/http-geoip2 --with-http_addition_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_sub_module
+configure arguments: --with-cc-opt='-g -O2 -ffile-prefix-map=/build/nginx-zLeQKq/nginx-1.26.2=. -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -fPIC -Wdate-time -D_FORTIFY_SOURCE=3' --with-ld-opt='-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -Wl,-z,relro -Wl,-z,now -fPIC' --prefix=/usr/share/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --modules-path=/usr/lib/nginx/modules --http-client-body-temp-path=/var/lib/nginx/body --http-fastcgi-temp-path=/var/lib/nginx/fastcgi --http-proxy-temp-path=/var/lib/nginx/proxy --http-scgi-temp-path=/var/lib/nginx/scgi --http-uwsgi-temp-path=/var/lib/nginx/uwsgi --with-compat --with-debug --with-pcre-jit --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_auth_request_module --with-http_v2_module --with-http_dav_module --with-http_slice_module --with-threads --with-http_addition_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_sub_module
 ```
+
+{{% notice Note %}}
+The exact version numbers will depend on your Linux distribution and when you install Nginx. As of late 2024, the stable version is 1.26.x, and you might see OpenSSL 3.0.x (LTS) or 3.3.x (latest stable). The example above has been updated to reflect more recent versions.
+{{% /notice %}}
 
 The output shows key pieces of information that can help you understand the features and expected performance of Nginx. For example, the output lists the version of Nginx, the version of OpenSSL, and GCC compile flags like `-O2` (listed in the `--with-cc-opt` switch). 
 
-The latest versions of Nginx and OpenSSL are recommended for best performance on Arm. 
+The latest stable versions of Nginx (1.26.x or newer) and OpenSSL (3.0.x LTS or 3.3.x) are recommended for best performance and security on Arm. 
 
 This information can be used as a starting point for configuring a build from source.
 
