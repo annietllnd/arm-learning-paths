@@ -18,7 +18,7 @@ You can explore the documentation to gain key insights that will help with deplo
 
 ## Install an Nginx prebuilt package
 
-To install Nginx using a package manager, you can follow the [nginx.org install instructions](http://nginx.org/en/linux_packages.html) or the [nginx.com install instructions](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/). Both yield the same result.
+To install Nginx using a package manager, you can follow the [nginx.org install instructions](https://nginx.org/en/linux_packages.html) or the [nginx.com install instructions](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/). Both yield the same result.
 
 ### Getting the Nginx build config
 
@@ -29,18 +29,18 @@ Run the following command to get the complete build options for the prebuilt ins
 ```bash
 nginx -V
 ```
-The output from this command will look similar to:
+The output from this command will look similar to (version numbers will vary based on your system and when you installed NGINX):
 
 ```output
-nginx version: nginx/1.18.0
-built with OpenSSL 3.0.2 15 Mar 2022
+nginx version: nginx/1.26.0
+built with OpenSSL 3.0.13 30 Jan 2024
 TLS SNI support enabled
-configure arguments: --with-cc-opt='-g -O2 -ffile-prefix-map=/build/nginx-glNPkO/nginx-1.18.0=. -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -fPIC -Wdate-time -D_FORTIFY_SOURCE=2' --with-ld-opt='-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -Wl,-z,now -fPIC' --prefix=/usr/share/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --modules-path=/usr/lib/nginx/modules --http-client-body-temp-path=/var/lib/nginx/body --http-fastcgi-temp-path=/var/lib/nginx/fastcgi --http-proxy-temp-path=/var/lib/nginx/proxy --http-scgi-temp-path=/var/lib/nginx/scgi --http-uwsgi-temp-path=/var/lib/nginx/uwsgi --with-compat --with-debug --with-pcre-jit --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_auth_request_module --with-http_v2_module --with-http_dav_module --with-http_slice_module --with-threads --add-dynamic-module=/build/nginx-glNPkO/nginx-1.18.0/debian/modules/http-geoip2 --with-http_addition_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_sub_module
+configure arguments: --with-cc-opt='-g -O2 -ffile-prefix-map=/build/nginx-zLib123/nginx-1.26.0=. -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -fPIC -Wdate-time -D_FORTIFY_SOURCE=2' --with-ld-opt='-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -Wl,-z,now -fPIC' --prefix=/usr/share/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --modules-path=/usr/lib/nginx/modules --http-client-body-temp-path=/var/lib/nginx/body --http-fastcgi-temp-path=/var/lib/nginx/fastcgi --http-proxy-temp-path=/var/lib/nginx/proxy --http-scgi-temp-path=/var/lib/nginx/scgi --http-uwsgi-temp-path=/var/lib/nginx/uwsgi --with-compat --with-debug --with-pcre-jit --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_auth_request_module --with-http_v2_module --with-http_dav_module --with-http_slice_module --with-threads --add-dynamic-module=/build/nginx-zLib123/nginx-1.26.0/debian/modules/http-geoip2 --with-http_addition_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_sub_module
 ```
 
 The output shows key pieces of information that can help you understand the features and expected performance of Nginx. For example, the output lists the version of Nginx, the version of OpenSSL, and GCC compile flags like `-O2` (listed in the `--with-cc-opt` switch). 
 
-The latest versions of Nginx and OpenSSL are recommended for best performance on Arm. 
+The latest stable versions of Nginx and OpenSSL are recommended for best performance and security on Arm. As of late 2024, NGINX 1.26.x is the current stable release, and OpenSSL 3.0.x or newer provides good performance and security. 
 
 This information can be used as a starting point for configuring a build from source.
 

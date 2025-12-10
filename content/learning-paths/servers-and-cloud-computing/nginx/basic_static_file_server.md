@@ -75,7 +75,9 @@ server {
 
   ssl_certificate /etc/nginx/ssl/ecdsa.crt;
   ssl_certificate_key /etc/nginx/ssl/ecdsa.key;
-  ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384;
+  ssl_protocols TLSv1.2 TLSv1.3;
+  ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-GCM-SHA256;
+  ssl_prefer_server_ciphers off;
   location / {
     try_files $uri $uri/ =404;
   }
@@ -135,7 +137,11 @@ Copy the key and certificate to the `ssl_certificate` and `ssl_certificate_key` 
 ```console
 cp ecdsa.key /etc/nginx/ssl/ecdsa.key
 cp ecdsa.crt /etc/nginx/ssl/ecdsa.crt
+chmod 600 /etc/nginx/ssl/ecdsa.key
+chmod 644 /etc/nginx/ssl/ecdsa.crt
 ```
+
+The `chmod` commands ensure that the private key is only readable by root, and the certificate is readable by all users.
 
 ### Checking Nginx configuration and starting the server
 
@@ -147,7 +153,7 @@ nginx -t -v
 The output will be similar to: 
 
 ```output
-nginx version: nginx/1.23.4
+nginx version: nginx/1.26.0
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
