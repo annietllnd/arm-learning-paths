@@ -60,7 +60,9 @@ server {
 
   ssl_certificate /etc/nginx/ssl/ecdsa.crt;
   ssl_certificate_key /etc/nginx/ssl/ecdsa.key;
-  ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384;
+  ssl_protocols TLSv1.2 TLSv1.3;
+  ssl_ciphers HIGH:!aNULL:!MD5;
+  ssl_prefer_server_ciphers off;
 
   # API Gateway Path
   location ~ ^/api_old/.*$ {
@@ -98,13 +100,17 @@ Check the configuration for correct syntax and then start the Nginx RP/APIGW usi
 nginx -t -v
 ```
 
-The output from this command will be similar to: 
+The output is similar to: 
 
 ```output
-nginx version: nginx/1.23.4
+nginx version: nginx/1.26.2
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
+
+{{% notice Note %}}
+Your version number may vary depending on when you installed Nginx and your Linux distribution.
+{{% /notice %}}
 
 Start Nginx, refer to [Install Nginx via a package manager and check the build configuration](/learning-paths/servers-and-cloud-computing/nginx/install_from_package/) for a sample service file:
 

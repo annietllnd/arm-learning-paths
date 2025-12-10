@@ -75,7 +75,9 @@ server {
 
   ssl_certificate /etc/nginx/ssl/ecdsa.crt;
   ssl_certificate_key /etc/nginx/ssl/ecdsa.key;
-  ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384;
+  ssl_protocols TLSv1.2 TLSv1.3;
+  ssl_ciphers HIGH:!aNULL:!MD5;
+  ssl_prefer_server_ciphers off;
   location / {
     try_files $uri $uri/ =404;
   }
@@ -102,6 +104,15 @@ server {
 
 * [`ssl_certificate_key`](https://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate_key):
   * Location of the SSL/TLS private key.
+
+* [`ssl_protocols`](https://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_protocols):
+  * Specifies which SSL/TLS protocol versions to support. TLSv1.2 and TLSv1.3 are recommended for modern security.
+
+* [`ssl_ciphers`](https://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_ciphers):
+  * Specifies the cipher suites to use. The configuration shown allows high-strength ciphers while excluding insecure options.
+
+* [`ssl_prefer_server_ciphers`](https://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_prefer_server_ciphers):
+  * With TLSv1.3, client preference is recommended (set to off), as modern clients typically select appropriate ciphers.
 
 * [`location`](https://nginx.org/en/docs/http/ngx_http_core_module.html#location):
   * Configurations can be placed here based on the request URI location. In this case, the location to serve from is the root directory (`/usr/share/nginx/html`).
@@ -144,13 +155,17 @@ Check the configuration for correct syntax and then start the Nginx server using
 ```console
 nginx -t -v
 ```
-The output will be similar to: 
+The output is similar to: 
 
 ```output
-nginx version: nginx/1.23.4
+nginx version: nginx/1.26.2
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
+
+{{% notice Note %}}
+Your version number may vary depending on when you installed Nginx and your Linux distribution.
+{{% /notice %}}
 
 Start Nginx using the `service` command: 
 
