@@ -137,7 +137,11 @@ Copy the key and certificate to the `ssl_certificate` and `ssl_certificate_key` 
 ```console
 cp ecdsa.key /etc/nginx/ssl/ecdsa.key
 cp ecdsa.crt /etc/nginx/ssl/ecdsa.crt
+chmod 600 /etc/nginx/ssl/ecdsa.key
+chmod 644 /etc/nginx/ssl/ecdsa.crt
 ```
+
+The `chmod` commands ensure that the private key is only readable by root, and the certificate is readable by all users.
 
 ### Checking Nginx configuration and starting the server
 

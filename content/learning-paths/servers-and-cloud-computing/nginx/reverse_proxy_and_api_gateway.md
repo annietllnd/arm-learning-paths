@@ -74,8 +74,8 @@ server {
   }
 
   # Reverse Proxy Path
-   location / {
-   proxy_pass https://ssl_file_server_com;
+  location / {
+    proxy_pass https://ssl_file_server_com;
   }
 }
 ```
