@@ -5,7 +5,7 @@ set -e
 #
 # Tunables: Defaults
 #
-export dry_run=true   # if true, do not perform any file modifications
+export dry_run=false   # if true, do not perform any file modifications
 export quality=85     # quality for webp conversion (1-100)
 export max_width=1600 # maximum width before resizing
 export target_width=1280 # target width for resizing      
