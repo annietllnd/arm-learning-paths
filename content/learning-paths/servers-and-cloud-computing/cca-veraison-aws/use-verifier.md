@@ -13,6 +13,6 @@ To do this, you should follow the steps set out in the Learning Path [Get Starte
 
 The URL for the Veraison server provided by Linaro is `https://veraison.test.linaro.org:8443`.
 
-Instead of this URL, use the one for your own Veraison service, which will be of the form `https://services.example-veraison.com:8443`, although you need to replace `example-veraison.com` with your AWS domain.
+Instead of this URL, use the one for your own Veraison service, which is of the form `https://services.example-veraison.com:8443`. Replace `example-veraison.com` with your AWS domain.
 
 Apart from this URL change, all other steps in the Learning Path remain the same.

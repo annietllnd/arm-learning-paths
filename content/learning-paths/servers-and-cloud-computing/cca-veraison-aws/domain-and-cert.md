@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Create Your Domain in Route53
-Veraison provides cloud services for attestation. These services are published on the internet and are accessible via HTTPS using RESTful APIs. Like all cloud services, they need a domain so users can easily find and access them. Domains are named using string labels separated by dots. You will be familiar with domain names such as `www.amazon.com` - they allow public internet resources to be located conveniently and routed using shared internet infrastructure such as DNS.
+Veraison provides cloud services for attestation. These services are published on the internet and are accessible via HTTPS using RESTful APIs. Like all cloud services, they need a domain so users can easily find and access them. Domains are named using string labels separated by dots. Domain names such as `www.amazon.com` allow public internet resources to be located conveniently and routed using shared internet infrastructure such as DNS.
 ### What is Route53?
 
 [Route53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html) is an AWS service that allows you to register and manage domains. In order to create your Veraison deployment in AWS, you first need to choose a domain name and register it with Route53.
@@ -49,7 +49,7 @@ You can use the [AWS Certificate Manager (ACM)](https://aws.amazon.com/certifica
 
 ![Request Certificate](./request-certificate.png)
 
-On the first page of the certificate wizard, select **Request a public certificate**, then click **Next**.
+On the first page of the certificate wizard, select **Request a public certificate**, then select **Next**.
 
 ![Request Public Certificate](./request-public-certificate.png)
 
@@ -65,14 +65,14 @@ For the validation method, you should use **DNS validation**, which is the recom
 
 ![Certificate Validation and Key Algorithm](./cert-validation-and-algorithm.webp)
 
-Now click **Request** to request the certificate from the Certificate Manager.
+Now select **Request** to request the certificate from the Certificate Manager.
 
 ### Validating Your Domain Ownership
 
 Before AWS can issue the certificate, it checks that you own the domain. Since you registered the domain in Route53 earlier, this is straightforward.
 
-Use the ACM dashboard to view the certificate. You will see that it has a status of "Pending Validation". You will also see the two associated domains: `example-veraison.com` and `*.example-veraison.com`, or whatever your chosen domain name is.
+Use the ACM dashboard to view the certificate. The certificate has a status of "Pending Validation". You also see the two associated domains: `example-veraison.com` and `*.example-veraison.com`, or whatever your chosen domain name is.
 
-Click **Create records in Route 53** to confirm domain ownership. AWS then issues the certificate, and its status changes from **Pending Validation** to **Issued**. Be aware that this process can take up to about half an hour.
+Select **Create records in Route 53** to confirm domain ownership. AWS then issues the certificate, and its status changes from **Pending Validation** to **Issued**. This process can take up to about half an hour.
 
 Once your domain and certificate are prepared, you are ready to create your Veraison deployment.

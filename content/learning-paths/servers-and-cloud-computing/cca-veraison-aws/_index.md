@@ -3,7 +3,7 @@ title: Build a CCA Attestation Service on AWS with Veraison
 
 minutes_to_complete: 90
 
-who_is_this_for: This Learning Path is for developers familiar with CCA attestation and the Veraison project. You'll learn how to deploy a scalable CCA attestation verifier service on AWS.
+who_is_this_for: This Learning Path is for developers familiar with Arm Confidential Compute Architecture (CCA) attestation and the Veraison project who want to deploy a scalable CCA attestation verifier service on AWS.
 
 learning_objectives:
     - Build an attestation service on AWS using the Veraison project's components.

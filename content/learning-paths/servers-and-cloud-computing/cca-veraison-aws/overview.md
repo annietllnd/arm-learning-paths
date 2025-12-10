@@ -9,7 +9,7 @@ layout: learningpathall
 ## Deploying Veraison on AWS
 [Veraison](https://github.com/veraison) is a community open-source project that is part of the [Confidential Computing Consortium (CCC)](https://confidentialcomputing.io). Veraison provides components for building attestation verification services for confidential computing and other use cases. 
 
-Veraison acts as the Verifier role in the [RATS architecture (RFC9334)](https://datatracker.ietf.org/doc/rfc9334/), which is a common model for attestation-based systems. Veraison makes use of community standardization efforts to ensure a high degree of interoperability.
+Veraison acts as the Verifier role in the [Remote ATtestation procedureS (RATS) architecture (RFC9334)](https://datatracker.ietf.org/doc/rfc9334/), which is a common model for attestation-based systems. Veraison makes use of community standardization efforts to ensure a high degree of interoperability.
 
 Attestation is essential for confidential computing, and Veraison acts as a verifier for Arm's Confidential Compute Architecture (CCA). 
 

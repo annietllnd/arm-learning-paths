@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Introduction to Endorsements
-Now that your Veraison services are deployed into AWS, the next step is to provide the endorsements for the CCA platform. This will allow the Veraison services to act as a verifier for CCA attestation tokens.
+Now that your Veraison services are deployed into AWS, the next step is to provide the endorsements for the CCA platform. This allows the Veraison services to act as a verifier for CCA attestation tokens.
 
 ## Get the Linaro Endorsement Tool
 The endorsement tool is available on Linaro's Git server. Run the following command to clone the repository into a suitable directory on your machine:
@@ -41,9 +41,10 @@ Next, change back to the directory where you cloned the endorsement tool.
 ```bash
 cd $HOME/poc-endorser/
 ```
- Use your preferred text editor to edit the file `endorse.sh` in the endorsement tool. Locate these lines in the script:
 
-```code
+Use your preferred text editor to edit the file `endorse.sh` in the endorsement tool. Locate these lines in the script:
+
+```yaml
 api_server: https://provisioning-service:8888/endorsement-provisioning/v1/submit
 auth: oauth2
 username: veraison-provisioner
@@ -62,7 +63,7 @@ In the command shell where you have cloned the endorsement tool, run the followi
 ```bash
 make build
 ```
-This command will build the Docker image locally on your machine.
+This command builds the Docker image locally on your machine.
 
 Now run the following command to provision the endorsements:
 
@@ -88,7 +89,7 @@ Next, return to the command shell where you created the Veraison AWS deployment,
 cd $HOME/services/deployments/aws
 veraison stores
 ```
-This command will query Veraison's database stores. If the CCA endorsements were provisioned successfully, the output should look something like the example below. (You don't need to understand all of the detail here.)
+This command queries Veraison's database stores. If the CCA endorsements were provisioned successfully, the output should look something like the example below. (You don't need to understand all of the detail here.)
 
 ```output
 TRUST ANCHORS:

@@ -9,13 +9,13 @@ layout: learningpathall
 ## Create the Veraison Deployment
 Now that your AWS account, internet domain and certificate are prepared, you are ready to deploy the Veraison services into AWS.
 
-This process is highly automated, but will take between 30 to 60 minutes, as several resources need to be created in AWS.
+This process is highly automated, but takes between 30 to 60 minutes, as several resources need to be created in AWS.
 
 The deployment process is documented in [Veraison's GitHub repository](https://github.com/veraison/services/blob/main/deployments/aws/README.md). 
 
 You can follow the instructions below to deploy the Veraison services into AWS:
 
-Use the [Bootstrap](https://github.com/veraison/services/tree/main/deployments/aws#bootstrap) process first to clone the Veraison source code from GitHub and set up your build environment. This will take care of installing the dependencies that you need on your development machine.
+Use the [Bootstrap](https://github.com/veraison/services/tree/main/deployments/aws#bootstrap) process first to clone the Veraison source code from GitHub and set up your build environment. This takes care of installing the dependencies you need on your development machine.
 
 ```bash
 cd $HOME
@@ -25,7 +25,7 @@ make bootstrap
 ```
 Once your build environment is bootstrapped, you will use the [Quickstart](https://github.com/veraison/services/tree/main/deployments/aws#quickstart) procedure to provide some AWS configuration and create the deployment.
 
-You'll provide AWS-specific settings, including the IDs for your VPC and subnets, and the CIDR block allowed access to the deployment. In this deployment, you will use `misc/arm.cfg` file for example. Make sure you update `VERAISON_AWS_REGION` to the same region where you created your AWS certificate for your new domain.`VERAISON_AWS_DNS_NAME` needs to match the domain name you chose. 
+You'll provide AWS-specific settings, including the IDs for your VPC and subnets, and the CIDR block allowed access to the deployment. In this deployment, you will use the `misc/arm.cfg` file as an example. Make sure you update `VERAISON_AWS_REGION` to the same region where you created your AWS certificate for your new domain. `VERAISON_AWS_DNS_NAME` needs to match the domain name you chose. 
 
 Once the account-specific config file is created, define `AWS_ACCOUNT_CFG` environment variable to point to it and then create the deployment.
 
