@@ -143,8 +143,14 @@ process_images() {
                 find "$img_dir" "$(dirname "$img_dir")" -name "*.md" 2>/dev/null | while read -r md_file; do
                     if grep -q "$img_name" "$md_file"; then
                         echo "Replacing $img_name → $webp_name in $md_file"
-                        sed -i '' "s|($img_name|(${webp_name}|g" "$md_file"
-                        sed -i '' "s|/$img_name|/${webp_name}|g" "$md_file"
+                        # Handle sed differences between macOS and Linux
+                        if [[ "$OSTYPE" == "darwin"* ]]; then
+                            sed -i '' "s|($img_name|(${webp_name}|g" "$md_file"
+                            sed -i '' "s|/$img_name|/${webp_name}|g" "$md_file"
+                        else
+                            sed -i "s|($img_name|(${webp_name}|g" "$md_file"
+                            sed -i "s|/$img_name|/${webp_name}|g" "$md_file"
+                        fi
                     fi
                 done
             fi                                  
