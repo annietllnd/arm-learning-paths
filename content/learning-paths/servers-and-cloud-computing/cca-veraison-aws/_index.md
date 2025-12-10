@@ -10,8 +10,8 @@ learning_objectives:
     - Set up Veraison as a verifier for Arm CCA attestation tokens by provisioning CCA platform endorsements.
 
 prerequisites:
-    - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) with access to AWS services.
-    - An x86 computer running Ubuntu or Arch Linux, authorized for AWS access. If you're using another build environment, you'll need to configure the toolchains for cross-compilation.
+    - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) with administrator-level privileges.
+    - A development computer (x86 or Arm64) running Ubuntu or Arch Linux, authorized for AWS access. If you're using another build environment, you'll need to configure the toolchains for cross-compilation.
 
 author: Paul Howard
 

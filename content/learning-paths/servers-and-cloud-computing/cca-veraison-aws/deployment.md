@@ -35,7 +35,7 @@ export AWS_ACCOUNT_CFG=misc/arm.cfg  # replace with path to your config
 make deploy
 ```
 
-You do not need to use the end-to-end flow as described in the document. Later in this Learning Path, you will perform some additional steps to prepare and use the Veraison services.
+You don't need to use the end-to-end flow as described in the document. Later in this Learning Path, you will perform some additional steps to prepare and use the Veraison services.
 
 The rest of the document provides additional information about how to manage the deployment, but you don't need this now.
 

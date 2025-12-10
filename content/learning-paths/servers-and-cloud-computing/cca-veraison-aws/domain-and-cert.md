@@ -14,9 +14,9 @@ Veraison provides cloud services for attestation. These services are published o
 
 ### Choosing Your Domain Name
 
-Your domain name must be unique and specific to your Veraison deployment. Remember that this domain name is for creating public internet services, so it cannot clash with any other domains that exist on the public internet. 
+Your domain name must be unique and specific to your Veraison deployment. Remember that this domain name is for creating public internet services, so it can't clash with any other domains that exist on the public internet. 
 
-In this Learning Path, you will use `example-veraison.com` as an illustrative example of a domain name. However, do not use this name for your own deployment. Choose your own name, and use it in place of the example as you progress through the Learning Path.
+In this Learning Path, you will use `example-veraison.com` as an illustrative example of a domain name. However, don't use this name for your own deployment. Choose your own name, and use it in place of the example as you progress through the Learning Path.
 
 ### Registering Your Domain with Route53
 

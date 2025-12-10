@@ -17,7 +17,7 @@ cd $HOME
 git clone https://git.codelinaro.org/linaro/dcap/cca-demos/poc-endorser
 ```
 ## Configure the Endorsement Tool for AWS
-By default, the endorsement tool assumes that your Veraison services are deployed locally on your machine. This is not the case here, because your Veraison services have been deployed into AWS instead. You'll need to configure the tool to point it at the correct API endpoints with the required authentication.
+By default, the endorsement tool assumes that your Veraison services are deployed locally on your machine. This isn't the case here, because your Veraison services have been deployed into AWS instead. You'll need to configure the tool to point it at the correct API endpoints with the required authentication.
 
 In the command shell where you created the AWS deployment of Veraison, run the following command:
 
