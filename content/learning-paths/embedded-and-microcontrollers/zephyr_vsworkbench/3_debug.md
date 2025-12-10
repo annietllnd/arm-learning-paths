@@ -203,7 +203,7 @@ If Workbench for Zephyr doesn't automatically detect the installed debug runner,
 
 You can start debugging from Workbench for Zephyr by selecting **Debug**, or from VS Code by going to **Run and Debug** (`Ctrl+Shift+D`), selecting the debug config, and selecting **Run**.
 
-![VS Code window displaying the Zephyr Workbench Debug Application panel. The main subject is the debug interface showing active debugging controls, breakpoints, and variable watch windows. The environment is a technical workspace with the Zephyr Workbench sidebar open in Visual Studio Code. Visible text includes Debug Application, Breakpoints, Variables, and Call Stack. The tone is neutral and focused on software development tasks. alt-text #center](images/debug_app.png "VS Code window displaying the Zephyr Workbench Debug Application panel.")
+![VS Code window displaying the Zephyr Workbench Debug Application panel. The main subject is the debug interface showing active debugging controls, breakpoints, and variable watch windows. The environment is a technical workspace with the Zephyr Workbench sidebar open in Visual Studio Code. Visible text includes Debug Application, Breakpoints, Variables, and Call Stack. The tone is neutral and focused on software development tasks. alt-text #center](images/debug_app.webp "VS Code window displaying the Zephyr Workbench Debug Application panel.")
 
 ## Debug toolbar controls
 
