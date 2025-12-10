@@ -67,4 +67,5 @@ You should see output similar to the following (depending on which AWS region yo
     ]
 }
 ```
+
 If this operation fails, pause here and troubleshoot using the [AWS documentation](https://docs.aws.amazon.com/cli/v1/userguide/cli-chap-authentication.html) before continuing.
