@@ -25,12 +25,11 @@ make bootstrap
 ```
 Once your build environment is bootstrapped, you will use the [Quickstart](https://github.com/veraison/services/tree/main/deployments/aws#quickstart) procedure to provide some AWS configuration and create the deployment.
 
-You'll provide AWS-specific settings, including the IDs for your VPC and subnets, and the CIDR block allowed access to the deployment. In this deployment, you will use `misc/arm.cfg` file for example. Make sure you update `VERAISON_AWS_REGION` to the same region where you created your AWS certificate for your new domain.`VERAISON_AWS_DNS_NAME` needs to match the domain name you chose. 
+You'll provide AWS-specific settings, including the IDs for your VPC and subnets, and the CIDR block allowed access to the deployment. In this deployment, you will use the `misc/arm.cfg` file as an example. Make sure you update `VERAISON_AWS_REGION` to the same region where you created your AWS certificate for your new domain. `VERAISON_AWS_DNS_NAME` needs to match the domain name you chose. 
 
-Once the account-specific config file is created, define `AWS_ACCOUNT_CFG` environment variable to point to it and then create the deployment.
+Once the account-specific config file is created, define the `AWS_ACCOUNT_CFG` environment variable to point to it and then create the deployment.
 
 ```bash
-source env/env.bash
 export AWS_ACCOUNT_CFG=misc/arm.cfg  # replace with path to your config
 make deploy
 ```
@@ -40,9 +39,10 @@ You do not need to use the end-to-end flow as described in the document. Later i
 The rest of the document provides additional information about how to manage the deployment, but you don't need this now.
 
 ## Check the Deployment Status
-In the command shell where you ran the steps above, run the following command:
+In the command shell where you ran the steps above, source the environment file and then run the following command:
 
 ```bash
+source env/env.bash
 veraison status
 ```
 This command outputs a status report for the deployment. If successful, it includes information about:

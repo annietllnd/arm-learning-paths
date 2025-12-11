@@ -12,6 +12,10 @@ Now that your Veraison services are deployed into AWS, the next step is to provi
 ## Get the Linaro Endorsement Tool
 The endorsement tool is available on Linaro's Git server. Run the following command to clone the repository into a suitable directory on your machine:
 
+{{% notice Note %}}
+The Linaro Git server (git.codelinaro.org) may experience intermittent availability. If you encounter connection issues, you may need to retry the clone operation or check the [Veraison project documentation](https://github.com/veraison/services) for alternative endorsement provisioning methods.
+{{% /notice %}}
+
 ```bash
 cd $HOME
 git clone https://git.codelinaro.org/linaro/dcap/cca-demos/poc-endorser
