@@ -34,6 +34,10 @@ vllm serve DeepSeek-V2-Lite-w4a8dyn-mse-channelwise \
   --dtype float32 --max-model-len 4096 --max-num-batched-tokens 4096
 ```
 
+{{% notice Note %}}
+If you didn't install tcmalloc earlier, you can omit the `LD_PRELOAD` line. tcmalloc improves performance under high concurrency but is not required for basic operation.
+{{% /notice %}}
+
 The server now exposes the standard OpenAI-compatible /v1/chat/completions endpoint.
 
 You can test it using any OpenAI-style client library to measure tokens-per-second throughput and response latency on your Arm-based server.
@@ -76,7 +80,7 @@ async def run_one(i: int, messages):
     resp = await client.chat.completions.create(
         model=model,
         messages=messages,
-        max_tokens=128,  # Change as per comfiguration
+        max_tokens=128,  # Change as per configuration
     )
     return i, resp.choices[0].message.content
 
