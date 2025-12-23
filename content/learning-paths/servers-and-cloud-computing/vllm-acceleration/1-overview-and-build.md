@@ -53,10 +53,10 @@ Additionally, enabling tcmalloc (Thread-Caching Malloc) reduces allocator conten
 
 Before you begin, make sure your environment meets these requirements:
 
-- Python 3.12 on Ubuntu 22.04 LTS or newer
+- Python 3.10 or newer (Python 3.12+ recommended) on Ubuntu 22.04 LTS or newer
 - At least 32 vCPUs, 64 GB RAM, and 64 GB of free disk space
 
-This Learning Path was tested on an AWS Graviton4 `c8g.12xlarge` instance with 64 GB of attached storage.
+This Learning Path was tested on an AWS Graviton4 `c8g.12xlarge` instance running Ubuntu 24.04 with Python 3.12 and 64 GB of attached storage.
 
 ## Install build dependencies
 
@@ -99,7 +99,7 @@ cd vllm
 git checkout 5fb4137
 pip install -r requirements/cpu.txt -r requirements/cpu-build.txt
 ```
-The specific commit (5fb4137) pins a verified version of vLLM that officially adds Arm CPUs to the list of supported build targets, ensuring full compatibility and optimized performance for Arm-based systems.
+The specific commit (5fb4137) pins a verified version of vLLM that officially adds Arm CPUs to the list of supported build targets, ensuring full compatibility and optimized performance for Arm-based systems. This commit is part of v0.11.1 and later releases, including the stable v0.12.0 release.
 
 ## Build the vLLM wheel for CPU
 Run the following command to compile and package vLLM as a Python wheel optimized for CPU inference:
@@ -123,30 +123,6 @@ The repository contains C++ extensions and runtime libraries required for correc
 {{% /notice %}}
 
 ## Validate your build with offline inference
-
-Run a quick test to confirm your Arm-optimized vLLM build works as expected. Use the built-in chat example to perform offline inference and verify that oneDNN and Arm Compute Library optimizations are active.
-
-```bash
-python examples/offline_inference/basic/chat.py \
-   --dtype=bfloat16 \
-   --model TinyLlama/TinyLlama-1.1B-Chat-v1.0
-```
-
-This command runs a small Hugging Face model in bfloat16 precision, streaming generated tokens to the console. You should see output similar to:
-
-```output
-Generated Outputs:
---------------------------------------------------------------------------------
-Prompt: None
-
-Generated text: 'The Importance of Higher Education\n\nHigher education is a fundamental right'
---------------------------------------------------------------------------------
-Adding requests: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 9552.05it/s]
-Processed prompts: 100%|████████████████████████████████████████████████████████████████████████| 10/10 [00:01<00:00,  6.78it/s, est. speed input: 474.32 toks/s, output: 108.42 toks/s]
-...
-```
-
-If you see token streaming and generated text, your vLLM build is correctly configured for Arm64 inference.
 
 Once your Arm-optimized vLLM build completes, you can validate it by running a small offline inference example. This ensures that the CPU-specific backend and oneDNN and ACL optimizations were correctly compiled into your build.
 Run the built-in chat example included in the vLLM repository:
