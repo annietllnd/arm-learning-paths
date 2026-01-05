@@ -76,7 +76,7 @@ async def run_one(i: int, messages):
     resp = await client.chat.completions.create(
         model=model,
         messages=messages,
-        max_tokens=128,  # Change as per comfiguration
+        max_tokens=128,  # Change as per configuration
     )
     return i, resp.choices[0].message.content
 

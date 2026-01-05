@@ -26,6 +26,10 @@ Before you start:
   * Complete the optimized build in “Overview and Optimized Build” and validate your vLLM install.
   * Optionally quantize a model using the “Quantize an LLM to INT4 for Arm Platform” module. We’ll reference the output directory name from that step.
 
+{{% notice Note %}}
+While earlier sections use DeepSeek-V2-Lite as the primary example, this section uses Meta-Llama-3.1-8B-Instruct to demonstrate accuracy benchmarking. You can apply the same evaluation process to any model you've quantized, including DeepSeek-V2-Lite.
+{{% /notice %}}
+
 ## Install lm-eval-harness
 
 Install the harness with vLLM extras in your active Python environment:
@@ -87,21 +91,8 @@ lm_eval \
 
 The expected output includes per-task accuracy metrics. Compare these results to your BF16 baseline to evaluate the impact of INT4 quantization on model quality.
 
-Use the INT4 quantization recipe & script from previous steps to quantize `meta-llama/Meta-Llama-3.1-8B-Instruct` model.
-
-Channelwise INT4 (MSE):
-
-```bash
-lm_eval \
-  --model vllm \
-  --model_args \
-    pretrained=Meta-Llama-3.1-8B-Instruct-w4a8dyn-mse-channelwise,dtype=float32,max_model_len=4096,enforce_eager=True \
-  --tasks mmlu,hellaswag \
-  --batch_size auto \
-  --output_path results
-```
-
 ## Interpret the results
+
 
 The harness prints per-task and aggregate scores (for example, `acc`, `acc_norm`, `exact_match`). Higher is generally better. Compare BF16 vs INT4 on the same tasks to assess quality impact.
 
