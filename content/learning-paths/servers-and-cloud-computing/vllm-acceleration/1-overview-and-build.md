@@ -39,15 +39,6 @@ vLLM achieves high performance on Arm servers by combining software and hardware
 
 These optimizations work together to deliver higher throughput and lower latency for LLM inference on Arm servers.
 
-vLLM's performance on Arm servers is driven by both software optimization and hardware-level acceleration.
-Each component of this optimized build contributes to higher throughput and lower latency during inference:
-
-- Optimized kernels: the aarch64 vLLM build uses direct oneDNN with the Arm Compute Library for key operations.
-- 4‑bit weight quantization: vLLM supports INT4 quantized models, and Arm accelerates this using KleidiAI microkernels, which take advantage of DOT-product (SDOT/UDOT) instructions.
-- Efficient MoE execution: for Mixture-of-Experts (MoE) models, vLLM fuses INT4 quantized expert layers to reduce intermediate memory transfers, which minimizes bandwidth bottlenecks
-- Optimized Paged attention: the paged attention mechanism, which handles token reuse during long-sequence generation, is SIMD-tuned for Arm’s NEON and SVE (Scalable Vector Extension) pipelines.
-- System tuning: using thread affinity ensures efficient CPU core pinning and balanced thread scheduling across Arm clusters.
-Additionally, enabling tcmalloc (Thread-Caching Malloc) reduces allocator contention and memory fragmentation under high-throughput serving loads.
 
 ## Set up your environment 
 
@@ -148,31 +139,7 @@ Processed prompts: 100%|██████████████████�
 
 If you see token streaming and generated text, your vLLM build is correctly configured for Arm64 inference.
 
-Once your Arm-optimized vLLM build completes, you can validate it by running a small offline inference example. This ensures that the CPU-specific backend and oneDNN and ACL optimizations were correctly compiled into your build.
-Run the built-in chat example included in the vLLM repository:
 
-```bash
-python examples/offline_inference/basic/chat.py \
-  --dtype=bfloat16 \
-  --model TinyLlama/TinyLlama-1.1B-Chat-v1.0
-```
-
-Explanation:
---dtype=bfloat16 runs inference in bfloat16 precision. Recent Arm processors support the BFloat16 (BF16) number format in PyTorch. For example, AWS Graviton3 and Graviton3 processors support BFloat16.
---model specifies a small Hugging Face model for testing (TinyLlama-1.1B-Chat), ideal for functional validation before deploying larger models.
-You should see token streaming in the console, followed by a generated output confirming that vLLM's inference pipeline is working correctly.
-
-```output
-Generated Outputs:
---------------------------------------------------------------------------------
-Prompt: None
-
-Generated text: 'The Importance of Higher Education\n\nHigher education is a fundamental right'
---------------------------------------------------------------------------------
-Adding requests: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 9552.05it/s]
-Processed prompts: 100%|████████████████████████████████████████████████████████████████████████| 10/10 [00:01<00:00,  6.78it/s, est. speed input: 474.32 toks/s, output: 108.42 toks/s]
-...
-```
 
 {{% notice Note %}}
 As CPU support in vLLM continues to mature, these manual build steps will eventually be replaced by a streamlined `pip` install workflow for aarch64, simplifying future deployments on Arm servers.

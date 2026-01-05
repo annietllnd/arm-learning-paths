@@ -1,0 +1,187 @@
+{
+  "lp_id": "vllm-acceleration",
+  "title": "Accelerate vLLM inference on Arm servers",
+  "files": [
+    "_index.md",
+    "1-overview-and-build.md",
+    "2-quantize-model.md",
+    "3-run-inference-and-serve.md",
+    "4-accuracy-benchmarking.md",
+    "_next-steps.md"
+  ],
+  "commands": [
+    {
+      "file": "1-overview-and-build.md",
+      "line": "65-68",
+      "command": "sudo apt-get update -y\nsudo apt-get install -y build-essential cmake libnuma-dev\nsudo apt install -y python3.12-venv python3.12-dev"
+    },
+    {
+      "file": "1-overview-and-build.md",
+      "line": "72-74",
+      "command": "sudo apt-get install -y libtcmalloc-minimal4"
+    },
+    {
+      "file": "1-overview-and-build.md",
+      "line": "88-91",
+      "command": "python3.12 -m venv vllm_env\nsource vllm_env/bin/activate\npython3 -m pip install --upgrade pip"
+    },
+    {
+      "file": "1-overview-and-build.md",
+      "line": "96-101",
+      "command": "git clone https://github.com/vllm-project/vllm.git\ncd vllm\ngit checkout 5fb4137\npip install -r requirements/cpu.txt -r requirements/cpu-build.txt"
+    },
+    {
+      "file": "1-overview-and-build.md",
+      "line": "108-109",
+      "command": "VLLM_TARGET_DEVICE=cpu python3 setup.py bdist_wheel"
+    },
+    {
+      "file": "1-overview-and-build.md",
+      "line": "115-117",
+      "command": "pip install --force-reinstall dist/*.whl"
+    },
+    {
+      "file": "1-overview-and-build.md",
+      "line": "130-133",
+      "command": "python examples/offline_inference/basic/chat.py \\\n   --dtype=bfloat16 \\\n   --model TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+    },
+    {
+      "file": "1-overview-and-build.md",
+      "line": "155-158",
+      "command": "python examples/offline_inference/basic/chat.py \\\n  --dtype=bfloat16 \\\n  --model TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+    },
+    {
+      "file": "2-quantize-model.md",
+      "line": "17-20",
+      "command": "pip install --no-deps compressed-tensors\npip install llmcompressor"
+    },
+    {
+      "file": "2-quantize-model.md",
+      "line": "26-28",
+      "command": "pip install --no-deps dist/*.whl"
+    },
+    {
+      "file": "2-quantize-model.md",
+      "line": "34-36",
+      "command": "huggingface-cli login"
+    },
+    {
+      "file": "2-quantize-model.md",
+      "line": "151-154",
+      "command": "python3 quantize_vllm_models.py deepseek-ai/DeepSeek-V2-Lite \\\n  --scheme channelwise --method mse"
+    },
+    {
+      "file": "3-run-inference-and-serve.md",
+      "line": "24-35",
+      "command": "export VLLM_TARGET_DEVICE=cpu\nexport VLLM_CPU_KVCACHE_SPACE=32\nexport VLLM_CPU_OMP_THREADS_BIND=\"0-$(($(nproc)-1))\"\nexport VLLM_MLA_DISABLE=1\nexport ONEDNN_DEFAULT_FPMATH_MODE=BF16\nexport OMP_NUM_THREADS=\"$(nproc)\"\nexport LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libtcmalloc_minimal.so.4\n\nvllm serve DeepSeek-V2-Lite-w4a8dyn-mse-channelwise \\\n  --dtype float32 --max-model-len 4096 --max-num-batched-tokens 4096"
+    },
+    {
+      "file": "3-run-inference-and-serve.md",
+      "line": "110-112",
+      "command": "python3 batch_test.py"
+    },
+    {
+      "file": "3-run-inference-and-serve.md",
+      "line": "133-136",
+      "command": "vllm serve deepseek-ai/DeepSeek-V2-Lite \\\n  --dtype bfloat16 --max-model-len 4096  \\\n  --max-num-batched-tokens 4096"
+    },
+    {
+      "file": "4-accuracy-benchmarking.md",
+      "line": "33-36",
+      "command": "pip install \"lm_eval[vllm]\"\npip install ray"
+    },
+    {
+      "file": "4-accuracy-benchmarking.md",
+      "line": "46-54",
+      "command": "export VLLM_TARGET_DEVICE=cpu\nexport VLLM_CPU_KVCACHE_SPACE=32\nexport VLLM_CPU_OMP_THREADS_BIND=\"0-$(($(nproc)-1))\"\nexport VLLM_MLA_DISABLE=1\nexport ONEDNN_DEFAULT_FPMATH_MODE=BF16\nexport OMP_NUM_THREADS=\"$(nproc)\"\nexport LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libtcmalloc_minimal.so.4"
+    },
+    {
+      "file": "4-accuracy-benchmarking.md",
+      "line": "64-72",
+      "command": "lm_eval \\\n  --model vllm \\\n  --model_args \\\n    pretrained=meta-llama/Meta-Llama-3.1-8B-Instruct,dtype=bfloat16,max_model_len=4096,enforce_eager=True \\\n  --tasks mmlu,hellaswag \\\n  --batch_size auto \\\n  --output_path results"
+    },
+    {
+      "file": "4-accuracy-benchmarking.md",
+      "line": "79-86",
+      "command": "lm_eval \\\n  --model vllm \\\n  --model_args \\\n    pretrained=Meta-Llama-3.1-8B-Instruct-w4a8dyn-mse-channelwise,dtype=float32,max_model_len=4096,enforce_eager=True \\\n  --tasks mmlu,hellaswag \\\n  --batch_size auto \\\n  --output_path results"
+    },
+    {
+      "file": "4-accuracy-benchmarking.md",
+      "line": "94-102",
+      "command": "lm_eval \\\n  --model vllm \\\n  --model_args \\\n    pretrained=Meta-Llama-3.1-8B-Instruct-w4a8dyn-mse-channelwise,dtype=float32,max_model_len=4096,enforce_eager=True \\\n  --tasks mmlu,hellaswag \\\n  --batch_size auto \\\n  --output_path results"
+    }
+  ],
+  "tools": [
+    {
+      "name": "vLLM",
+      "version": "commit 5fb4137",
+      "source": "git clone https://github.com/vllm-project/vllm.git"
+    },
+    {
+      "name": "Python",
+      "version": "3.12",
+      "source": "python3.12"
+    },
+    {
+      "name": "llmcompressor",
+      "version": "unspecified",
+      "source": "pip install llmcompressor"
+    },
+    {
+      "name": "compressed-tensors",
+      "version": "unspecified",
+      "source": "pip install --no-deps compressed-tensors"
+    },
+    {
+      "name": "lm_eval",
+      "version": "unspecified",
+      "source": "pip install \"lm_eval[vllm]\""
+    },
+    {
+      "name": "ray",
+      "version": "unspecified",
+      "source": "pip install ray"
+    },
+    {
+      "name": "PyTorch",
+      "version": "unspecified",
+      "source": "vLLM dependencies"
+    },
+    {
+      "name": "oneDNN",
+      "version": "unspecified",
+      "source": "vLLM CPU backend"
+    },
+    {
+      "name": "Arm Compute Library (ACL)",
+      "version": "unspecified",
+      "source": "vLLM CPU backend"
+    },
+    {
+      "name": "tcmalloc",
+      "version": "unspecified",
+      "source": "sudo apt-get install -y libtcmalloc-minimal4"
+    }
+  ],
+  "models": [
+    {
+      "name": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+      "usage": "Validation model for build verification"
+    },
+    {
+      "name": "deepseek-ai/DeepSeek-V2-Lite",
+      "usage": "Primary model for quantization and serving"
+    },
+    {
+      "name": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "usage": "Accuracy benchmarking model"
+    }
+  ],
+  "hardware_requirements": {
+    "cpu": "Arm-based Linux server, minimum 32 vCPUs",
+    "ram": "64 GB minimum",
+    "disk": "64 GB free space",
+    "os": "Ubuntu 22.04+ recommended",
+    "tested_on": "AWS Graviton4 c8g.12xlarge"
+  }
+}
