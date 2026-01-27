@@ -5,6 +5,25 @@ weight: 10
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Actual
+Actual: install extension in VS Code via search
+Check if toolchain is installed (is arm in the PATH?) or install the installer and install from there
+Open "New Project Wizars", add the board, the toolchain path and an empty directory for the project
+
+Clone repo to local
+run the arm script in docker container (move this step to setup)
+
+ docker ps -a 
+
+CONTAINER ID   IMAGE                 COMMAND       CREATED        STATUS        PORTS     NAMES
+e667d7cb2d2b   ubuntu-24-container   "/bin/bash"   30 hours ago   Up 29 hours             amazing_engelbart
+anntal01@C60YCXQG7G Executorch_runner_cm33 % docker cp e667d7cb2d2b:/home/ubuntu/executorch/cmake-out/lib/. ./executorch/lib/ 
+
+OR 
+
+docker cp $(docker ps -q --filter "ancestor=ubuntu-24-container"):/home/ubuntu/executorch/arm_test/cmake-out/lib/. ./executorch/lib/
+
+Open vs code from the Executorch_runner_cm33 project, and it should show up in the MCUX side panel (see screenshot taken)
 
 ## Set up MCUXpresso for VS Code
 
@@ -85,7 +104,7 @@ abc123def456   executorch     "/bin/bash"   2 hours ago    Exited
 Copy the libraries:
 
 ```bash
-docker cp abc123def456:/home/ubuntu/executorch/cmake-out/lib/. ./executorch/lib/
+docker cp abc123def456:/home/ubuntu/executorch/arm_test/cmake-out/lib/. ./executorch/lib/
 docker cp abc123def456:/home/ubuntu/executorch/. ./executorch/include/executorch/
 ```
 

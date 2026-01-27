@@ -88,7 +88,7 @@ cd /home/ubuntu
    # Use "sudo apt ..." if you are not logged in as root
    apt update
    apt install -y \
-     python-is-python3 python3.12-dev python3.12-venv \
+     python-is-python3 python3.12-dev python3.12-venv python3-pip \
      gcc g++ \
      make cmake \
      build-essential \

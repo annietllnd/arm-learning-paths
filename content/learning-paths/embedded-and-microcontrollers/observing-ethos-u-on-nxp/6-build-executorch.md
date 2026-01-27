@@ -15,6 +15,7 @@ For a full tutorial on building ExecuTorch please see learning path [Introductio
 1. Upgrade pip and install build tools:
 
    ```bash
+   # not needed
    pip install --upgrade pip setuptools wheel
    ```
 
@@ -47,12 +48,19 @@ Initialize the Arm-specific environment and accept the EULA:
 2. Source the environment variables:
 
    ```bash
+   # should be ethos-u-scratch
    source ./examples/arm/arm-scratch/setup_path.sh
    ```
 
 ## Apply the Ethos-U65 patch
 
 As of this writing, ExecuTorch does not officially support the Ethos-U65. You must patch the `compile_spec.py` file to enable U65 compilation targets within the build system.
+
+```bash
+#Actual: added ethos-u65 as an elif clause in the environmetns compile_spec.py
+#filepath = "/root/executorch/.venv/lib/python3.12/site-packages/executorch/backends/arm/ethosu/compile_spec.py"
+
+```
 
 1. Create and apply the patch by running the following command block:
 
