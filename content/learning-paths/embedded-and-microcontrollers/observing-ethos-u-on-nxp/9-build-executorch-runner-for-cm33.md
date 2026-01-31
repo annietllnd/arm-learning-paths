@@ -29,7 +29,7 @@ Open vs code from the Executorch_runner_cm33 project, and it should show up in t
 
 Install the MCUXpresso extension in VS Code:
 
-{{< tabpane code=false >}}
+{{< tabpane-normal >}}
 {{< tab header="Windows/Linux" >}}
 1. Open VS Code and press `Ctrl+Shift+X` to open Extensions
 2. Search for "MCUXpresso for VS Code"
@@ -37,46 +37,37 @@ Install the MCUXpresso extension in VS Code:
 {{< /tab >}}
 {{< tab header="macOS" >}}
 1. Open VS Code and press `Cmd+Shift+X` to open Extensions
-2. Search for "MCUXpresso for VS Code"  
+2. Search for "MCUXpresso for VS Code"
 3. Click **Install** on the NXP extension
 {{< /tab >}}
-{{< /tabpane >}}
+{{< /tabpane-normal >}}
 
-Configure the ARM toolchain path:
+## Install MCUXpresso SDK and Arm toolchain
 
-{{< tabpane code=false >}}
+Use the MCUXpresso Installer GUI to install the required SDK and toolchain components:
+
+{{< tabpane-normal >}}
 {{< tab header="Windows/Linux" >}}
-1. Open Settings with `Ctrl+,`
-2. Search for **MCUXpresso: Toolchain**
-3. Set the toolchain path to: `/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin`
+1. Press `Ctrl+Shift+P` to open the Command Palette
+2. Type **MCUXpresso for VS Code: Open MCUXpresso Installer** and press Enter
+3. Select the following components and click **Install**:
+   - **MCUXpresso SDK Developer** (under Software Kits)
+   - **Arm GNU Toolchain (Latest)** (under Arm components)
+   - **Standalone Toolchain Add-ons (Latest)** (under Arm components)
 {{< /tab >}}
 {{< tab header="macOS" >}}
-1. Open Settings with `Cmd+,`
-2. Search for **MCUXpresso: Toolchain**
-3. Set the toolchain path to: `/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin`
+1. Press `Cmd+Shift+P` to open the Command Palette
+2. Type **MCUXpresso for VS Code: Open MCUXpresso Installer** and press Enter
+3. Select the following components and click **Install**:
+   - **MCUXpresso SDK Developer** (under Software Kits)
+   - **Arm GNU Toolchain (Latest)** (under Arm components)
+   - **Standalone Toolchain Add-ons (Latest)** (under Arm components)
 {{< /tab >}}
-{{< /tabpane >}}
+{{< /tabpane-normal >}}
 
-Install the MCUXpresso SDK for FRDM-MIMX93:
+![MCUXpresso Installer showing SDK and toolchain selection options#center](mcuxpresso-installer.png "MCUXpresso Installer")
 
-{{< tabpane code=false >}}
-{{< tab header="Windows/Linux" >}}
-1. Open Command Palette: `Ctrl+Shift+P`
-2. Type: **MCUXpresso: Install MCUXpresso SDK**
-3. Search for "FRDM-MIMX93" or select **MCIMX93-EVK**
-4. Select the latest SDK and click **Install**
-{{< /tab >}}
-{{< tab header="macOS" >}}
-1. Open Command Palette: `Cmd+Shift+P`
-2. Type: **MCUXpresso: Install MCUXpresso SDK**
-3. Search for "FRDM-MIMX93" or select **MCIMX93-EVK**
-4. Select the latest SDK and click **Install**
-{{< /tab >}}
-{{< /tabpane >}}
 
-{{% notice Note %}}
-If the FRDM-MIMX93 development board is not listed in the current MCUXpresso SDK catalog, you can alternatively select **MCIMX93-EVK** as they share the same i.MX93 SoC with Cortex-M33 core architecture. The SDK compatibility ensures seamless development across both platforms.
-{{% /notice %}}
 
 ## Clone the executor_runner repository
 
@@ -91,7 +82,7 @@ The repository contains the complete runtime source code and build configuration
 
 ## Copy ExecuTorch libraries
 
-The executor_runner requires prebuilt ExecuTorch libraries with Ethos-U NPU support from your Docker container.
+Copy the prebuilt ExecuTorch libraries with Ethos-U NPU support from your Docker container.
 
 Find your ExecuTorch build container:
 
@@ -117,10 +108,10 @@ In some Docker containers, the `cmake-out` folder might not exist. If you don't 
 ./examples/arm/run.sh --build-only
 ```
 
-The libraries will be generated in `arm_test/cmake-out`.
+The libraries are generated in `arm_test/cmake-out`.
 {{% /notice %}}
 
-Verify the libraries:
+Verify the libraries were copied:
 
 ```bash { output_lines = "2-5" }
 ls -lh executorch/lib/
@@ -139,22 +130,135 @@ code .
 
 Initialize the MCUXpresso project:
 
-{{< tabpane code=false >}}
+1. Import the remote repository from MCUXpresso SDK:
+
+{{< tabpane-normal >}}
 {{< tab header="Windows/Linux" >}}
-1. Press `Ctrl+Shift+P` to open Command Palette
-2. Type: **MCUXpresso: Import Repository**
-3. Select the current folder
-4. Choose **MIMX9352_cm33** as the target processor
+1. Press `Ctrl+Shift+P` to open the Command Palette
+2. Type **MCUXpresso for VS Code: Import Repository** and press Enter
+3. Select the **Remote** tab and choose **MCUXpresso SDK**
 {{< /tab >}}
 {{< tab header="macOS" >}}
-1. Press `Cmd+Shift+P` to open Command Palette
-2. Type: **MCUXpresso: Import Repository**
-3. Select the current folder
-4. Choose **MIMX9352_cm33** as the target processor
-{{< /tab >}}
-{{< /tabpane >}}
+1. Press `Cmd+Shift+P` to open the Command Palette
+2. Type **MCUXpresso for VS Code: Import Repository** and press Enter
+3. Select the **Remote** tab and choose **MCUXpresso SDK**
 
-VS Code generates the MCUXpresso configuration.
+{{< /tab >}}
+{{< /tabpane-normal >}}
+
+![Import Repository dialog showing MCUXpresso SDK remote repository options#center](importrepo.png "Import MCUXpresso SDK Repository")
+
+2. Import the cloned GitHub repository into the VS Code project:
+
+{{< tabpane-normal >}}
+{{< tab header="Windows/Linux" >}}
+1. Press `Ctrl+Shift+P` to open the Command Palette
+2. Type **MCUXpresso for VS Code: Import Project** and press Enter
+3. Navigate to the location of the cloned project files
+4. Choose **Arm GNU Toolchain** and click **Import**
+{{< /tab >}}
+{{< tab header="macOS" >}}
+1. Press `Cmd+Shift+P` to open the Command Palette
+2. Type **MCUXpresso for VS Code: Import Project** and press Enter
+3. Navigate to the location of the cloned project files
+4. Choose **Arm GNU Toolchain** and click **Import**
+
+{{< /tab >}}
+{{< /tabpane-normal >}}
+
+![Import Project dialog showing project path, repository, and toolchain selection#center](import-project.png "Import Cloned Project folder")
+
+## Set environment variables
+
+Set three environment variables to locate your toolchain and SDK. Configure these once for your user account so every project picks them up automatically.
+
+### Required variables
+
+| Variable | Description | Example Value |
+|----------|-------------|---------------|
+| `ARMGCC_DIR` | Path to the Arm GCC toolchain root | See platform instructions below |
+| `SdkRootDirPath` | Path to the MCUXpresso SDK root (the mcimx93_evk folder) | See platform instructions below |
+| `MCUX_VENV_PATH` | Path to the MCUXpresso Python venv executables | See platform instructions below |
+
+### Toolchain directory names by platform
+
+{{< tabpane-normal >}}
+{{< tab header="Windows" >}}
+```text
+arm-gnu-toolchain-14.2.rel1-mingw-w64-x86_64-arm-none-eabi
+```
+{{< /tab >}}
+{{< tab header="Linux" >}}
+```text
+arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi
+```
+{{< /tab >}}
+{{< tab header="macOS" >}}
+For Apple Silicon:
+```text
+arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi
+```
+
+For Intel Mac:
+```text
+arm-gnu-toolchain-14.2.rel1-darwin-x86_64-arm-none-eabi
+```
+{{< /tab >}}
+{{< /tabpane-normal >}}
+
+{{< tabpane-normal >}}
+{{< tab header="Windows" >}}
+Open PowerShell and run these commands to set persistent environment variables for the current user:
+
+```powershell
+# Set ARMGCC_DIR (adjust the path if you installed the toolchain elsewhere)
+[Environment]::SetEnvironmentVariable("ARMGCC_DIR", "$env:USERPROFILE\.mcuxpressotools\arm-gnu-toolchain-14.2.rel1-mingw-w64-x86_64-arm-none-eabi", "User")
+
+# Set SdkRootDirPath (adjust the path to your SDK location)
+[Environment]::SetEnvironmentVariable("SdkRootDirPath", "$env:USERPROFILE\mcimx93_evk", "User")
+
+# Set MCUX_VENV_PATH (adjust if your venv has a different name, e.g. .venv_3_11)
+[Environment]::SetEnvironmentVariable("MCUX_VENV_PATH", "$env:USERPROFILE\.mcuxpressotools\.venv\Scripts", "User")
+```
+
+Restart VS Code (or your terminal) after setting environment variables so they take effect.
+{{< /tab >}}
+{{< tab header="Linux" >}}
+Add these lines to `~/.bashrc` or `~/.profile`:
+
+```bash
+export ARMGCC_DIR="$HOME/.mcuxpressotools/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi"
+export SdkRootDirPath="$HOME/mcimx93_evk"
+export MCUX_VENV_PATH="$HOME/.mcuxpressotools/.venv/bin"
+```
+
+Then reload your shell configuration:
+
+```bash
+source ~/.bashrc
+```
+{{< /tab >}}
+{{< tab header="macOS" >}}
+Add these lines to `~/.zshrc`:
+
+```bash
+# For Apple Silicon:
+export ARMGCC_DIR="$HOME/.mcuxpressotools/arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi"
+# For Intel Mac, use this instead:
+# export ARMGCC_DIR="$HOME/.mcuxpressotools/arm-gnu-toolchain-14.2.rel1-darwin-x86_64-arm-none-eabi"
+
+export SdkRootDirPath="$HOME/mcimx93_evk"
+export MCUX_VENV_PATH="$HOME/.mcuxpressotools/.venv/bin"
+```
+
+Then reload your shell configuration:
+
+```bash
+source ~/.zshrc
+```
+{{< /tab >}}
+{{< /tabpane-normal >}}
+
 
 ## Configure memory settings
 
@@ -178,39 +282,26 @@ If you see "region RAM overflowed" errors during build, reduce these pool sizes.
 
 ## Build the firmware
 
-Configure the build system:
+You can build the firmware using the Command Palette or the VS Code GUI.
 
-{{< tabpane code=false >}}
+Press `F7` or use the Command Palette:
+
+{{< tabpane-normal >}}
 {{< tab header="Windows/Linux" >}}
-1. Press `Ctrl+Shift+P`
-2. Type: **CMake: Configure**
-3. Select **ARM GCC** as the kit
-4. Choose **Debug** or **Release**
+1. Press `Ctrl+Shift+P` to open the Command Palette
+2. Type **CMake: Build** and press Enter
 {{< /tab >}}
 {{< tab header="macOS" >}}
-1. Press `Cmd+Shift+P`
-2. Type: **CMake: Configure**
-3. Select **ARM GCC** as the kit
-4. Choose **Debug** or **Release**
+1. Press `Cmd+Shift+P` to open the Command Palette
+2. Type **CMake: Build** and press Enter
 {{< /tab >}}
-{{< /tabpane >}}
+{{< /tabpane-normal >}}
 
-Build the project:
+Alternatively, click the **Explorer** tab on the top left of VS Code and click the build icon under the **Projects** tab on the left pane. The icon is next to the project name, `executorch_runner_cm33`.
 
-Press `F7` or:
+![VS Code explorer showing project structure with build icon in the Projects tab#center](build-nxp.png "VS Code Projects panel with build icon")
 
-{{< tabpane code=false >}}
-{{< tab header="Windows/Linux" >}}
-1. Press `Ctrl+Shift+P`
-2. Type: **CMake: Build**
-{{< /tab >}}
-{{< tab header="macOS" >}}
-1. Press `Cmd+Shift+P`
-2. Type: **CMake: Build**
-{{< /tab >}}
-{{< /tabpane >}}
-
-Watch the build output:
+The build output shows the progress:
 
 ```output
 [build] Scanning dependencies of target executorch_runner_cm33.elf
@@ -221,14 +312,14 @@ Watch the build output:
 [build] Build finished with exit code 0
 ```
 
-Verify the build succeeded:
+Verify that the build succeeded:
 
 ```bash { output_lines = "2" }
 ls -lh build/executorch_runner_cm33.elf
 -rwxr-xr-x 1 user user 601K executorch_runner_cm33.elf
 ```
 
-Check memory usage to ensure it fits in the Cortex-M33:
+Check the memory usage to ensure it fits in the Cortex-M33:
 
 ```bash { output_lines = "2-3" }
 arm-none-eabi-size build/executorch_runner_cm33.elf
@@ -240,7 +331,7 @@ The total RAM usage (data + bss) is approximately 51KB, well within the 108KB li
 
 ## Troubleshooting
 
-**ARM toolchain not found:**
+**Arm toolchain not found:**
 
 Add the toolchain to your PATH:
 
