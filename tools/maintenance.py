@@ -150,7 +150,11 @@ def main():
                     sys.exit(0)
         elif os.path.isdir(args.instructions) and "/learning-paths/" in os.path.abspath(args.instructions):
             results_dict = check_lp(args.instructions, args.link, args.debug)
+        elif "/migration" in os.path.abspath(args.instructions):
+                logging.info("Migration paths are not supported for maintenance tests yet.")
+                exit(0)
         else:
+            print(os.path.abspath(args.instructions))
             logging.error("-i/--instructions expects a .md file, a CSV with a list of files or a Learning Path directory")
         if results_dict is not None:
             if all(results_dict.get(k) for k in results_dict):
