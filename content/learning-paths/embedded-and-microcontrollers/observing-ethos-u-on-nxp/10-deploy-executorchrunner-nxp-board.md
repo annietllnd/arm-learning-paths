@@ -6,53 +6,20 @@ weight: 11
 layout: learningpathall
 ---
 
-## Connect to the FRDM-IMX93 board
+This section is where the heterogeneous system comes together.
+Linux on the application cores manages the lifecycle of Cortex-M33 through RemoteProc, and your Cortex-M33 firmware brings up ExecuTorch and the Ethos-U65 delegate.
 
-The FRDM-IMX93 board runs Linux on the Cortex-A55 cores. You need network or serial access to deploy the firmware.
-
-Find your board's IP address using the serial console or check your router's DHCP leases.
-
-Connect via SSH:
-
-{{< tabpane code=false >}}
-{{< tab header="Windows/Linux" >}}
-```bash
-ssh root@192.168.1.24
-```
-
-Alternative with PuTTY on Windows:
-- Host: `192.168.1.24`
-- Port: `22`
-- Connection type: SSH
-- Username: `root`
-{{< /tab >}}
-{{< tab header="macOS" >}}
-```bash
-ssh root@192.168.1.24
-```
-{{< /tab >}}
-{{< /tabpane >}}
-
-Replace `192.168.1.24` with your board's IP address.
+Your success criteria is simple and observable: RemoteProc reports the firmware is up and running
 
 ## Copy the firmware to the board
 
-Copy the built firmware file to the board's firmware directory:
+From the 'Executorch_runner_cm33' project, copy the built firmware file to the board's firmware directory:
 
-{{< tabpane code=false >}}
-{{< tab header="Windows/Linux" >}}
 ```bash
-scp debug/executorch_runner_cm33.elf root@192.168.1.24:/lib/firmware/
+scp debug/executorch_runner_cm33.elf root@<your-ip-address>:/lib/firmware/
 ```
-{{< /tab >}}
-{{< tab header="macOS" >}}
-```bash
-scp debug/executorch_runner_cm33.elf root@192.168.1.24:/lib/firmware/
-```
-{{< /tab >}}
-{{< /tabpane >}}
 
-Verify the file was copied:
+Verify the file was copied by running the following on the board:
 
 ```bash { command_line="root@frdm-imx93" output_lines="2" }
 ls -lh /lib/firmware/executorch_runner_cm33.elf
@@ -62,6 +29,8 @@ ls -lh /lib/firmware/executorch_runner_cm33.elf
 ## Load the firmware on Cortex-M33
 
 The Cortex-M33 firmware is managed by the RemoteProc framework running on Linux.
+
+RemoteProc is the control plane for this platform: it gives you a consistent way to stop, replace, and start the Cortex-M33 image without manually resetting the system.
 
 Stop any currently running firmware:
 
@@ -93,34 +62,37 @@ dmesg | grep remoteproc | tail -n 5
 
 The message "remote processor imx-rproc is now up" confirms successful loading.
 
-## Load a model to DDR memory
+## Stage a model in DDR memory
 
-The executor_runner loads `.pte` model files from DDR memory at address 0x80100000.
+The `executor_runner` firmware expects the `.pte` model to be present in DDR at a fixed address (0x80100000).
+In this bring-up flow, you copy the `.pte` onto the Linux filesystem and then write it into DDR so the Cortex-M33 firmware can load it.
 
 Copy your `.pte` model to the board:
 
-{{< tabpane code=false >}}
-{{< tab header="Windows/Linux" >}}
 ```bash
-scp model.pte root@192.168.1.24:/tmp/
+scp executorch/include/executorch/mobilenetv2_u65.pte \ 
+    root@<your-ip-address>:/tmp/
 ```
-{{< /tab >}}
-{{< tab header="macOS" >}}
-```bash
-scp model.pte root@192.168.1.24:/tmp/
-```
-{{< /tab >}}
-{{< /tabpane >}}
 
+## Verify the firmware is up and running
+
+Run the following to verify
+
+```bash { command_line="root@frdm-imx93" output_lines="2" }
+cat /sys/kernel/debug/remoteproc/remoteproc0/trace0
+CM33: ExecuTorch runner started
+```
+
+### Optional: verify the model was written
 Write the model to DDR memory:
 
 ```bash { command_line="root@frdm-imx93" }
-dd if=/tmp/model.pte of=/dev/mem bs=1M seek=2049
+dd if=/tmp/mobilenetv2_u65.pte of=/dev/mem bs=1M seek=2049
 ```
 
 The seek value of 2049 corresponds to address 0x80100000 (2049 MB = 0x801 in hex).
 
-Verify the model was written:
+Optionally verify the model was written:
 
 ```bash { command_line="root@frdm-imx93" output_lines="2-5" }
 xxd -l 64 -s 0x80100000 /dev/mem
@@ -132,9 +104,10 @@ xxd -l 64 -s 0x80100000 /dev/mem
 
 Non-zero bytes confirm the model is present in memory.
 
+# TO REMOVE?
 ## Monitor Cortex-M33 output
 
-The executor_runner outputs debug information via UART. Connect a USB-to-serial adapter to the M33 UART pins on the FRDM board.
+The `executor_runner` outputs debug information via UART. Connect a USB-to-serial adapter to the M33 UART pins on the FRDM board.
 
 Open a serial terminal (115200 baud, 8N1):
 
@@ -211,6 +184,15 @@ executorch_runner_cm33.elf
 3. **Model is in DDR memory** (non-zero bytes at 0x80100000)
 
 4. **UART shows inference output** with timing information
+
+## What you’ve accomplished and what’s next:
+
+In this section:
+
+- You used Linux RemoteProc to load and boot a custom Cortex-M33 firmware image
+- You validated an end-to-end ExecuTorch inference run that initializes the Ethos-U delegate
+
+Next, you can iterate on `.pte` models (and measure how operator coverage and model shape affect runtime behavior) while keeping the firmware bring-up path stable.
 
 ## Troubleshooting
 

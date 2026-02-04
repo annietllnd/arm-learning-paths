@@ -8,9 +8,8 @@ weight: 8 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-Embedded systems like the NXP board require two ExecuTorch runtime components: a `.pte` file and an `executor_runner` file.
+On the FRDM i.MX 93, you deploy ExecuTorch as two cooperating artifacts:
 
-**ExecuTorch Runtime Files for Embedded Systems**
 |Component|Role in Deployment|What It Contains|Why It's Required|
 |---------|------------------|----------------|-----------------|
 |**`.pte file`**  (e.g., `mobilenetv2_u65.pte`)|The model itself, exported from ExecuTorch|Serialized and quantized operator graph + weights + metadata|Provides the neural network to be executed|
@@ -81,7 +80,13 @@ Embedded systems like the NXP board require two ExecuTorch runtime components: a
 
 ## Build the ExecuTorch .pte for Ethos-U65
 
-This section shows you how to build `.pte` files for the Ethos-U65 NPU. You will compile two models: a simple addition model to verify the setup, and MobileNet V2 for real-world inference.
+This section shows you how to build `.pte` files for the Ethos-U65 NPU.
+You compile two models:
+
+- A simple add model to validate the toolchain and U65 compile spec
+- MobileNet V2 to demonstrate a realistic workload and confirm NPU operator coverage
+
+The `.pte` file is the handoff point between “host build time” and “device run time”. In the later deployment steps, Linux is responsible for loading firmware, and the Cortex-M33 firmware is responsible for loading and executing the `.pte` using the Ethos-U delegate.
 
 ### Compile a simple add model
 
@@ -204,7 +209,7 @@ This script compiles the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_m
    python3 compile_mv2_u65.py
    ```
 
-   If successful, you see the Vela compiler summary indicating 100% NPU utilization:
+    If successful, you see the Vela compiler summary indicating 100% NPU utilization. This is an important bring-up signal because it shows the graph was lowered onto the Ethos-U path rather than falling back to CPU execution.
 
    ```output
    Network summary for out
