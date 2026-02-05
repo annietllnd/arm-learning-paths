@@ -8,6 +8,8 @@ description: Software developers are embracing the Arm architecture for its supe
 
 Arm Neoverse is a family of processor cores designed for servers and cloud data centers. There are 2 families currently available, Neoverse V-series and Neoverse N-series.
 
+
+
 ### What is Arm Neoverse?
 
 Neoverse V-series offers the highest overall performance, and Neoverse N-series offers industry-leading performance-per-watt and serves a broad set of server and cloud use cases. Each Neoverse CPU implements a version of the [Arm architecture](https://www.arm.com/architecture/cpu). Arm continually works with partners to advance the architecture and increase computing capability. Neoverse cores focus on predictable per-socket performance and do not rely on multithreading or extreme clock speeds.
