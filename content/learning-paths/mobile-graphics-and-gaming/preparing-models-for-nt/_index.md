@@ -1,6 +1,6 @@
 ---
 title: Prepare models for neural graphics with Arm neural technology
-description: Learn how to export a PyTorch model through ExecuTorch, inspect TOSA IR, generate VGF artifacts, and validate outputs for neural graphics workflows.
+description: Learn how to export a PyTorch model through the ExecuTorch VGF backend, inspect the generated artifacts, and use TOSA IR when you need deeper debugging for neural graphics workflows.
 
 minutes_to_complete: 45
 
@@ -8,9 +8,10 @@ who_is_this_for: This is an advanced topic for developers who want to understand
 
 learning_objectives:
     - Build and export a simple PyTorch model for ExecuTorch
-    - Inspect TOSA intermediate representation to validate operator lowering
-    - Convert model artifacts to `.vgf` and compare export paths
-    - Visualize model structure using Model Explorer
+    - Generate `.vgf` artifacts with the ExecuTorch VGF backend
+    - Visualize model structure and generated artifacts using Model Explorer
+    - Inspect TOSA intermediate representation when you need to debug operator lowering
+    - Validate the generated model with an ExecuTorch runner and connect it to ML Extensions for Vulkan workflows
 
 prerequisites:
     - Basic PyTorch and Python experience

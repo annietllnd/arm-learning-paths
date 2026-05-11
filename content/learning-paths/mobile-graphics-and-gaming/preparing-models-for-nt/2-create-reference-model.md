@@ -12,15 +12,16 @@ Before using a production NSS model, it helps to validate the toolchain with a s
 
 This page uses a minimal `AddSigmoid` model so you can focus on the conversion flow:
 - PyTorch export
-- TOSA extraction
-- VGF conversion
-- runtime validation
+- VGF export with the ExecuTorch backend
+- Artifact inspection in Model Explorer
+- Optional TOSA inspection when you need to debug the lowering path
+- Runtime validation with an ExecuTorch runner
 
-This is the same workflow pattern used in other NX learning paths, including [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/).
+This matters because neural graphics models sit between ML tooling and real-time graphics runtimes. In Arm's neural accelerator ecosystem, a trained PyTorch model typically needs to become a deployable artifact that can be consumed by ML Extensions for Vulkan, inspected with graphics-oriented tooling, and validated before it is integrated into an engine or sample application. This is the same workflow pattern used in other NX learning paths, including [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/) and [Fine-tune neural graphics models using Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym/).
 
 ## Create and export the model
 
-Run the following in a notebook cell:
+Create a Python file named `create_reference_model.py`:
 
 ```python
 import torch
@@ -42,6 +43,15 @@ exported_model = torch.export.export(model, example_inputs)
 graph_module = exported_model.module(check_guards=False)
 
 _ = graph_module.print_readable()
+
+torch.export.save(exported_model, "add_sigmoid.pt2")
+print("Wrote: add_sigmoid.pt2")
 ```
 
-The printed graph confirms the model was exported correctly and is ready for backend lowering.
+Run the script:
+
+```bash
+python create_reference_model.py
+```
+
+The printed graph confirms the model was exported correctly. The saved `add_sigmoid.pt2` file is the input to the backend lowering steps that follow.

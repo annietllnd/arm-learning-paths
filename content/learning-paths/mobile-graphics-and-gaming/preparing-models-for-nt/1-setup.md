@@ -8,10 +8,10 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you set up the environment used across this Learning Path and prepare a notebook workflow for running each code cell in sequence.
+This Learning Path walks through every step directly in the web pages. If you prefer working in a notebook, you can download the optional notebook and run the same workflow in Jupyter.
 
 {{% notice Note %}}
-The workflow in this Learning Path mirrors notebook-first guidance used in [Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym/), so using Jupyter makes it easier to reproduce each stage.
+The notebook is optional. The commands and code snippets in the following sections are the source of truth for the Learning Path.
 {{% /notice %}}
 
 ## OS and tooling requirements
@@ -20,7 +20,7 @@ Use one of the following:
 - Linux
 - macOS with Apple Silicon
 
-Install and verify Python 3.10+:
+Install and verify Python 3.10+, <3.14:
 
 ```bash
 python3 --version
@@ -28,18 +28,17 @@ python3 --version
 
 ## Create a Python virtual environment
 
+Create a working directory for this Learning Path:
+
+```bash
+mkdir preparing-models-for-nt
+cd preparing-models-for-nt
+```
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 python -m pip install --upgrade pip
-```
-
-## Install Jupyter
-
-Install Jupyter Lab so you can run the tutorial in notebook form:
-
-```bash
-pip install jupyterlab
 ```
 
 ## Clone and install ExecuTorch
@@ -74,7 +73,25 @@ command -v model-converter || command -v model_converter
 command -v model-explorer
 ```
 
-## Launch Jupyter Lab
+Return to the Learning Path working directory:
+
+```bash
+cd ../..
+```
+
+## Optional: use the notebook
+
+If you prefer to work through the same steps in Jupyter, download the notebook from the `arm-learning-paths` repository:
+
+```bash
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/mobile-graphics-and-gaming/preparing-models-for-nt/prepare-models-for-nt.ipynb
+```
+
+Install Jupyter Lab in your active virtual environment:
+
+```bash
+pip install jupyterlab
+```
 
 From the `preparing-models-for-nt` directory, launch Jupyter Lab:
 
@@ -88,4 +105,4 @@ Open the notebook:
 prepare-models-for-nt.ipynb
 ```
 
-You are now ready to create and export your first test model.
+You are now ready to create and export your first test model, either from the Learning Path pages or from the optional notebook.
